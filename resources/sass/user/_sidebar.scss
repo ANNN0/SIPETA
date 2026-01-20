@@ -1,0 +1,106 @@
+// ================================================
+// USER SIDEBAR - Yellow Theme
+// ================================================
+// Modern sidebar for user account pages with active state highlighting
+
+.user-sidebar {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  min-width: 220px; // Fixed minimum width for stability
+  
+  @media (max-width: 991px) {
+    min-width: auto;
+  }
+
+  &__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    margin-bottom: 0.5rem;
+
+    &.active {
+      .user-sidebar__link {
+        background-color: #f7b32b; // Yellow/orange from reference
+        color: #222;
+        font-weight: 600;
+
+        &:hover {
+          background-color: darken(#f7b32b, 5%);
+        }
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 0.875rem 1.125rem;
+    color: #666;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.9375rem;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f8f8f8;
+      color: #222;
+    }
+    
+    &--disabled {
+      color: #bbb;
+      cursor: not-allowed;
+      
+      &:hover {
+        background-color: transparent;
+        color: #bbb;
+      }
+    }
+
+    &--logout {
+      color: #e74c3c;
+      font-weight: 500;
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+
+      &:hover {
+        background-color: #d71717;
+        color: #fff;
+      }
+    }
+  }
+}
+
+// User Account Layout - Fixed for stable sidebar
+.my-account {
+  padding-top: 2rem;
+
+  .row {
+    // Don't use gap - use padding instead for stability
+    @media (min-width: 992px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.user-content {
+  @media (min-width: 992px) {
+    padding-left: 2rem;
+    flex: 1; // Ensures content stays beside sidebar
+  }
+
+  @media (max-width: 991px) {
+    margin-top: 1.5rem;
+  }
+}
+

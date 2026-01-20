@@ -1,0 +1,182 @@
+// Fix Table Header Background
+.table {
+    thead {
+        th {
+            background-color: #d39818;
+            color: #fff !important;
+            border-bottom: 2px solid #f1f1f1;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+    }
+    
+    // Ensure table body cells align nicely
+    tbody {
+        td {
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+    }
+}
+
+// Product Image Styling
+.shopping-cart__product-item {
+    img {
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+        
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}
+
+// Clean Quantity Control Styling
+.qty-control {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: space-between; // Distribute space
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 50px; // Pill shape
+    padding: 4px 6px; // Little padding
+    gap: 8px; // Force gap between elements
+    min-width: 120px; // Ensure minimum width
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+
+    // Remove Default Input Styles
+    .qty-control__number {
+        border: none !important;
+        background: transparent !important;
+        width: 40px !important; 
+        text-align: center;
+        font-weight: 700;
+        font-size: 15px;
+        color: #212529;
+        margin: 0;
+        padding: 0;
+        -moz-appearance: textfield; // Firefox
+        appearance: textfield; // Standard
+        
+        &:focus {
+            outline: none;
+        }
+        
+        // Hide chrome/safari arrows
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 1;
+        }
+    }
+    
+    // Style Buttons
+    .qty-control__reduce,
+    .qty-control__increase {
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0; // Prevent shrinking
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 80%;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef !important;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1;
+        color: #495057;
+        transition: all 0.2s ease;
+        padding: 0 !important;
+        margin-top: 7px;
+        margin-left: 10px;
+        margin-right: 10px;
+        
+        &:hover {
+            background-color: #e9ecef;
+            color: #000;
+            border-color: #ced4da !important;
+        }
+
+        .cart-totals {
+            width: 100%;
+            margin-bottom: 1.5rem;
+
+            th, td {
+                padding: 0.75rem 0;
+                border-bottom: 1px solid #f0f7f2;
+            }
+
+            th {
+                font-weight: 500;
+                color: #5c7c67;
+            }
+
+            td {
+                text-align: right;
+                font-weight: 600;
+                color: #145f30;
+            }
+
+            .organic-summary {
+                th { color: #1a7a3e; }
+                td { color: #1a7a3e; font-size: 0.9rem; }
+            }
+
+            .non-organic-summary {
+                th { color: #856404; }
+                td { color: #856404; font-size: 0.9rem; }
+            }
+
+            .cart-total-final {
+                th, td {
+                    border-bottom: none;
+                    padding-top: 1.5rem;
+                }
+
+                th {
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                    color: #145f30;
+                }
+
+                td {
+                    font-size: 1.25rem;
+                    font-weight: 800;
+                    color: #1a7a3e;
+                }
+            }
+        }
+    }
+}
+
+// Utilities/Overrides
+.text-success { color: #278c04 !important; }
+.text-danger { color: #d93025 !important; }
+
+// Remove Button Styling
+.remove-cart {
+    &.btn-outline-danger {
+        color: #dc3545;
+        border-color: #dc3545;
+        background: transparent;
+        font-weight: 500;
+        padding: 5px 15px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            color: #ffffff !important;
+            background-color: #c82333 !important; // Deeper, more contrasty red
+            border-color: #bd2130 !important;
+            box-shadow: 0 4px 8px rgba(200, 35, 51, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}

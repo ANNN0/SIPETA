@@ -1,0 +1,225 @@
+// ============================================
+// TOAST NOTIFICATION SYSTEM - SIPETA
+// Modern, animated toast notifications
+// ============================================
+
+// Toast Container
+.toast-container {
+    position: fixed;
+    top: 100px; // Below navbar
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 380px;
+    width: 100%;
+    pointer-events: none;
+
+    @media (max-width: 576px) {
+        top: auto;
+        bottom: 20px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+// Base Toast Styling
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid;
+    pointer-events: auto;
+    transform: translateX(120%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    &.toast--show {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &.toast--hide {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+
+    // Toast Icon
+    .toast__icon {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+
+        svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+    }
+
+    // Toast Content
+    .toast__content {
+        flex-grow: 1;
+        min-width: 0;
+
+        .toast__title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+
+        .toast__message {
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+    }
+
+    // Close Button
+    .toast__close {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 0.2s ease;
+        padding: 0;
+        margin: -4px -4px -4px 8px;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        svg {
+            width: 12px;
+            height: 12px;
+            fill: currentColor;
+        }
+    }
+
+    // Progress Bar (auto-dismiss indicator)
+    .toast__progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: currentColor;
+        opacity: 0.3;
+        border-radius: 0 0 0 12px;
+        animation: toast-progress linear forwards;
+    }
+
+    @keyframes toast-progress {
+        from {
+            width: 100%;
+        }
+        to {
+            width: 0%;
+        }
+    }
+}
+
+// Toast Variants
+.toast--success {
+    border-left-color: #22c55e;
+
+    .toast__icon {
+        background: rgba(34, 197, 94, 0.1);
+        color: #22c55e;
+    }
+
+    .toast__progress {
+        background: #22c55e;
+    }
+}
+
+.toast--error {
+    border-left-color: #ef4444;
+
+    .toast__icon {
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+    }
+
+    .toast__progress {
+        background: #ef4444;
+    }
+}
+
+.toast--warning {
+    border-left-color: #f59e0b;
+
+    .toast__icon {
+        background: rgba(245, 158, 11, 0.1);
+        color: #f59e0b;
+    }
+
+    .toast__progress {
+        background: #f59e0b;
+    }
+}
+
+.toast--info {
+    border-left-color: #3b82f6;
+
+    .toast__icon {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+    }
+
+    .toast__progress {
+        background: #3b82f6;
+    }
+}
+
+// Toast with action button
+.toast--with-action {
+    .toast__action {
+        margin-top: 8px;
+
+        .btn-toast-action {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &.btn-toast-action--primary {
+                background: #4a7c59;
+                color: #fff;
+
+                &:hover {
+                    background: #3d6b4a;
+                }
+            }
+
+            &.btn-toast-action--secondary {
+                background: #e2e8f0;
+                color: #475569;
+
+                &:hover {
+                    background: #cbd5e1;
+                }
+            }
+        }
+    }
+}

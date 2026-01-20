@@ -1,0 +1,299 @@
+// ====================================
+// Product Form - Admin Panel
+// ====================================
+
+// Consistent with existing theme colors
+:root {
+    --form-accent: #64748b;
+    --form-accent-light: #94a3b8;
+    --form-bg: #ffffff;
+    --form-bg-secondary: #f8fafc;
+    --form-border: #e2e8f0;
+    --form-text-primary: #1e293b;
+    --form-text-secondary: #475569;
+    --form-shadow: rgba(0, 0, 0, 0.04);
+}
+
+// ====================================
+// Product Types Section
+// ====================================
+.product-types-section {
+    .body-title {
+        margin-bottom: 16px;
+        font-weight: 600;
+        color: var(--form-text-primary);
+    }
+
+    .product-types-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+        margin-bottom: 10px;
+
+        .type-checkbox {
+            position: relative;
+
+            input[type="checkbox"] {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+
+                &:checked + .type-label {
+                    background: var(--form-accent);
+                    color: white;
+                    border-color: var(--form-accent);
+                    box-shadow: 0 2px 4px var(--form-shadow);
+
+                    .type-icon {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            .type-label {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 16px;
+                border: 1px solid var(--form-border);
+                border-radius: 6px;
+                background: var(--form-bg);
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--form-text-primary);
+
+                &:hover {
+                    background: var(--form-bg-secondary);
+                    border-color: var(--form-accent-light);
+                }
+
+                .type-icon {
+                    font-size: 20px;
+                    transition: transform 0.2s ease;
+                }
+
+                .type-name {
+                    flex: 1;
+                }
+            }
+        }
+    }
+
+    .text-tiny {
+        color: var(--form-text-secondary);
+        font-size: 12px;
+        margin-top: 8px;
+    }
+}
+
+// ====================================
+// Unit Prices Dynamic Table
+// ====================================
+.unit-prices-section {
+    margin-top: 32px;
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        .body-title {
+            font-weight: 600;
+            color: var(--form-text-primary);
+            margin: 0;
+        }
+
+        .add-unit-btn {
+            padding: 8px 16px;
+            background: var(--form-accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            &:hover {
+                background: var(--form-accent-light);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 4px var(--form-shadow);
+            }
+
+            i {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .unit-prices-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--form-bg);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px var(--form-shadow);
+
+        thead {
+            background: var(--form-bg-primary);
+            box-shadow: 0px -3px 0px 0px var(--form-accent) inset;
+
+            th {
+                padding: 14px 12px;
+                text-align: left;
+                color: var(--form-accent);
+                font-weight: 600;
+                font-size: 12px;
+                letter-spacing: 0.3px;
+                text-transform: uppercase;
+                border-bottom: 1px solid var(--form-border);
+                white-space: normal; // Allow wrapping
+                line-height: 1.3; // Better spacing for wrapped text
+
+                &.col-unit {
+                    width: 20%; // Satuan column
+                }
+
+                &.col-price {
+                    width: 18%; // Price columns
+                }
+
+                &.col-min-order {
+                    width: 15%; // Min Order column
+                }
+
+                &.col-actions {
+                    width: 80px;
+                    text-align: center;
+                }
+
+                &.col-primary {
+                    width: 100px;
+                    text-align: center;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                border-bottom: 1px solid var(--form-border);
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background: var(--form-bg-secondary);
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                td {
+                    padding: 12px;
+
+                    select,
+                    input[type="number"],
+                    input[type="text"] {
+                        width: 100%;
+                        padding: 8px 12px;
+                        border: 1px solid var(--form-border);
+                        border-radius: 4px;
+                        font-size: 13px;
+                        transition: all 0.2s ease;
+
+                        &:focus {
+                            outline: none;
+                            border-color: var(--form-accent);
+                            box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.1);
+                        }
+                    }
+
+                    &.col-actions {
+                        text-align: center;
+
+                        .remove-unit-btn {
+                            padding: 6px 10px;
+                            background: #ef4444;
+                            color: white;
+                            border: none;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            font-size: 12px;
+                            transition: all 0.2s ease;
+
+                            &:hover {
+                                background: #dc2626;
+                            }
+
+                            i {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+
+                    &.col-primary {
+                        text-align: center;
+                        
+                        input[type="radio"] {
+                            width: 18px;
+                            height: 18px;
+                            cursor: pointer;
+                            accent-color: var(--form-accent);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--form-text-secondary);
+        font-size: 14px;
+        background: var(--form-bg-secondary);
+        border-radius: 6px;
+        margin-top: 16px;
+    }
+
+    .help-text {
+        color: var(--form-text-secondary);
+        font-size: 12px;
+        margin-top: 12px;
+        display: flex;
+        align-items: start;
+        gap: 6px;
+
+        i {
+            margin-top: 2px;
+            color: var(--form-accent-light);
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .product-types-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .unit-prices-table {
+        font-size: 12px;
+
+        thead th,
+        tbody td {
+            padding: 8px;
+        }
+
+        input,
+        select {
+            font-size: 12px;
+            padding: 6px 8px;
+        }
+    }
+}

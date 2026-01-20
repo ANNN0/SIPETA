@@ -1,0 +1,177 @@
+// ============================================
+// Animations & Transitions (Moderate Level)
+// ============================================
+
+// --- Keyframe Animations ---
+
+// Fade In
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Fade In Up (for content reveal)
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Fade In Down
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Slide In Left
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Slide In Right
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Subtle Scale (for hover effects)
+@keyframes subtleScale {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+// --- Transition Mixins ---
+
+// Smooth Hover Transition
+@mixin smooth-hover($property: all, $duration: $transition-base) {
+  transition: $property $duration;
+}
+
+// Hover Lift Effect (no shadow, just translate)
+@mixin hover-lift($translate-y: -4px) {
+  transition: transform $transition-base;
+  
+  &:hover {
+    transform: translateY($translate-y);
+  }
+}
+
+// Hover Scale Effect
+@mixin hover-scale($scale: 1.05) {
+  transition: transform $transition-base;
+  
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+// Hover Brighten (for images/cards without shadows)
+@mixin hover-brighten($opacity: 0.9) {
+  transition: opacity $transition-base;
+  
+  &:hover {
+    opacity: $opacity;
+  }
+}
+
+// --- Utility Classes ---
+
+// Fade animations
+.animate-fade-in {
+  animation: fadeIn $transition-normal ease-in-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp $transition-normal ease-out;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown $transition-normal ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft $transition-normal ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight $transition-normal ease-out;
+}
+
+// Transition utilities
+.transition-all {
+  transition: all $transition-base;
+}
+
+.transition-colors {
+  transition: background-color $transition-base, color $transition-base, border-color $transition-base;
+}
+
+.transition-transform {
+  transition: transform $transition-base;
+}
+
+.transition-opacity {
+  transition: opacity $transition-base;
+}
+
+// Hover effects (no shadows)
+.hover-lift {
+  @include hover-lift();
+}
+
+.hover-scale {
+  @include hover-scale();
+}
+
+.hover-brighten {
+  @include hover-brighten();
+}
+
+// Delay utilities for staggered animations
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}

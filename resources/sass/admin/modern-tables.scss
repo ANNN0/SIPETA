@@ -1,0 +1,399 @@
+// ====================================
+// Modern Table Design - Light Theme
+// ====================================
+
+// Color Variables - Light Theme with Soft Accent
+:root {
+    --table-bg-primary: #ffffff; // Main background
+    --table-bg-secondary: #f8fafc; // Alternating row (very light gray)
+    --table-bg-hover: #f1f5f9; // Hover state (light slate)
+    --table-accent: #64748b; // Soft slate-blue accent
+    --table-accent-light: #94a3b8; // Lighter accent for subtle elements
+    --table-border: #e2e8f0; // Subtle border
+    --table-text-primary: #1e293b; // Main text (dark slate)
+    --table-text-secondary: #475569; // Secondary text (medium slate)
+    --table-shadow: rgba(0, 0, 0, 0.04); // Very subtle shadow
+}
+
+// Modern Table Styles
+.table,
+.wg-table table,
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        sans-serif;
+    background: var(--table-bg-primary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px var(--table-shadow);
+}
+
+// Force Rigid Boundaries for Admin Layout
+// This prevents the containers from expanding when the table has min-width: 1000px
+.layout-wrap {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+.section-content-right {
+    flex: 1 !important;
+    min-width: 0 !important; // CRITICAL: Allows flex child to shrink below its content's intrinsic size
+    max-width: 100% !important;
+}
+
+.main-content,
+.main-content-inner,
+.main-content-wrap,
+.wg-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.wg-box {
+    overflow: hidden !important; // Ensure the white box itself is a rigid container
+}
+
+// Responsive Wrapper
+.table-responsive {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+
+    .table,
+    .wg-table table,
+    table {
+        width: 100% !important;
+        max-width: none !important; // Prevent bootstrap override
+        table-layout: auto !important; // Allow columns to size based on content
+        margin-bottom: 0;
+    }
+
+    // Table Header
+    thead {
+        background: var(--table-bg-primary);
+        box-shadow: 0px -3px 0px 0px var(--table-accent) inset; // Subtle top accent
+        position: relative;
+
+        th {
+            padding: 18px 16px !important;
+            text-align: center !important;
+            color: var(--table-accent) !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            border: none !important;
+            border-bottom: 1px solid var(--table-border) !important;
+            background: var(--table-bg-primary);
+            vertical-align: middle;
+
+            // Remove default sorting icons
+            &.sorting,
+            &.sorting_asc,
+            &.sorting_desc {
+                &::before,
+                &::after {
+                    display: none !important;
+                }
+            }
+        }
+    }
+
+    // Table Body
+    tbody {
+        tr {
+            background: var(--table-bg-primary);
+            border: none;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+
+            // Stripe effect - alternating rows
+            &:nth-child(even) {
+                background: var(--table-bg-secondary);
+            }
+
+            // Hover effect
+            &:hover {
+                background: var(--table-bg-hover) !important;
+                box-shadow: 0 2px 4px var(--table-shadow);
+            }
+
+            td {
+                padding: 16px !important;
+                color: var(--table-text-secondary) !important;
+                font-size: 14px !important;
+                font-weight: 400 !important;
+                vertical-align: middle !important;
+                text-align: center !important;
+                border: none !important;
+                border-bottom: 1px solid var(--table-border) !important;
+                transition: color 0.2s ease;
+                white-space: normal !important; // Allow text to wrap
+                word-wrap: break-word !important; // Break long words if necessary
+
+                // First column (usually ID/No)
+                &:first-child {
+                    color: var(--table-text-primary) !important;
+                    font-weight: 500 !important;
+                }
+
+                // Links inside table
+                a {
+                    color: var(--table-accent);
+                    text-decoration: none;
+                    transition: color 0.2s ease;
+
+                    &:hover {
+                        color: var(--table-accent-light);
+                        text-decoration: underline;
+                    }
+                }
+
+                // Badge/Status styling
+                .badge {
+                    padding: 5px 14px;
+                    border-radius: 16px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    display: inline-block;
+                    letter-spacing: 0.3px;
+                }
+
+                // Badge color variants
+                .bg-success,
+                .badge.bg-success {
+                    background-color: #22c55e !important; // Vibrant green
+                    color: white !important;
+                }
+
+                .bg-danger,
+                .badge.bg-danger {
+                    background-color: #ef4444 !important;
+                    color: white !important;
+                }
+
+                .bg-warning,
+                .badge.bg-warning {
+                    background-color: #f59e0b !important;
+                    color: #1e293b !important;
+                }
+            }
+        }
+
+        // Remove border from last row
+        tr:last-child td {
+            border-bottom: none !important;
+        }
+    }
+}
+
+// Product Name Column (with image) - Inline layout to prevent overflow
+.pname {
+    text-align: left !important;
+
+    .image {
+        display: inline-block;
+        vertical-align: middle;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: var(--table-bg-secondary);
+        margin-right: 14px;
+        flex-shrink: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .name {
+        display: inline-block;
+        vertical-align: middle;
+        max-width: calc(100% - 70px); // Account for image + margins
+
+        a {
+            color: var(--table-text-primary) !important;
+            font-weight: 500 !important;
+            text-decoration: none;
+            display: block;
+            font-weight: 500 !important;
+            text-decoration: none;
+            display: block;
+            // white-space: nowrap; // Removed to prevent overflow
+
+            &:hover {
+                color: var(--table-accent) !important;
+            }
+        }
+
+        .text-tiny {
+            white-space: nowrap;
+        }
+    }
+}
+
+// Table Container Improvements
+.wg-box {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+// Pagination Styling
+.wgp-pagination {
+    padding-top: 20px;
+
+    .pagination {
+        gap: 4px;
+
+        .page-link {
+            color: var(--table-accent);
+            background: var(--table-bg-primary);
+            border: 1px solid var(--table-border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background: var(--table-bg-hover);
+                color: var(--table-accent);
+            }
+        }
+
+        .page-item.active .page-link {
+            background: var(--table-accent);
+            border-color: var(--table-accent);
+            color: white;
+        }
+    }
+}
+
+// Modern Pagination Component
+.modern-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    gap: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        sans-serif;
+    width: 100%;
+
+    .pagination-info {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: var(--table-text-secondary);
+        flex: 0 0 auto; // Don't grow, don't shrink
+
+        .page-range {
+            font-weight: 600;
+            color: var(--table-text-primary);
+        }
+
+        .page-total {
+            font-weight: 400;
+        }
+    }
+
+    .pagination-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto; // Push to right
+    }
+
+    .pagination-nav {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--table-border);
+        border-radius: 6px;
+        background: var(--table-bg-primary);
+        color: var(--table-accent);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+
+        svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        &:hover:not([disabled]) {
+            background: var(--table-bg-hover);
+            border-color: var(--table-accent);
+            color: var(--table-accent);
+        }
+
+        &[disabled] {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+}
+
+// Admin Pages - Uniform Coloring (No Striping)
+.main-content-inner {
+    .table,
+    .wg-table table,
+    table {
+        tbody tr {
+            // Override alternating row colors to be uniform
+            &:nth-child(even) {
+                background: var(--table-bg-primary) !important;
+            }
+
+            &:nth-child(odd) {
+                background: var(--table-bg-primary) !important;
+            }
+        }
+    }
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+    .table,
+    .wg-table table,
+    table {
+        thead th {
+            padding: 12px 8px !important;
+            font-size: 11px !important;
+        }
+
+        tbody td {
+            padding: 12px 8px !important;
+            font-size: 13px !important;
+        }
+    }
+
+    .pname {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .modern-pagination {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+
+        .pagination-controls {
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
+}

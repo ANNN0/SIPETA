@@ -1,0 +1,387 @@
+// Checkout Modern Redesign Styles
+
+// ==========================================
+// 1. MODERN ORDER SUMMARY CARD
+// ==========================================
+.order-summary-card {
+    background: #ffffff;
+    border: 2px solid #F5A623;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 450px; // Limit width for compact design
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    
+    .summary-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #F5A623;
+        
+        h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+        }
+    }
+    
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+        
+        &:last-of-type {
+            border-bottom: none;
+        }
+        
+        .item-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .item-value {
+            font-size: 14px;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+        
+        &.organic {
+            .item-label, .item-value {
+                color: #1a7a3e;
+            }
+        }
+        
+        &.non-organic {
+            .item-label, .item-value {
+                color: #999;
+            }
+        }
+    }
+    
+    .summary-total {
+        background: linear-gradient(135deg, #F5A623 0%, #E89610 100%);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .total-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        .total-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+    }
+}
+
+// ==========================================
+// 2. PRODUCT LIST SECTION WITH YELLOW HEADER
+// ==========================================
+.product-order-section {
+    margin-bottom: 32px;
+    
+    h4 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #145f30;
+        margin-bottom: 16px;
+    }
+}
+
+.product-order-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 16px; // Spacing between multiple product cards
+    
+    &:last-child {
+        margin-bottom: 0; // Remove bottom margin from last card
+    }
+    
+    .order-header {
+        background: linear-gradient(135deg, #F5A623 0%, #E89610 100%);
+        padding: 16px 20px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 80px; // 5th column for "Hapus" button
+        gap: 12px;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 13px;
+        
+        // Show 5th column (Hapus button header)
+        div:nth-child(5) {
+            display: block;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+    }
+    
+    .product-row {
+        padding: 16px 20px;
+        border-bottom: 1px solid #f5f5f5;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 80px; // 5 columns including "Hapus" button
+        gap: 12px;
+        align-items: center;
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        &:last-child {
+            border-bottom: none;
+        }
+        
+        &:hover {
+            background: #fafafa;
+        }
+        
+        .product-main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            
+            .product-image {
+                width: 60px;
+                height: 60px;
+                border-radius: 8px;
+                object-fit: cover;
+                border: 1px solid #e5e5e5;
+                flex-shrink: 0;
+            }
+            
+            .product-image-spacer {
+                width: 60px;
+                height: 60px;
+                flex-shrink: 0;
+            }
+            
+            .product-info {
+                flex: 1;
+                min-width: 0; // Allow text truncation
+                
+                .product-name {
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                    margin-bottom: 4px;
+                }
+                
+                .product-qty {
+                    font-size: 13px;
+                    color: #666;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    
+                    .qty-badge {
+                        background: #f0f0f0;
+                        color: #1a7a3e;
+                        font-weight: 600;
+                        padding: 2px 8px;
+                        border-radius: 4px;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            .product-price {
+                font-size: 15px;
+                font-weight: 700;
+                color: #1a7a3e;
+                
+                .unit-label {
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: #666;
+                    margin-left: 2px;
+                }
+            }
+            
+            .detail-label {
+                font-weight: 600;
+                color: #666;
+                margin-right: 6px;
+                
+                @media (min-width: 769px) {
+                    display: none; // Hide labels on desktop, header provides context
+                }
+            }
+            
+            .detail-value {
+                color: #1a1a1a;
+                font-size: 14px;
+            }
+        }
+        
+        .badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+            
+            &.badge-organic {
+                background: #d4edda !important;
+                color: #1a7a3e !important;
+                border: 1px solid #c3e6cb;
+            }
+            
+            &.badge-non-organic {
+                background: #f8d7da !important;
+                color: #721c24 !important;
+                border: 1px solid #f5c6cb;
+            }
+        }
+        
+        .variant-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            .btn-remove-variant {
+                text-decoration: none;
+                font-weight: 500;
+                transition: all 0.2s;
+                
+                &:hover {
+                    transform: translateY(-1px);
+                }
+                
+                &:active {
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+    
+    .order-actions {
+        padding: 16px 20px;
+        background: #f9f9f9;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        
+        .btn-cancel {
+            padding: 8px 20px;
+            background: #ffffff;
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            
+            &:hover {
+                background: #dc3545;
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+// ==========================================
+// 3. FORM ENHANCEMENTS
+// ==========================================
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.form-check-input_fill {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%  ;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin-top: 0;
+    
+    &:checked::after {
+        content: "";
+        width: 12px;
+        height: 12px;
+        background-color: #1a7a3e;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+// ==========================================
+// 4. BUTTON STYLES
+// ==========================================
+.btn-checkout {
+    background: linear-gradient(135deg, #1a7a3e 0%, #156b34 100%);
+    border: none;
+    color: #ffffff;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(26, 122, 62, 0.3);
+    
+    &:hover {
+        background: linear-gradient(135deg, #156b34 0%, #1a7a3e 100%);
+        box-shadow: 0 6px 20px rgba(26, 122, 62, 0.4);
+        transform: translateY(-2px);
+    }
+    
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+}
+
+.policy-text {
+    font-size: 12px;
+    color: #999;
+    line-height: 1.6;
+    
+    a {
+        color: #1a7a3e;
+        text-decoration: none;
+        
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,0 +1,136 @@
+.user-account-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: -0.5rem;
+  min-width: 160px;
+  max-width: 180px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 1rem;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+    box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  // Show when hover container is active
+  .hover-container:hover &,
+  .hover-container.js-content_visible & {
+    opacity: 1;
+    visibility: visible;
+    margin-right: 30px;
+    margin-top: -20px;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    margin: 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #f5f5f5;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #222;
+    text-decoration: none;
+    font-size: 0.875rem; // Slightly smaller for compact look
+    transition: background-color 0.2s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 400;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: #f8f8f8;
+      color: #222;
+      border-radius: 8px;
+    }
+
+    &--logout {
+      background-color: #fff;
+      color: #e52c2c;
+      font-weight: 500;
+      border-radius: 8px;
+      
+      &:hover {
+        background-color: #e52c2c;
+        border-radius: 8px;
+        color: #fff;
+      }
+    }
+  }
+}
+
+// User Account Name Display
+.user-account-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #222;
+  
+  @media (max-width: 575px) {
+    display: none; // Hide name on very small screens
+  }
+}
+
+// Header Avatar Styling
+.header-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+  border: 1px solid #eee;
+  display: block;
+  overflow: hidden;
+
+  &--mobile {
+    width: 40px !important;
+    height: 40px !important;
+    vertical-align: middle;
+  }
+}
+
+.header-avatar__placeholder {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  background: #1a3c2a; // Brand dark green
+  color: #fff;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  overflow: hidden;
+
+  &--mobile {
+    width: 40px !important;
+    height: 40px !important;
+    display: inline-flex !important;
+    vertical-align: middle;
+    font-size: 1.125rem;
+  }
+}

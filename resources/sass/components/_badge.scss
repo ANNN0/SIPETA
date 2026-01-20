@@ -1,0 +1,29 @@
+// Global Badge Styles - Override Bootstrap defaults
+.badge {
+    padding: 5px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    letter-spacing: 0.3px;
+    
+    &.bg-success {
+        background-color: #22c55e !important; // Vibrant green
+        color: white !important;
+    }
+    
+    &.bg-danger {
+        background-color: #ef4444 !important; // Vibrant red
+        color: white !important;
+    }
+    
+    &.bg-warning {
+        background-color: #f59e0b !important; // Vibrant orange
+        color: #1e293b !important;
+    }
+    
+    &.bg-secondary {
+        background-color: #6b7280 !important; // Gray
+        color: white !important;
+    }
+}

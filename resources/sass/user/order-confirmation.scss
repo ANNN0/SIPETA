@@ -1,0 +1,165 @@
+// Order Confirmation Page Styles
+
+.order-complete {
+    .order-complete__message {
+        text-align: center;
+        padding: 2rem 0;
+        
+        svg {
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        p {
+            color: #666;
+            font-size: 1rem;
+        }
+    }
+    
+    .order-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        justify-content: center;
+        padding: 2rem 0;
+        border-top: 1px solid #e5e5e5;
+        border-bottom: 1px solid #e5e5e5;
+        margin-bottom: 2rem;
+        
+        &__item {
+            text-align: center;
+            min-width: 150px;
+            
+            label {
+                display: block;
+                font-size: 0.875rem;
+                text-transform: uppercase;
+                color: #888;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+                letter-spacing: 0.5px;
+            }
+            
+            span {
+                display: block;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #333;
+            }
+        }
+    }
+    
+    // Shipping Address Section Styling
+    .shipping-address-section {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #333;
+            border-bottom: 2px solid #228B22;
+            padding-bottom: 0.75rem;
+        }
+        
+        .address-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .address-field {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.2s ease;
+            
+            &:hover {
+                border-color: #228B22;
+                box-shadow: 0 2px 8px rgba(34, 139, 34, 0.1);
+            }
+            
+            &.full-width {
+                grid-column: 1 / -1;
+            }
+            
+            label {
+                display: block;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                color: #888;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                margin-bottom: 0.5rem;
+            }
+            
+            p {
+                margin: 0;
+                font-size: 1rem;
+                color: #333;
+                font-weight: 500;
+                line-height: 1.5;
+                word-wrap: break-word;
+            }
+        }
+    }
+}
+
+// Check Your Orders Button Styling
+.btn-check-orders {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center;
+    background-color: #222;
+    color: #fff;
+    border: 0.8px solid #222;
+    border-radius: 0;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    
+    &:hover {
+        background-color: #333;
+        border-color: #333;
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(34, 34, 34, 0.25);
+    }
+    
+    // More specific SVG selector with important flags
+    svg,
+    > svg {
+        flex-shrink: 0 !important;
+        margin-right: 8px !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        display: block !important;
+        position: relative !important;
+        // top: 2px !important;  // Move down 1px for alignment
+    }
+}
+

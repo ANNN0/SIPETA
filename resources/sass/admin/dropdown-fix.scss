@@ -1,0 +1,22 @@
+// ====================================
+// Dropdown Overflow Fix
+// ====================================
+
+// Fix for dropdown overflow - prevent clipping at ALL levels
+.wg-box,
+.wg-table,
+.table-responsive,
+.table-all-user {
+    overflow: visible !important;
+}
+
+// Force table body to allow overflow
+table tbody,
+table {
+    overflow: visible !important;
+}
+
+// Ensure dropdowns appear above everything
+.dropdown-menu {
+    z-index: 1050 !important;
+}

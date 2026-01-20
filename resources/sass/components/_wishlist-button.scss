@@ -1,0 +1,105 @@
+// ============================================
+// Wishlist Button Component
+// ============================================
+
+.wishlist-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    color: #767676;
+    transition: all 0.3s ease;
+
+    // Critical: Ensure wishlist button is always on top
+    z-index: 20;
+
+    // SVG icon styling
+    svg {
+        width: 20px;
+        height: 20px;
+        transition: all 0.3s ease;
+        fill: #767676 !important;
+        stroke: none !important;
+
+        path {
+            fill: #767676 !important;
+        }
+
+        g path {
+            fill: #767676 !important;
+        }
+    }
+
+    // Hover state
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: scale(1.1);
+    }
+
+    // Active/Filled state (when in wishlist)
+    &.filled-heart {
+        color: #d6001c;
+
+        svg {
+            fill: #d6001c !important;
+            stroke: none !important;
+
+            path {
+                fill: #d6001c !important;
+            }
+
+            g path {
+                fill: #d6001c !important;
+            }
+        }
+    }
+
+    // Mobile responsiveness
+    @media (min-width: 768px) {
+        top: 1.25rem;
+        right: 1.25rem;
+        width: 2.75rem;
+        height: 2.75rem;
+        padding: 0;
+
+        svg {
+            width: 22px;
+            height: 22px;
+        }
+    }
+
+    // Prevent interference with other elements
+    pointer-events: auto !important;
+}
+
+// Container protection
+.pc__img-wrapper {
+    .wishlist-btn {
+        position: absolute;
+        z-index: 20;
+    }
+}
+
+// Ensure Add to Cart button stays below wishlist
+.pc__atc {
+    z-index: 5;
+    text-decoration: none !important;
+    
+    .btn-text,
+    .btn-spinner,
+    span {
+        text-decoration: none !important;
+    }
+}

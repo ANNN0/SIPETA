@@ -1,0 +1,61 @@
+# Daftar Perbaikan SIPETA
+
+## Tahap 1: ~~Redesign Halaman Wishlist Public~~ ✅ SELESAI
+
+---
+
+## Tahap 2: Integrasi WhatsApp untuk Hubungi Petani
+**Status**: ❌ Belum
+**Deskripsi**: Tombol "Hubungi via WhatsApp" di profil petani & halaman produk
+
+---
+
+## Tahap 3: Halaman FAQ / Bantuan
+**Status**: ❌ Belum
+**Deskripsi**: Halaman FAQ untuk pertanyaan umum (pesanan, pengiriman, dll)
+
+---
+
+## Tahap 4: Fitur Bandingkan Produk
+**Status**: ❌ Belum
+**Deskripsi**: Bandingkan 2-3 produk side-by-side (harga, rating, lokasi)
+
+---
+
+## Tahap 5: Floating WhatsApp Button (Support)
+**Status**: ❌ Belum
+**Deskripsi**: Tombol WA floating di pojok kanan bawah untuk hubungi admin
+
+---
+
+## 🆕 Rekomendasi Tambahan (dari analisis codebase):
+
+### Tahap 6: Produk Terakhir Dilihat (Recently Viewed) - Halaman Product Details
+**Status**: ✅ Selesai
+**Deskripsi**: Tampilkan riwayat produk yang baru dilihat user di Halaman Product Details.
+
+### Tahap 7: Quick View Produk
+**Deskripsi**: Modal popup untuk melihat detail produk tanpa pindah halaman
+
+### Tahap 8: Testimonial / Review Section di Homepage
+**Deskripsi**: Tampilkan review terbaik dari pelanggan di homepage
+
+### Tahap 9: Optimalisasi Fitur Search (Autocomplete & UX)
+**Deskripsi**: Tingkatkan pencarian dengan autocomplete, highlight keyword, info jumlah hasil, dan empty state yang lebih baik.
+
+---
+
+## Ringkasan Progress
+
+| Tahap | Fitur | Status |
+|-------|-------|--------|
+| 1 | Redesign Wishlist | ✅ Selesai |
+| 2 | WhatsApp Hubungi Petani | ⏳ Pending |
+| 3 | Halaman FAQ | 🎨 Mockup Ready |
+| 4 | Bandingkan Produk | 🎨 Mockup Ready |
+| 5 | Floating WA Button | ✅ Selesai |
+| 6 | Recently Viewed | ✅ Selesai |
+| 7 | Quick View Produk | 💡 Saran |
+| 8 | Testimonial Homepage | ✅ Selesai |
+| 9 | Optimalisasi Search | ✅ Selesai |
+

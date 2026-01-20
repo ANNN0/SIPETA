@@ -1,0 +1,195 @@
+// ============================================
+// Base Styles - Global Elements
+// ============================================
+
+// CSS Reset & Base
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  // Hide scrollbar but maintain scroll functionality
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE and Edge
+  
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
+}
+
+.pt-90 {
+  padding-bottom: 80px;
+}
+
+body {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-base;
+  color: $neutral-900;
+  background-color: $body-bg;
+  min-height: 100vh;
+  
+  // Hide scrollbar on body as well
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Gradient background for body (light theme)
+body.gradient-bg {
+  background: linear-gradient(135deg, $neutral-50 0%, $white 50%, $neutral-100 100%);
+  background-attachment: fixed;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $neutral-900;
+  margin-bottom: $spacing-4;
+
+  // Use Brand Green for titles in user layout
+  .gradient-bg & {
+    color: $primary-dark;
+  }
+}
+
+h1 {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+}
+
+h2 {
+  font-size: $font-size-3xl;
+}
+
+h3 {
+  font-size: $font-size-2xl;
+}
+
+h4 {
+  font-size: $font-size-xl;
+}
+
+h5 {
+  font-size: $font-size-lg;
+}
+
+h6 {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+}
+
+p {
+  margin-bottom: $spacing-4;
+  color: $neutral-700;
+}
+
+// Links
+a {
+  color: $primary;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $primary-dark;
+  }
+
+  // Remove intrusive focus outline, use subtle underline instead
+  &:focus {
+    outline: none;
+  }
+  
+  // Focus visible only for keyboard navigation (accessibility)
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+    border-radius: $radius-sm;
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Lists
+ul, ol {
+  list-style-position: inside;
+  margin-bottom: $spacing-4;
+}
+
+// Form Elements Base
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// Utility Classes
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Visibility
+.hidden {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

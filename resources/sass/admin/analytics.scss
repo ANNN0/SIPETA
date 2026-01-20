@@ -1,0 +1,102 @@
+// Analytics Dashboard Styles
+
+// Statistics Cards
+.stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: #fff;
+
+        &.bg-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        &.bg-success {
+            background: linear-gradient(135deg, #228b22 0%, #1a691a 100%);
+        }
+
+        &.bg-warning {
+            background: linear-gradient(135deg, #f6b93b 0%, #e58e26 100%);
+        }
+
+        &.bg-info {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+        }
+    }
+
+    .stat-content {
+        flex: 1;
+
+        h6 {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 2px;
+        }
+
+        small {
+            font-size: 11px;
+            color: #999;
+        }
+    }
+}
+
+// Chart Containers
+.wg-box {
+    canvas {
+        max-height: 350px;
+    }
+}
+
+// Table styles are now handled globally by datatables.scss
+
+// Responsive
+@media (max-width: 768px) {
+    .stat-card {
+        padding: 16px;
+        gap: 12px;
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+        }
+
+        .stat-content {
+            h6 {
+                font-size: 12px;
+            }
+
+            h3 {
+                font-size: 22px;
+            }
+        }
+    }
+}

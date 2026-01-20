@@ -1,0 +1,39 @@
+
+.logo {
+    .logo__image {
+        max-height: 140px !important; 
+        width: 140px !important;
+        height: auto !important;
+        object-fit: contain;
+        display: block;
+    }
+}
+
+.header-mobile .logo {
+    .logo__image {
+        max-height: 45px !important;
+    }
+}
+
+.header-desk .logo {
+    .logo__image {
+        max-height: 80px !important;
+    }
+}
+
+.footer .logo {
+    .logo__image {
+        max-height: 130px !important;
+        max-width: 130px !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+#logo_header_1,
+#logo_header_mobile {
+    max-height: 60px;
+    max-width: 120px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}

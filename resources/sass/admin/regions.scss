@@ -1,0 +1,39 @@
+// Admin Regions Styles
+
+.regions-list {
+    .region-thumbnail {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-right: 10px;
+        flex-shrink: 0; // Prevent image from shrinking
+        display: block; // Ensure image displays properly
+    }
+
+    .region-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // Vertically center the text
+        flex: 1; // Take remaining space
+        
+        .region-name {
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 2px;
+        }
+
+        .region-slug {
+            font-size: 0.875rem;
+            color: #6c757d;
+            line-height: 1.2;
+        }
+    }
+
+    .region-item-wrapper {
+        display: flex !important; // Force flex to override any conflicting styles
+        flex-direction: row !important; // Force horizontal layout
+        align-items: center !important; // Vertically center image and text
+        gap: 0;
+    }
+}

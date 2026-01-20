@@ -1,0 +1,151 @@
+// ====================================
+// User Account Details Styling - SIPETA (New Design)
+// ====================================
+
+.personal-info__card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+// Profile Photo Styling
+.personal-photo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.personal-photo__container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.personal-photo__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.personal-photo__placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #1a3c2a; // Dark green from reference
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 3.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.personal-photo__edit-btn {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 38px;
+    height: 38px;
+    background: #4a5c53; // Slate/olive color for the edit button
+    border-radius: 10px; // Slightly rounded square like in reference
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease;
+    border: 2px solid #fff;
+
+    &:hover {
+        background: #1a3c2a;
+    }
+
+    svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+// Form Field Styling
+.personal-form__group {
+    .personal-form__label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 0.9375rem;
+    }
+
+    .personal-form__input {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        height: auto;
+        font-size: 0.95rem;
+        color: #555;
+        transition: all 0.3s ease;
+
+        &:focus {
+            border-color: #1a7a3e;
+            box-shadow: 0 0 0 3px rgba(26, 122, 62, 0.1);
+        }
+
+        &.input-disabled {
+            background-color: #f3f4f6;
+            color: #666;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.personal-form__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1a3c2a;
+    margin-bottom: 1.5rem;
+}
+
+// Submit Button Styling
+.personal-form__submit {
+    background: #1a3c2a; // Dark forest green
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 0.875rem 2.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(26, 60, 42, 0.2);
+
+    &:hover {
+        background: lighten(#1a3c2a, 5%);
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 15px rgba(26, 60, 42, 0.25);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .personal-info__card {
+        padding: 1.5rem;
+    }
+    
+    .personal-photo__container {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1rem;
+    }
+}

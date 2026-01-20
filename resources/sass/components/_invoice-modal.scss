@@ -1,0 +1,363 @@
+// ============================================
+// INVOICE MODAL - Receipt Style
+// ============================================
+
+.invoice-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.show {
+        display: flex;
+        opacity: 1;
+    }
+}
+
+.invoice-modal {
+    background: #fff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+
+    .show & {
+        transform: translateY(0);
+    }
+
+    // Header - White/Natural, Centered Title
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 20px 24px;
+        background: #fff;
+        border-bottom: none;
+
+        h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #222;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            color: #222;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+
+            &:hover {
+                background: #f5f5f5;
+            }
+
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+
+    // Dashed Separator
+    &__separator {
+        border: none;
+        border-top: 2px dashed #e0e0e0;
+        margin: 0;
+    }
+
+    // Body Content
+    &__body {
+        padding: 24px;
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    // Section Title - Receipt style
+    &__section-title {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #888;
+        margin: 0 0 8px 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    // Info Row (Left-Right Layout)
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 8px 0;
+        gap: 16px;
+
+        .label {
+            font-size: 14px;
+            color: #666;
+            flex-shrink: 0;
+        }
+
+        .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        &--total {
+            padding-top: 12px;
+            margin-top: 8px;
+            border-top: 2px solid #222;
+
+            .label, .value {
+                font-size: 16px;
+                font-weight: 700;
+                color: #1a7a3e;
+            }
+        }
+    }
+
+    // Product Item
+    &__product {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid #f5f5f5;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #f9f9f9;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+
+            .name {
+                font-size: 14px;
+                font-weight: 600;
+                color: #222;
+                margin: 0 0 4px 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .price-qty {
+                font-size: 13px;
+                color: #666;
+            }
+        }
+
+        .product-subtotal {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
+            flex-shrink: 0;
+        }
+    }
+
+    // Sections
+    &__section {
+        margin-bottom: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // Status Badge
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &--approved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        &--pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        &--declined {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    }
+
+    // Loading State
+    &__loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+        color: #666;
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f0f0f0;
+            border-top-color: #1a7a3e;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    }
+
+    // Footer with buttons
+    &__footer {
+        display: flex;
+        gap: 12px;
+        padding: 16px 24px;
+        background: #f9f9f9;
+        border-top: 1px solid #eee;
+
+        .btn-print,
+        .btn-export {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-print {
+            background: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+
+            &:hover {
+                background: #f5f5f5;
+                border-color: #ccc;
+            }
+
+            svg {
+                stroke: #333;
+            }
+        }
+
+        .btn-export {
+            background: #1a7a3e;
+            color: #fff;
+
+            &:hover {
+                background: #156632;
+            }
+
+            svg {
+                stroke: #fff;
+            }
+        }
+    }
+}
+
+// Responsive
+@media (max-width: 576px) {
+    .invoice-modal {
+        max-height: 95vh;
+        border-radius: 12px;
+
+        &__header {
+            padding: 16px 20px;
+
+            h3 {
+                font-size: 16px;
+            }
+        }
+
+        &__body {
+            padding: 20px;
+        }
+
+        &__row {
+            flex-direction: column;
+            gap: 4px;
+
+            .value {
+                text-align: left;
+            }
+
+            &--total {
+                flex-direction: row;
+            }
+        }
+
+        &__product {
+            .product-image {
+                width: 40px;
+                height: 40px;
+            }
+
+            .product-info .name {
+                font-size: 13px;
+            }
+        }
+    }
+}

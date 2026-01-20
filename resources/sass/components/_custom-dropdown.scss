@@ -1,0 +1,171 @@
+// Custom Dropdown Component for Shop Filters
+// Inline expanding accordion style - pushes content below
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    
+    // Dropdown icon
+    .accordion-button__icon.type2 {
+        transition: transform 0.3s ease;
+        // Default state (closed) - icon points DOWN
+        transform: rotate(180deg);
+    }
+    
+    // When dropdown is open
+    &.open {
+        .accordion-button__icon.type2 {
+            // Open state - icon points UP
+            transform: rotate(0deg);
+        }
+    }
+
+    &__selected {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.375rem 0.75rem;
+        background: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        
+        &:hover {
+            border-color: #86b7fe;
+        }
+        
+        .selected-text {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        // SVG arrow styling
+        .accordion-button__icon {
+            width: 10px;
+            height: 6px;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+            
+            path {
+                fill: #212529;
+            }
+        }
+    }
+    
+    &.open &__selected {
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        // Icon rotation now handled by .custom-dropdown.open rule (lines 15-20)
+    }
+    
+    &__options {
+        // INLINE, not absolute - pushes content below
+        position: relative;
+        background: #fff;
+        border: 1px solid #ced4da;
+        border-top: none;
+        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+        overflow: hidden;
+        
+        // Smooth height animation - ALL properties same timing for smoothness
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                    padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0;
+    }
+    
+    &.open &__options {
+        max-height: 400px; // Large enough for all options
+        opacity: 1;
+        padding: 0.25rem 0;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+    
+    &__option {
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        transition: background-color 0.15s ease, color 0.15s ease;
+        font-size: 1rem;
+        color: #212529;
+        
+        &:hover {
+            background-color: #f8f9fa;
+        }
+        
+        &.selected {
+            background-color: #0d6efd;
+            color: #fff;
+            
+            &:hover {
+                background-color: #0b5ed7;
+            }
+        }
+    }
+    
+    // Dropup variant (for bottom of page)
+    &.dropup {
+        display: flex;
+        flex-direction: column-reverse;
+        
+        &__selected {
+            border-radius: 0.25rem;
+        }
+        
+        .open &__selected {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+            
+            // When dropup and open, rotate SVG back to 0deg (arrow points down)
+            .accordion-button__icon {
+                transform: rotate(0deg);
+            }
+        }
+        
+        &__options {
+            border-top: 1px solid #ced4da;
+            border-bottom: none;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+}
+
+// Scrollbar for dropdown options (if needed)
+.custom-dropdown__options {
+    scrollbar-width: thin;
+    scrollbar-color: #6c757d #f8f9fa;
+    
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #f8f9fa;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: #6c757d;
+        border-radius: 0.2rem;
+        
+        &:hover {
+            background-color: #495057;
+        }
+    }
+}

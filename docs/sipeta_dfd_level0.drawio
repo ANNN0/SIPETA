@@ -1,0 +1,124 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.3.1">
+  <diagram id="dfd-level-0" name="DFD Level 0 - Context Diagram">
+    <mxGraphModel dx="1042" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=16;fontStyle=1;" value="DFD LEVEL 0 - CONTEXT DIAGRAM SIPETA" vertex="1">
+          <mxGeometry height="30" width="400" x="400" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p0" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontSize=13;fontStyle=1;" value="0&#xa;&#xa;SISTEM&#xa;SIPETA" vertex="1">
+          <mxGeometry height="150" width="200" x="500" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cust" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontStyle=1;fontSize=12;" value="CUSTOMER" vertex="1">
+          <mxGeometry height="50" width="120" x="80" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="e_admin" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontStyle=1;fontSize=12;" value="ADMIN" vertex="1">
+          <mxGeometry height="50" width="120" x="540" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pay" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontStyle=1;fontSize=11;" value="PAYMENT GATEWAY" vertex="1">
+          <mxGeometry height="50" width="120" x="1000" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="e_farm" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontStyle=1;fontSize=12;" value="FARMER" vertex="1">
+          <mxGeometry height="50" width="120" x="540" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="355" as="sourcePoint" />
+            <mxPoint x="500" y="355" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a1_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;" value="Data Login, Pesanan, Return" vertex="1">
+          <mxGeometry height="20" width="180" x="250" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="395" as="sourcePoint" />
+            <mxPoint x="200" y="395" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a2_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;" value="Info Produk, Status Pesanan" vertex="1">
+          <mxGeometry height="20" width="180" x="250" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="600" as="sourcePoint" />
+            <mxPoint x="560" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a3_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;" value="CRUD Data, Konfirmasi" vertex="1">
+          <mxGeometry height="20" width="130" x="430" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="640" y="450" as="sourcePoint" />
+            <mxPoint x="640" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;" value="Laporan, Data" vertex="1">
+          <mxGeometry height="20" width="100" x="650" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="355" as="sourcePoint" />
+            <mxPoint x="1000" y="355" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a5_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;" value="Request Pembayaran" vertex="1">
+          <mxGeometry height="20" width="130" x="770" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1000" y="395" as="sourcePoint" />
+            <mxPoint x="700" y="395" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a6_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;" value="Status Pembayaran" vertex="1">
+          <mxGeometry height="20" width="130" x="770" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="150" as="sourcePoint" />
+            <mxPoint x="560" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;" value="Data Produk Tani" vertex="1">
+          <mxGeometry height="20" width="110" x="430" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="a8" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="640" y="300" as="sourcePoint" />
+            <mxPoint x="640" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a8_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;" value="Info Pesanan" vertex="1">
+          <mxGeometry height="20" width="100" x="650" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=1;" value="LEGENDA:" vertex="1">
+          <mxGeometry height="20" width="70" x="40" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" parent="1" style="ellipse;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="22" width="30" x="40" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;" value="Proses" vertex="1">
+          <mxGeometry height="18" width="50" x="80" y="727" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" parent="1" style="rounded=0;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="22" width="30" x="150" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;" value="External Entity" vertex="1">
+          <mxGeometry height="18" width="80" x="190" y="727" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="736" as="sourcePoint" />
+            <mxPoint x="330" y="736" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg3t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;" value="Aliran Data" vertex="1">
+          <mxGeometry height="18" width="70" x="340" y="727" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

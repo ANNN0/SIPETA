@@ -1,0 +1,171 @@
+.my-account {
+    .wg-box {
+        margin-bottom: 30px;
+        background-color: #ffffff;
+        border: 1px solid #d1e7dd; // Soft green border
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        h5 {
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #145f30; // primary-dark
+        }
+    }
+
+    .table-transaction {
+        thead th,
+        tr th {
+            background: #f0f7f2 !important; 
+            color: #145f30 !important;
+            border-bottom: 2px solid #1a7a3e !important;
+            font-weight: 700 !important;
+        }
+
+        tbody {
+            tr {
+                background: #ffffff;
+
+                &:nth-child(even) {
+                    background: #fafaeb; // earthy cream
+                }
+
+                &:hover {
+                    background: #e6f3e9 !important;
+                }
+            }
+
+            // Label cells (th) - distinct background
+            th {
+                border: none !important;
+                border-bottom: 1px solid #d1e7dd !important;
+                padding: 14px 18px !important;
+                background: #f0f7f2 !important;
+                color: #145f30 !important;
+                font-weight: 700 !important;
+            }
+
+            // Value cells (td) - plain white
+            td {
+                border: none !important;
+                border-bottom: 1px solid #d1e7dd !important;
+                padding: 14px 18px !important;
+                background: #ffffff !important;
+                color: #5c7c67 !important;
+            }
+        }
+    }
+
+    .table thead th,
+    .table-striped thead th,
+    .table-bordered thead th {
+        background: #4ab94e !important;
+        color: #ffffff !important;
+        border-bottom: 2px solid #1a7a3e !important;
+        padding: 18px 16px !important;
+        font-weight: 700 !important;
+        font-size: 13px !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .address-card {
+        background: #ffffff;
+        border: 1px solid #d1e7dd;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+        .address-item {
+            display: flex;
+            margin-bottom: 14px;
+            gap: 14px;
+            align-items: flex-start;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .label {
+                font-weight: 700;
+                color: #145f30;
+                min-width: 130px;
+                flex-shrink: 0;
+                font-size: 0.85rem;
+                text-transform: uppercase;
+                letter-spacing: 0.3px;
+            }
+
+            .value {
+                color: #5c7c67;
+                flex: 1;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+        }
+    }
+}
+
+// Order Details Header with Back Button
+.order-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--table-border);
+
+    .page-subtitle {
+        font-size: 30px;
+        color: var(--table-text-primary);
+        margin: 0;
+        color: #334155;
+        font-weight: 600;
+    }
+
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        background: #ffffff;
+        color: #1a7a3e;
+        border: 2px solid #1a7a3e;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(26, 122, 62, 0.1);
+
+        svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        &:hover {
+            background: transparent;
+            color: #1a7a3e;
+            border-color: #1a7a3e;
+            box-shadow: 0 6px 15px rgba(26, 122, 62, 0.2);
+            text-decoration: none;
+            transform: translateY(-2px);
+
+            svg {
+                transform: translateX(-4px);
+            }
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}

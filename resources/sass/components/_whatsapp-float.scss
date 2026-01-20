@@ -1,0 +1,89 @@
+// ============================================
+// Floating WhatsApp Support Button
+// ============================================
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #25D366; // Official WhatsApp green
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    cursor: pointer;
+
+    // Pulse animation for attention
+    animation: whatsapp-pulse 2s ease-in-out infinite;
+
+    // WhatsApp icon
+    .whatsapp-icon {
+        width: 32px;
+        height: 32px;
+        color: #fff;
+        transition: transform 0.3s ease;
+    }
+
+    // Hover effect
+    &:hover {
+        background: #1EBE57; // Darker green on hover
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5),
+                    0 3px 6px rgba(0, 0, 0, 0.15);
+        animation: none; // Stop pulse on hover
+
+        .whatsapp-icon {
+            transform: scale(1.05) rotate(5deg);
+        }
+    }
+
+    // Active/click state
+    &:active {
+        transform: scale(0.95);
+    }
+
+    // Responsive: smaller on mobile
+    @media (max-width: 768px) {
+        width: 56px;
+        height: 56px;
+        bottom: 16px;
+        right: 16px;
+
+        .whatsapp-icon {
+            width: 28px;
+            height: 28px;
+        }
+    }
+
+    // Ensure it doesn't interfere with other floating elements
+    @media (max-width: 576px) {
+        bottom: 80px; // Move up to avoid conflict with mobile navigation
+    }
+}
+
+// Pulse animation keyframes
+@keyframes whatsapp-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4),
+                    0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.6),
+                    0 2px 4px rgba(0, 0, 0, 0.1),
+                    0 0 0 8px rgba(37, 211, 102, 0.2);
+    }
+}
+
+// Optional: hide on print
+@media print {
+    .whatsapp-float {
+        display: none;
+    }
+}

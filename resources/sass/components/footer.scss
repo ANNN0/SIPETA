@@ -1,0 +1,277 @@
+// ================================================
+// FOOTER STYLES
+// ================================================
+// Extracted from style.css and custom.css, organized for SCSS
+
+// Sub-menu Title
+.sub-menu__title {
+    display: block;
+    margin-bottom: .75rem;
+    color: #767676;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+// Menu Link
+.menu-link {
+    display: inline-block;
+    position: relative;
+    padding: 0.5em 0;
+    color: #222222;
+    line-height: 1.5em;
+}
+
+.menu-link_us-s {
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 2em;
+        left: 0;
+        width: 0;
+        height: 2px;
+        transition: width 0.28s cubic-bezier(0.47, 0, 0.745, 0.715);
+        background-color: currentColor;
+    }
+
+    &:hover:after,
+    &.menu-link_active:after {
+        width: 2em;
+    }
+}
+
+// Footer Top
+.footer-top {
+    padding-top: 6.2rem;
+
+    .block-newsletter {
+        max-width: 47rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
+// Footer Middle
+.footer-middle {
+    padding-top: 2.25rem; // From custom.css
+    padding-bottom: 2.25rem; // From custom.css
+
+    .logo {
+        margin-bottom: 2.75rem;
+    }
+
+    @media (min-width: 768px) {
+        padding-top: 3.75rem;
+        padding-bottom: 2.85rem;
+    }
+
+    @media (min-width: 992px) {
+        padding-top: 6.25rem;
+        padding-bottom: 4.75rem;
+    }
+}
+
+// Footer Column
+.footer-column {
+    flex-grow: 1;
+}
+
+// Footer Address
+.footer-address {
+    margin-bottom: 0.875rem;
+}
+
+// Footer Social Link
+.footer__social-link {
+    padding: 0.5rem 1rem;
+    color: inherit;
+
+    .svg-icon {
+        fill: currentColor;
+    }
+}
+
+// Footer Newsletter Form
+.footer-newsletter__form .btn-link {
+    padding-right: 0.9375rem;
+}
+
+// Footer Bottom
+.footer-bottom {
+    padding-top: 1.25rem;
+    padding-bottom: 1rem;
+    border-top: 1px solid rgba(13, 69, 32, 0.1); // Dark green border
+}
+
+// Footer Main
+.footer {
+    background-color: #f0f4ef; // Nature's Mint (Soft background)
+    color: #0d4520; // $primary-darker (Dark green text)
+
+    .sub-menu__title {
+        margin-bottom: 0.875rem;
+        color: #0d4520;
+        font-weight: 700;
+
+        @media (min-width: 992px) {
+            margin-bottom: 1.875rem;
+        }
+    }
+
+    .menu-link {
+        margin-top: 3px;
+        margin-bottom: 2px;
+        color: rgba(13, 69, 32, 0.8); // Dark green with transparency
+        transition: $transition-fast;
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        &:hover {
+            color: #1a7a3e; // Primary green
+            text-decoration: none;
+
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+
+    .social-links {
+        margin-left: -0.5rem;
+        gap: 0.75rem;
+
+        .footer__social-link {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(13, 69, 32, 0.08); // Subtle green bubble
+            color: #0d4520;
+            border-radius: 50%;
+            padding: 0;
+            transition: $transition-fast;
+
+            &:hover {
+                background-color: #0d4520;
+                color: #ffffff;
+            }
+        }
+    }
+
+    .footer-address {
+        color: rgba(13, 69, 32, 0.8);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+
+    .logo {
+        // Keeps original logo colors (green)
+        img {
+            max-height: 40px;
+        }
+    }
+}
+
+
+// Footer Mobile
+.footer-mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+
+.footer-mobile__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 0.5rem;
+    color: #222222;
+    text-decoration: none;
+    font-size: 0.75rem;
+
+    svg {
+        margin-bottom: 0.25rem;
+    }
+
+    &:hover {
+        color: #b9a16b;
+    }
+}
+
+// Footer Copyright
+.footer-copyright {
+    color: rgba(13, 69, 32, 0.65);
+    font-size: 0.8125rem;
+}
+
+// Footer Settings (Privacy, Terms links)
+.footer-settings {
+    font-size: 0.8125rem;
+    color: rgba(13, 69, 32, 0.8);
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            color: #1a7a3e;
+            text-decoration: none;
+        }
+    }
+}
+
+.footer-info-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: rgba(13, 69, 32, 0.8);
+    font-size: 0.8125rem;
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        cursor: pointer;
+
+        &:after {
+            content: '▼';
+            font-size: 0.6rem;
+            margin-left: 0.25rem;
+            opacity: 0.7;
+        }
+    }
+}
+
+// Social Links (shared)
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        margin: 0;
+    }
+}

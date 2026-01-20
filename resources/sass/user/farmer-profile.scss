@@ -1,0 +1,242 @@
+// Farmer Profile Page Styles
+
+.farmer-profile-page {
+    padding: 40px 0 80px;
+
+    // Profile Header
+    .farmer-profile-header {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+        .col-md-3 {
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .farmer-photo {
+            img {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border: 4px solid #228b22;
+            }
+
+            .farmer-photo-placeholder {
+                width: 150px;
+                height: 150px;
+                background: #f0f9f0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 4px solid #228b22;
+                margin: 0 auto;
+
+                i {
+                    font-size: 60px !important;
+                    color: #228b22;
+                    display: block;
+                    line-height: 1;
+                }
+            }
+        }
+
+        .farmer-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: $primary-dark;
+            margin-bottom: 8px;
+        }
+
+        .farmer-location {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 0;
+
+            i {
+                color: #228b22;
+                margin-right: 6px;
+            }
+        }
+
+        .farmer-bio {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #555;
+        }
+    }
+
+    // Statistics Cards
+    .farmer-statistics {
+        .stat-card {
+            background: #fff;
+            padding: 20px 16px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            }
+
+            .stat-icon {
+                font-size: 20px;
+                color: #228b22;
+                margin-bottom: 8px;
+
+                i {
+                    font-size: 20px;
+                }
+            }
+
+            .stat-value {
+                font-size: 20px;
+                font-weight: 700;
+                color: $primary-dark;
+                margin-bottom: 4px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+                color: #666;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+        }
+    }
+
+    // Products Section
+    .farmer-products {
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: $primary-dark;
+            position: relative;
+            padding-bottom: 12px;
+
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 60px;
+                height: 3px;
+                background: #228b22;
+            }
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+
+            &:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            }
+
+            .pc__img-wrapper {
+                position: relative;
+                overflow: hidden;
+                padding-top: 100%;
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.3s;
+                }
+
+                &:hover img {
+                    transform: scale(1.05);
+                }
+            }
+
+            .pc__info {
+                padding: 16px;
+
+                .pc__category {
+                    font-size: 12px;
+                    color: #888;
+                    text-transform: uppercase;
+                    margin-bottom: 6px;
+                }
+
+                .pc__title {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-bottom: 8px;
+
+                    a {
+                        color: $primary-dark;
+                        text-decoration: none;
+
+                        &:hover {
+                            color: #228b22;
+                        }
+                    }
+                }
+
+                .product-card__price {
+                    .money {
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: #228b22;
+
+                        s {
+                            font-size: 14px;
+                            color: #999;
+                            margin-right: 6px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .farmer-profile-page {
+        .farmer-profile-header {
+            .farmer-name {
+                font-size: 24px;
+                text-align: center;
+                margin-top: 16px;
+            }
+
+            .farmer-location,
+            .farmer-bio {
+                text-align: center;
+            }
+        }
+
+        .farmer-statistics {
+            .stat-card {
+                padding: 16px;
+
+                .stat-icon i {
+                    font-size: 24px;
+                }
+
+                .stat-value {
+                    font-size: 22px;
+                }
+
+                .stat-label {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+// ================================================
+// NAVBAR CENTER ALIGNMENT
+// ================================================
+
+// Center the navigation on desktop while keeping logo on the left
+@media (min-width: 992px) {
+    .header-desk_type_1 {
+        position: relative;
+        
+        .logo {
+            // Keep logo on the left
+            margin-right: auto;
+        }
+        
+        .navigation {
+            // Center the navigation
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            
+            .navigation__list {
+                display: flex;
+                justify-content: center;
+                margin-right: 12px;
+            }
+        }
+        
+        .header-tools {
+            // Keep tools on the right
+            margin-left: auto;
+        }
+    }
+}

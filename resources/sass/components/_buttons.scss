@@ -1,0 +1,288 @@
+// ============================================
+// Button Components (No Shadows)
+// ============================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-3 $spacing-6;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  border: $border-width solid transparent;
+  border-radius: $radius-base;
+  cursor: pointer;
+  user-select: none;
+  transition: all $transition-base;
+  
+  &:focus {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// Button Variants
+
+// Primary Button
+.btn-primary {
+  background-color: $primary;
+  color: $white;
+  border-color: $primary;
+  
+  &:hover {
+    background-color: $primary-dark;
+    border-color: $primary-dark;
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    background-color: $primary-darker;
+    transform: translateY(0);
+  }
+}
+
+// Secondary Button
+.btn-secondary {
+  background-color: $secondary;
+  color: $neutral-900;
+  border-color: $secondary;
+  
+  &:hover {
+    background-color: darken($secondary, 5%);
+    transform: translateY(-2px);
+  }
+}
+
+// Accent Button
+.btn-accent {
+  background-color: $accent;
+  color: $white;
+  border-color: $accent;
+  
+  &:hover {
+    background-color: darken($accent, 8%);
+    transform: translateY(-2px);
+  }
+}
+
+// Outline Buttons
+.btn-outline-primary {
+  // Reversed for guest login button: filled by default, transparent on hover
+  background-color: $primary;
+  color: $white;
+  border-color: $primary;
+  border-width: 1.5px;
+  border-radius: 20px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  
+  &:hover {
+    background-color: transparent;
+    color: $primary;
+    border-color: $primary;
+    transform: none; // No transform for cleaner look
+  }
+  
+  svg {
+    vertical-align: middle;
+  }
+}
+
+.btn-outline-secondary {
+  background-color: transparent;
+  color: $neutral-700;
+  border-color: $neutral-300;
+  
+  &:hover {
+    background-color: $neutral-100;
+    border-color: $neutral-400;
+    transform: translateY(-2px);
+  }
+}
+
+// Ghost Button (no border)
+.btn-ghost {
+  background-color: transparent;
+  color: $primary;
+  border-color: transparent;
+  
+  &:hover {
+    background-color: rgba($primary, 0.1);
+  }
+}
+
+// Button Sizes
+.btn-sm {
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-sm;
+}
+
+.btn-lg {
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+}
+
+.btn-xl {
+  padding: $spacing-5 $spacing-10;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+}
+
+// Button Shapes
+.btn-rounded {
+  border-radius: $radius-full;
+}
+
+.btn-square {
+  border-radius: $radius-none;
+}
+
+// Block Button (full width)
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+// Button with Icon
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2;
+  
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+}
+
+// Icon-only Button
+.btn-icon-only {
+  padding: $spacing-3;
+  aspect-ratio: 1;
+  
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+}
+
+// Button Group
+.btn-group {
+  display: inline-flex;
+  
+  .btn {
+    border-radius: 0;
+    
+    &:first-child {
+      border-top-left-radius: $radius-base;
+      border-bottom-left-radius: $radius-base;
+    }
+    
+    &:last-child {
+      border-top-right-radius: $radius-base;
+      border-bottom-right-radius: $radius-base;
+    }
+    
+    &:not(:last-child) {
+      border-right: none;
+    }
+  }
+}
+
+// Semantic Buttons
+.btn-success {
+  background-color: $success;
+  color: $white;
+  border-color: $success;
+  
+  &:hover {
+    background-color: darken($success, 8%);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-warning {
+  background-color: $warning;
+  color: $white;
+  border-color: $warning;
+  
+  &:hover {
+    background-color: darken($warning, 8%);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-danger {
+  background-color: $danger;
+  color: $white;
+  border-color: $danger;
+  
+  &:hover {
+    background-color: darken($danger, 8%);
+    transform: translateY(-2px);
+  }
+}
+
+// Button Slideshow (for hero sections)
+.btn-slideshow {
+  padding: $spacing-4 $spacing-10;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  background-color: $primary;
+  color: $white;
+  border-color: $primary;
+  border-radius: $radius-md;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    background-color: $primary-dark;
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+// Clear/Reset Style Button (E.g. Clear Cart, Clear Wishlist)
+.btn-clear {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.625rem 1.5rem !important;
+    background: $primary !important;
+    color: white !important;
+    border: 2px solid $primary !important;
+    border-radius: $radius-xl !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba($primary, 0.15) !important;
+    transition: $transition-normal !important;
+    cursor: pointer !important;
+
+    i {
+        font-size: 0.875rem !important;
+        margin-right: 0.5rem !important;
+    }
+
+    &:hover {
+        background: transparent !important;
+        color: $primary !important;
+        box-shadow: 0 6px 18px rgba($primary, 0.2) !important;
+        transform: translateY(-2px) !important;
+    }
+
+    &:active {
+        transform: translateY(0) !important;
+    }
+}

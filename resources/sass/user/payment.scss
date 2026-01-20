@@ -1,0 +1,349 @@
+// ============================================
+// Payment & Checkout Styles - Modern Design
+// with Darker Yellow & Mature Green Palette
+// ============================================
+
+// New Payment Color Palette
+$payment-primary-green: #2d6a3e;    // Mature/darker green
+$payment-secondary-yellow: #d4a017; // Darker yellow/gold
+$payment-yellow-light: #e6b61f;     // Yellow accent
+$payment-yellow-bg: #fef9e7;        // Light yellow background
+$payment-green-light: #3a8049;      // Light green for hover
+
+// ====== PAYMENT SECTION ENHANCEMENTS ======
+// These styles ENHANCE existing checkout, not replace
+
+// Add yellow border to existing checkout totals
+.checkout__totals-wrapper {
+    .checkout__totals {
+        border: 3px solid $payment-secondary-yellow;
+        border-radius: $radius-lg;
+        
+        h3 {
+            color: $payment-primary-green;
+            border-bottom-color: $payment-secondary-yellow;
+        }
+    }
+}
+
+.checkout-cart-items,
+.checkout-totals {
+    width: 100%;
+    margin-bottom: $spacing-4;
+    
+    thead {
+        th {
+            font-size: $font-size-sm;
+            font-weight: $font-weight-semibold;
+            color: $neutral-600;
+            padding: $spacing-3 0;
+            border-bottom: 1px solid $border-color;
+        }
+    }
+    
+    tbody {
+        tr {
+            td {
+                padding: $spacing-3 0;
+                font-size: $font-size-base;
+                color: $neutral-700;
+                border-bottom: 1px solid $border-color-light;
+            }
+        }
+    }
+}
+
+// Total Amount - VERY PROMINENT
+.cart-total-final {
+    background: $payment-yellow-bg;
+    border: 2px solid $payment-secondary-yellow;
+    border-radius: $radius-base;
+    padding: $spacing-4 $spacing-5 !important;
+    margin-top: $spacing-4;
+    
+    th, td {
+        font-size: $font-size-xl !important;
+        font-weight: $font-weight-bold !important;
+        color: $payment-primary-green !important;
+        padding: $spacing-2 !important;
+        border: none !important;
+    }
+}
+
+.organic-summary,
+.non-organic-summary {
+    td, th {
+        font-size: $font-size-sm;
+        color: $neutral-600;
+    }
+}
+
+// ====== PAYMENT METHOD SELECTION ======
+.checkout__payment-methods {
+    margin-top: $spacing-6;
+    
+    h4 {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+        color: $payment-primary-green;
+        margin-bottom: $spacing-4;
+    }
+}
+
+// Payment Method Cards Grid
+.payment-methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-4;
+    margin-bottom: $spacing-5;
+}
+
+.payment-method-card {
+    background: $surface;
+    border: 2px solid $border-color;
+    border-radius: $radius-lg;
+    padding: $spacing-5;
+    cursor: pointer;
+    transition: all $transition-base;
+    text-align: center;
+    position: relative;
+    
+    &:hover {
+        border-color: $payment-primary-green;
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba($payment-primary-green, 0.15);
+    }
+    
+    &.selected {
+        border-color: $payment-secondary-yellow;
+        border-width: 3px;
+        background: $payment-yellow-bg;
+        box-shadow: 0 6px 16px rgba($payment-secondary-yellow, 0.2);
+        
+        .payment-icon {
+            color: $payment-primary-green;
+        }
+        
+        // Checkmark badge
+        &::after {
+            content: "✓";
+            position: absolute;
+            top: $spacing-2;
+            right: $spacing-2;
+            width: 24px;
+            height: 24px;
+            background: $payment-secondary-yellow;
+            color: white;
+            border-radius: $radius-full;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: $font-size-sm;
+            font-weight: $font-weight-bold;
+        }
+    }
+    
+    .payment-icon {
+        font-size: 2.5rem;
+        margin-bottom: $spacing-3;
+        color: $neutral-500;
+        transition: color $transition-base;
+    }
+    
+    .payment-label {
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
+        color: $neutral-800;
+        margin-bottom: $spacing-2;
+    }
+    
+    .payment-description {
+        font-size: $font-size-sm;
+        color: $neutral-600;
+        line-height: $line-height-normal;
+    }
+}
+
+// Payment Button
+.btn-checkout {
+    width: 100%;
+    padding: $spacing-5 $spacing-6;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    background: $payment-primary-green;
+    color: white;
+    border: none;
+    border-radius: $radius-lg;
+    cursor: pointer;
+    transition: all $transition-base;
+    margin-top: $spacing-5;
+    
+    &:hover {
+        background: $payment-green-light;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($payment-primary-green, 0.3);
+    }
+    
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// COD Option Styling
+.form-check.cod-option {
+    background: $neutral-50;
+    border: 2px solid $border-color;
+    border-radius: $radius-base;
+    padding: $spacing-4;
+    margin-bottom: $spacing-3;
+    cursor: pointer;
+    transition: all $transition-base;
+    
+    &:hover {
+        border-color: $payment-primary-green;
+    }
+    
+    input:checked ~ label {
+        color: $payment-primary-green;
+        font-weight: $font-weight-semibold;
+    }
+}
+
+// ====== PAYMENT PROCESSING STATES ======
+
+// Loading Spinner
+.payment-processing {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: $z-modal;
+    align-items: center;
+    justify-content: center;
+    
+    &.active {
+        display: flex;
+    }
+    
+    .processing-content {
+        background: white;
+        border-radius: $radius-xl;
+        padding: $spacing-10 $spacing-12;
+        text-align: center;
+        max-width: 400px;
+    }
+    
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid $border-color;
+        border-top-color: $payment-primary-green;
+        border-radius: $radius-full;
+        animation: spin 1s linear infinite;
+        margin: 0 auto $spacing-6;
+    }
+    
+    h3 {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $payment-primary-green;
+        margin-bottom: $spacing-3;
+    }
+    
+    p {
+        font-size: $font-size-base;
+        color: $neutral-600;
+    }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+// Success State
+.payment-success {
+    text-align: center;
+    padding: $spacing-8;
+    background: rgba($success, 0.1);
+    border: 2px solid $success;
+    border-radius: $radius-lg;
+    margin: $spacing-6 0;
+    
+    .success-icon {
+        font-size: 4rem;
+        color: $success;
+        margin-bottom: $spacing-4;
+    }
+    
+    h3 {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: $success;
+        margin-bottom: $spacing-3;
+    }
+}
+
+// Error State  
+.payment-error {
+    text-align: center;
+    padding: $spacing-8;
+    background: rgba($danger, 0.1);
+    border: 2px solid $danger;
+    border-radius: $radius-lg;
+    margin: $spacing-6 0;
+    
+    .error-icon {
+        font-size: 4rem;
+        color: $danger;
+        margin-bottom: $spacing-4;
+    }
+    
+    h3 {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: $danger;
+        margin-bottom: $spacing-3;
+    }
+}
+
+// Policy Text
+.policy-text {
+    font-size: $font-size-sm;
+    color: $neutral-600;
+    line-height: $line-height-relaxed;
+    padding: $spacing-4;
+    background: $neutral-50;
+    border-radius: $radius-base;
+    margin-top: $spacing-5;
+    
+    a {
+        color: $payment-primary-green;
+        text-decoration: underline;
+        
+        &:hover {
+            color: $payment-green-light;
+        }
+    }
+}
+
+// ====== RESPONSIVE ======
+@media (max-width: $breakpoint-md) {
+    .payment-methods-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .checkout__totals {
+        position: relative;
+        top: 0;
+    }
+    
+    .cart-total-final {
+        th, td {
+            font-size: $font-size-lg !important;
+        }
+    }
+}

@@ -1,0 +1,206 @@
+// ==========================================
+// CENTRALIZED MODAL STYLES
+// Minimalist red-theme design
+// ==========================================
+
+// Modal overlay
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+// Modal container
+.modal-container {
+    background: white;
+    border-radius: 16px;
+    padding: 40px 32px 32px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+// Icon wrapper
+.modal-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.modal-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+// Delete icon (red theme)
+.modal-icon-delete,
+.modal-icon-logout {
+    background: #fee;
+    color: #dc3545;
+}
+
+// Modal title
+.modal-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0 0 12px;
+    line-height: 1.3;
+}
+
+// Modal description
+.modal-description {
+    font-size: 15px;
+    color: #718096;
+    line-height: 1.6;
+    margin: 0 0 32px;
+    
+    strong {
+        color: #2d3748;
+        font-weight: 600;
+    }
+}
+
+// Action buttons
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+
+    .modal-btn {
+        flex: 1; // Equal width for both buttons
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        min-width: 120px; // Minimum width for buttons
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+    }
+}
+
+// Cancel button (outlined)
+.modal-btn-cancel {
+    background: #f1eded;
+    color: #101010;
+    
+    &:hover {
+        background: transparent;
+        border: 1px solid #101010 !important;
+    }
+}
+
+// Delete/Logout button (red solid)
+.modal-btn-delete {
+    background: #dc3545;
+    color: white;
+    border: 1.5px solid #dc3545;
+    
+    &:hover {
+        background: #c82333;
+        border-color: #c82333;
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    }
+    
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+// Success/Approve button (green solid)
+.modal-icon-success {
+    background: #d1fae5;
+    color: #10b981;
+}
+
+.modal-btn-success {
+    background: #10b981;
+    color: white;
+    border: 1.5px solid #10b981;
+    
+    &:hover {
+        background: #059669;
+        border-color: #059669;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+    
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+// Responsive
+@media (max-width: 480px) {
+    .modal-container {
+        padding: 32px 24px 24px;
+        max-width: 95%;
+    }
+    
+    .modal-icon {
+        width: 70px;
+        height: 70px;
+        
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
+    
+    .modal-title {
+        font-size: 20px;
+    }
+    
+    .modal-description {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .modal-btn {
+        width: 100%;
+    }
+}

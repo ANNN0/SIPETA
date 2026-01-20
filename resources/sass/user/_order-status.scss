@@ -1,0 +1,514 @@
+// Order Status Page Styles
+.order-status-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+// Breadcrumb
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #7F8C8D;
+    
+    a {
+        color: #7F8C8D;
+        text-decoration: none;
+        transition: color 0.2s;
+        
+        &:hover {
+            color: #E67E22;
+        }
+    }
+    
+    .current {
+        color: #2C3E50;
+        font-weight: 500;
+    }
+}
+
+// Title
+.order-status-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2C3E50;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+// Status Card - Clean Design (No Box)
+.status-card {
+    background: transparent;
+    padding: 32px 0;
+    margin-bottom: 48px;
+}
+
+.status-header {
+    margin-bottom: 32px;
+    
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2C3E50;
+        margin: 0 0 8px 0;
+    }
+    
+    .order-id {
+        font-size: 14px;
+        color: #7F8C8D;
+        margin: 0;
+    }
+}
+
+// Timeline
+.order-timeline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    padding: 0; // Remove padding for seamless bars
+    gap: 0; // No gap between elements
+}
+
+.timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    width: 120px;
+}
+
+.step-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F5F5F5;
+    color: #BDC3C7;
+    margin-bottom: 16px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 3px solid #E0E0E0;
+    
+    svg {
+        transition: transform 0.3s ease;
+    }
+}
+
+.timeline-step.active .step-icon,
+.timeline-step.completed .step-icon {
+    background: #FDB813; // Solid yellow for both active and completed
+    color: #FFFFFF;
+    border-color: #FDB813;
+    box-shadow: none; // Remove shadow for clean design
+    
+    svg {
+        transform: scale(1.0); // No scale transform
+    }
+}
+
+// Removed pulse-glow animation for cleaner design
+
+.step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.step-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #7F8C8D;
+    transition: color 0.3s;
+}
+
+.timeline-step.active .step-label,
+.timeline-step.completed .step-label {
+    color: #2C3E50;
+}
+
+.step-date {
+    font-size: 12px;
+    color: #95A5A6;
+    line-height: 1.4;
+    
+    &.pending {
+        font-style: italic;
+        color: #BDC3C7;
+    }
+}
+
+// Timeline Connector - Seamlessly Connected
+.timeline-connector {
+    flex: 1;
+    height: 4px;
+    background: #E0E0E0;
+    position: relative;
+    top: 28px;
+    margin: 0; // Remove negative margin for seamless connection
+    border-radius: 0; // Remove border radius for straight connection
+    overflow: hidden;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 0%;
+        background: #FDB813; // Solid yellow color
+        transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    &.active::after {
+        animation: fillProgress 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+}
+
+// Progress fill animation
+@keyframes fillProgress {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+// Entrance animations for timeline steps
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// Apply staggered animations on page load
+.timeline-step {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+    
+    // Staggered delays for each step
+    &:nth-child(1) { animation-delay: 0.1s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+    &:nth-child(5) { animation-delay: 0.7s; }
+    &:nth-child(7) { animation-delay: 1.0s; }
+    &:nth-child(9) { animation-delay: 1.3s; }
+    
+    .step-icon {
+        animation: scaleIn 0.4s ease-out forwards;
+        animation-delay: inherit;
+    }
+}
+
+// Connector animation with delays
+.timeline-connector {
+    &:nth-child(2) {
+        &.active::after { animation-delay: 0.3s; }
+    }
+    &:nth-child(4) {
+        &.active::after { animation-delay: 0.6s; }
+    }
+    &:nth-child(6) {
+        &.active::after { animation-delay: 0.9s; }
+    }
+    &:nth-child(8) {
+        &.active::after { animation-delay: 1.2s; }
+    }
+}
+
+// Canceled Notice
+.order-canceled-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: #FDF2F2;
+    border-radius: 8px;
+    margin-top: 24px;
+    color: #E74C3C;
+    font-weight: 600;
+    
+    svg {
+        color: #E74C3C;
+    }
+}
+
+// Product Section
+.product-section {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    margin-bottom: 32px;
+    
+    h3 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2C3E50;
+        margin: 0 0 20px 0;
+    }
+}
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.product-image {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #F8F9FA;
+    flex-shrink: 0;
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .no-image {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #BDC3C7;
+    }
+}
+
+.product-details {
+    h4 {
+        font-size: 15px;
+        font-weight: 600;
+        color: #2C3E50;
+        margin: 0 0 4px 0;
+    }
+    
+    p {
+        font-size: 13px;
+        color: #7F8C8D;
+        margin: 0;
+    }
+}
+
+// Feature Cards
+.feature-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.feature-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    cursor: pointer;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    &.highlight {
+        background: linear-gradient(135deg, #FEF9E7 0%, #FFF8E1 100%);
+        border: 1px solid #F1C40F;
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #F1C40F 0%, #E67E22 100%);
+            color: #FFFFFF;
+        }
+    }
+    
+    // Clickable overlay
+    .feature-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8F9FA;
+    color: #E67E22;
+    flex-shrink: 0;
+}
+
+.feature-content {
+    h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2C3E50;
+        margin: 0 0 4px 0;
+    }
+    
+    p {
+        font-size: 12px;
+        color: #7F8C8D;
+        margin: 0;
+        line-height: 1.4;
+    }
+}
+
+// Actions - Top Positioned
+.order-actions-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        border: 2px solid transparent;
+    }
+    
+    .btn-continue-shopping {
+        background: #27AE60;
+        color: #FFFFFF;
+        border-color: #27AE60;
+        
+        &:hover {
+            background: transparent;
+            color: #27AE60;
+            border-color: #27AE60;
+        }
+    }
+    
+    .btn-back-orders {
+        background: transparent;
+        color: #7F8C8D;
+        border-color: #E0E0E0;
+        
+        &:hover {
+            background: transparent;
+            color: #2C3E50;
+            border-color: #2C3E50;
+        }
+    }
+}
+
+// Hide old actions section
+.order-actions {
+    display: none;
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .order-status-title {
+        font-size: 24px;
+    }
+    
+    .status-card {
+        padding: 20px;
+    }
+    
+    .order-timeline {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+    }
+    
+    .timeline-step {
+        flex-direction: row;
+        width: 100%;
+        text-align: left;
+        padding: 12px 0;
+    }
+    
+    .step-icon {
+        margin-bottom: 0;
+        margin-right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .step-content {
+        flex: 1;
+    }
+    
+    .timeline-connector {
+        width: 4px;
+        height: 24px;
+        top: 0;
+        left: 24px;
+        margin: 0;
+        position: relative;
+        
+        &::after {
+            width: 100%;
+            height: 0%;
+        }
+        
+        &.active::after {
+            height: 100%;
+        }
+    }
+    
+    .feature-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .order-actions {
+        flex-direction: column;
+        
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+}

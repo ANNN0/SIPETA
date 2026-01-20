@@ -1,0 +1,426 @@
+// About Page Styles
+// White theme, clean and modern design - NO SHADOWS
+
+.about-page {
+    background: #ffffff;
+    
+    // Section 1 - Hero with Card Stack
+    &__section-1 {
+        padding: 100px 0;
+        background: #F5EFE6;
+        
+        @media (max-width: 991px) {
+            padding: 60px 0;
+        }
+        
+        @media (max-width: 767px) {
+            padding: 40px 0;
+        }
+    }
+    
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        
+        @media (max-width: 991px) {
+            gap: 50px;
+        }
+        
+        @media (max-width: 767px) {
+            flex-direction: column;
+            gap: 40px;
+        }
+    }
+    
+    // Left Column - Content
+    &__content {
+        flex: 1;
+        min-width: 0;
+        
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+    }
+    
+    &__title {
+        font-size: 52px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 24px;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        
+        @media (max-width: 991px) {
+            font-size: 42px;
+        }
+        
+        @media (max-width: 767px) {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+    }
+    
+    &__subtitle {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1a7a3e;
+        margin-bottom: 28px;
+        line-height: 1.5;
+        
+        @media (max-width: 767px) {
+            font-size: 18px;
+            margin-bottom: 24px;
+        }
+    }
+    
+    &__description {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #555555;
+        margin-bottom: 20px;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 767px) {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+    }
+    
+    // Right Column - Swiper
+    &__swiper-wrapper {
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        overflow: hidden; // Prevent cards from overflowing into text
+        
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+    }
+}
+
+// Swiper Cards Stack Styling with Custom Effect
+.about-swiper {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    perspective: 1200px;
+    
+    @media (max-width: 991px) {
+        height: 400px;
+    }
+    
+    @media (max-width: 767px) {
+        height: 380px;
+    }
+    
+    @media (max-width: 480px) {
+        height: 320px;
+    }
+    
+    .swiper-wrapper {
+        position: relative;
+    }
+    
+    .swiper-slide {
+        width: 75%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 32px; // Rounded corners untuk soft look
+        overflow: hidden;
+        background: #f5f5f5;
+        position: relative;
+        transform-origin: center center;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        
+        @media (max-width: 991px) {
+            width: 80%;
+            border-radius: 28px;
+        }
+        
+        @media (max-width: 767px) {
+            width: 85%;
+            border-radius: 24px;
+        }
+        
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        // Stack effect for non-active slides
+        &:not(.swiper-slide-active) {
+            opacity: 0.7;
+        }
+        
+        // Active slide - larger and in front
+        &.swiper-slide-active {
+            z-index: 10;
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        // Next slide - slightly visible behind
+        &.swiper-slide-next {
+            z-index: 5;
+        }
+        
+        // Previous slide
+        &.swiper-slide-prev {
+            z-index: 3;
+        }
+    }
+    
+    // Hide navigation buttons
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+    
+    // Hide pagination
+    .swiper-pagination {
+        display: none;
+    }
+}
+
+// Additional card stack visual effect
+.swiper-3d .swiper-slide-shadow-left,
+.swiper-3d .swiper-slide-shadow-right {
+    background-image: none !important;
+}
+
+// Section 2 - Story with Figure-8 Image and Accordion
+.about-page {
+    // Section 2 specific styles
+    &__section-2 {
+        padding: 50px 0;
+        background: #ffffff; // Cream/beige background for contrast
+        
+        @media (max-width: 991px) {
+            padding: 80px 0;
+        }
+        
+        @media (max-width: 767px) {
+            padding: 60px 0;
+        }
+    }
+    
+    &__row-reverse {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        flex-direction: row-reverse; // Image left, content right
+        
+        @media (max-width: 991px) {
+            gap: 60px;
+        }
+        
+        @media (max-width: 767px) {
+            flex-direction: column;
+            gap: 40px;
+        }
+    }
+    
+    // Figure-8 Image Styling (like number "8")
+    &__image-wrapper {
+        flex: 1;
+        min-width: 0;
+        margin-left: 80px;
+        
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+    }
+    
+    &__figure8-image {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px; // Soft rounded corners, clean
+        
+        @media (max-width: 991px) {
+            max-width: 500px;
+        }
+        
+        @media (max-width: 767px) {
+            max-width: 100%;
+            border-radius: 20px;
+        }
+        
+        img {
+            width: 100%;
+            height: auto; // Natural height
+            display: block;
+        }
+    }
+    
+    // Story Content
+    &__story-content {
+        flex: 1;
+        min-width: 0;
+        
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+    }
+    
+    &__section-title {
+        font-size: 48px;
+        font-weight: 700;
+        color: #1a1a1a;
+        line-height: 1.2;
+        
+        @media (max-width: 991px) {
+            font-size: 40px;
+        }
+        
+        @media (max-width: 767px) {
+            font-size: 34px;
+        }
+    }
+    
+    // Accordion Styles
+    &__accordion {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    &__accordion-header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        @media (max-width: 767px) {
+            padding: 16px 0;
+        }
+        
+        &:hover {
+            .about-page__story-heading {
+                color: #1a7a3e;
+            }
+        }
+    }
+    
+    &__accordion-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1;
+        text-align: left;
+        
+        @media (max-width: 767px) {
+            gap: 16px;
+        }
+    }
+    
+    &__story-number {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a7a3e;
+        min-width: 50px;
+        line-height: 1.2;
+        
+        @media (max-width: 767px) {
+            font-size: 24px;
+            min-width: 45px;
+        }
+    }
+    
+    &__story-heading {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin: 0;
+        transition: color 0.3s ease;
+        
+        @media (max-width: 767px) {
+            font-size: 18px;
+        }
+    }
+    
+    &__accordion-arrow {
+        color: #1a7a3e;
+        flex-shrink: 0;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        @media (max-width: 767px) {
+            width: 20px;
+            height: 20px;
+        }
+    }
+    
+    // Active state - rotate arrow
+    &__accordion-header.active &__accordion-arrow {
+        transform: rotate(180deg);
+    }
+    
+    &__accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0 0 0 70px;
+        
+        @media (max-width: 767px) {
+            padding: 0 0 0 60px;
+        }
+        
+        &.active {
+            max-height: 500px; // Large enough for content
+            padding: 0 0 20px 70px;
+            
+            @media (max-width: 767px) {
+                padding: 0 0 16px 60px;
+            }
+        }
+    }
+    
+    &__story-description {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #555555;
+        margin: 0;
+        
+        @media (max-width: 767px) {
+            font-size: 15px;
+        }
+    }
+    
+    // Dashed Border between items
+    &__dashed-border {
+        height: 1px;
+        background-image: repeating-linear-gradient(
+            to right,
+            #cccccc 0,
+            #cccccc 8px,
+            transparent 8px,
+            transparent 16px
+        );
+        margin: 0 0 0 70px;
+        
+        @media (max-width: 767px) {
+            margin: 0 0 0 60px;
+        }
+    }
+}
