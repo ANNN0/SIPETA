@@ -55,12 +55,12 @@ class UserController extends Controller
     {
         $order = Order::where('user_id', Auth::user()->id)->where('id', $order_id)->firstOrFail();
 
-        if ($order->status == 'canceled') {
+        if ($order->status == 'canceled' || $order->status == 'delivered') {
             $order->delete();
             return back()->with('success', 'Pesanan berhasil dihapus dari riwayat.');
         }
 
-        return back()->with('error', 'Hanya pesanan yang sudah dibatalkan yang dapat dihapus.');
+        return back()->with('error', 'Hanya pesanan yang sudah dibatalkan atau terkirim yang dapat dihapus.');
     }
 
     /**
@@ -359,6 +359,12 @@ class UserController extends Controller
         }
 
         $address->save();
+
+        $address->save();
+
+        if ($request->origin == 'checkout') {
+            return redirect()->route('cart.checkout')->with('success', 'Address added successfully');
+        }
 
         return redirect()->route('user.addresses')->with('success', 'Address added successfully');
     }

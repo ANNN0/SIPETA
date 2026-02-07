@@ -55,7 +55,7 @@ table {
 }
 
 .wg-box {
-    overflow: hidden !important; // Ensure the white box itself is a rigid container
+    overflow: visible !important; // Allow dropdowns to escape
 }
 
 // Responsive Wrapper
@@ -63,7 +63,7 @@ table {
     display: block !important;
     width: 100% !important;
     max-width: 100% !important;
-    overflow-x: auto !important;
+    overflow: visible !important; // Allow dropdowns to escape
     -webkit-overflow-scrolling: touch;
 
     .table,
@@ -75,24 +75,31 @@ table {
         margin-bottom: 0;
     }
 
-    // Table Header
+    // Table Header - Soft Neutral Theme with Force Override
     thead {
-        background: var(--table-bg-primary);
-        box-shadow: 0px -3px 0px 0px var(--table-accent) inset; // Subtle top accent
+        background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
         position: relative;
 
         th {
             padding: 18px 16px !important;
             text-align: center !important;
-            color: var(--table-accent) !important;
+            color: #ffffff !important;
             font-weight: 600 !important;
             font-size: 13px !important;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px !important;
+            text-transform: uppercase !important;
             border: none !important;
-            border-bottom: 1px solid var(--table-border) !important;
-            background: var(--table-bg-primary);
-            vertical-align: middle;
+            border-bottom: 2px solid rgba(100, 116, 139, 0.3) !important;
+            background: transparent !important;
+            vertical-align: middle !important;
+
+            &:first-child {
+                border-top-left-radius: 8px !important;
+            }
+
+            &:last-child {
+                border-top-right-radius: 8px !important;
+            }
 
             // Remove default sorting icons
             &.sorting,
@@ -103,6 +110,11 @@ table {
                     display: none !important;
                 }
             }
+        }
+
+        // Subtle hover effect on thead
+        tr:hover {
+            background: linear-gradient(135deg, #556179 0%, #3a4555 100%) !important;
         }
     }
 
@@ -342,6 +354,30 @@ table {
             opacity: 0.4;
             cursor: not-allowed;
             pointer-events: none;
+        }
+    }
+
+    .pagination-page-info {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 16px;
+        font-size: 14px;
+        color: var(--table-text-secondary);
+        user-select: none;
+
+        .current-page {
+            font-weight: 600;
+            color: var(--table-text-primary);
+        }
+
+        .page-separator {
+            font-weight: 400;
+        }
+
+        .total-pages {
+            font-weight: 600;
+            color: var(--table-text-primary);
         }
     }
 }

@@ -4,7 +4,7 @@
 
 .wishlist-btn {
     position: absolute;
-    top: 1rem;
+    top: 2rem; // Updated from 1rem for mobile
     right: 1rem;
     width: 2.5rem;
     height: 2.5rem;
@@ -18,14 +18,11 @@
     border: none;
     border-radius: 50%;
     cursor: pointer;
-
     color: #767676;
     transition: all 0.3s ease;
-
-    // Critical: Ensure wishlist button is always on top
     z-index: 20;
 
-    // SVG icon styling
+ 
     svg {
         width: 20px;
         height: 20px;
@@ -48,7 +45,6 @@
         transform: scale(1.1);
     }
 
-    // Active/Filled state (when in wishlist)
     &.filled-heart {
         color: #d6001c;
 
@@ -80,11 +76,9 @@
         }
     }
 
-    // Prevent interference with other elements
     pointer-events: auto !important;
 }
 
-// Container protection
 .pc__img-wrapper {
     .wishlist-btn {
         position: absolute;
@@ -92,7 +86,6 @@
     }
 }
 
-// Ensure Add to Cart button stays below wishlist
 .pc__atc {
     z-index: 5;
     text-decoration: none !important;

@@ -119,6 +119,7 @@
 
                                             {{-- Column 2: Price per Unit --}}
                                             <div class="detail-item">
+                                                <span class="detail-label">Harga:</span>
                                                 <div class="product-price">
                                                     Rp {{ number_format($item->price, 0, ',', '.') }}
                                                     @if ($unitSymbol)
@@ -129,6 +130,7 @@
 
                                             {{-- Column 3: Organic Status --}}
                                             <div class="detail-item">
+                                                <span class="detail-label">Status Organic:</span>
                                                 @php
                                                     $organicStatus = trim($item->model?->organic_status ?? '');
                                                 @endphp
@@ -143,6 +145,7 @@
 
                                             {{-- Column 4: Region --}}
                                             <div class="detail-item">
+                                                <span class="detail-label">Daerah Asal:</span>
                                                 <span class="detail-value">
                                                     {{ $item->model?->region?->name ?? '-' }}
                                                 </span>
@@ -174,7 +177,8 @@
                                 <h4>DETAIL PENGIRIMAN</h4>
                             </div>
                             <div class="col-md-4 text-end">
-                                <a href="{{ route('user.address.add') }}" class="btn btn-sm btn-outline-primary">
+                                <a href="{{ route('user.address.add', ['origin' => 'checkout']) }}"
+                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-plus me-2 mt-1"></i> Tambah Alamat Baru
                                 </a>
                             </div>

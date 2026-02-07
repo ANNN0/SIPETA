@@ -482,20 +482,32 @@
     }
     
     .timeline-connector {
-        width: 4px;
-        height: 24px;
-        top: 0;
-        left: 24px;
-        margin: 0;
+        width: 3px; // Slightly thinner for elegance
+        height: 30px; // Fixed height between steps
+        margin-left: 22.5px; // (48px / 2) - (3px / 2) = 22.5px to center
+        margin-top: -8px; // Pull closer to top step
+        margin-bottom: -8px; // Pull closer to bottom step
+        background-color: #E0E0E0;
         position: relative;
+        top: auto;
+        left: auto;
+        flex-shrink: 0;
         
+        // Pseudo element for active fill
         &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 0%;
+            height: 0%; // Default 0 height
+            background-color: #FDB813;
+            transition: height 0.5s ease;
         }
         
         &.active::after {
-            height: 100%;
+            height: 100%; // Fill downwards
+            width: 100%;
         }
     }
     

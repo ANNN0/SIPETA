@@ -30,24 +30,27 @@
                                             wishlist Anda
                                         </p>
                                     </div>
-                                    <form action="{{ route('wishlist.items.clear') }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-clear">
-                                            <i class="fa fa-trash me-2"></i>Hapus Semua
-                                        </button>
-                                    </form>
                                 </div>
                                 <hr class="mt-3">
                             </div>
-
-                            <!-- Products Grid -->
                             <div class="wishlist-products" id="wishlist-products">
                                 @if ($products->count() > 0)
                                     @include('user.whistlist.partials.wishlist-product-card', [
                                         'products' => $products,
                                     ])
                                 @endif
+                            </div>
+
+                            {{-- Clear All Button (Moved to Bottom) --}}
+                            <div class="wishlist-footer d-flex justify-content-end mt-4 pt-3 border-top">
+                                <form action="{{ route('wishlist.items.clear') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-clear d-flex align-items-center gap-2"
+                                        style="background: transparent; border: none; font-weight: 600;">
+                                        <i class="fa fa-trash"></i> Hapus Semua
+                                    </button>
+                                </form>
                             </div>
                     </div>
                 @else

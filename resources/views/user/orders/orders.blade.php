@@ -125,8 +125,15 @@
                                                 <a href="{{ route('shop.product.details', ['product_slug' => $item->product->slug]) }}"
                                                     class="name">{{ $item->product->name }}</a>
                                                 <div class="details">
+                                                    @php
+                                                        $unitSymbol =
+                                                            $item->unit_symbol ?:
+                                                            $item->unit->symbol ?? null ?:
+                                                            $item->options->unit_symbol ?? null ?:
+                                                            'pcs';
+                                                    @endphp
                                                     Rp {{ number_format($item->price, 0, ',', '.') }} /
-                                                    {{ $item->unit_symbol ?: $item->unit->symbol ?? 'Satuan' }}
+                                                    {{ $unitSymbol }}
                                                     <span class="ms-2">x {{ $item->quantity }}</span>
                                                     {{-- <span class="ms-2 fw-bold text-dark">(Rp
                                                         {{ number_format($item->price * $item->quantity, 0, ',', '.') }})</span> --}}
@@ -177,30 +184,43 @@
                                                 $statusLabel = '';
                                                 $statusNote = '';
 
-                                                switch ($order->status) {
-                                                    case 'delivered':
-                                                        $badgeClass = 'bg-delivered';
-                                                        $statusLabel = 'Terkirim';
-                                                        $statusNote = 'Pesanan Anda telah Terkirim';
-                                                        break;
-                                                    case 'canceled':
-                                                        $badgeClass = 'bg-canceled';
-                                                        $statusLabel = 'Dibatalkan';
-                                                        $statusNote = 'Pesanan ini telah dibatalkan';
-                                                        break;
-                                                    case 'processing':
-                                                    case 'approved':
-                                                        $badgeClass = 'bg-processing';
-                                                        $statusLabel = 'Diproses';
-                                                        $statusNote = 'Pesanan Anda sedang Diproses';
-                                                        break;
-                                                    case 'ordered':
-                                                    case 'pending':
-                                                    default:
-                                                        $badgeClass = 'bg-processing';
-                                                        $statusLabel = 'Dikemas';
-                                                        $statusNote = 'Pesanan Anda sedang Dikemas';
-                                                        break;
+                                                // Check for Pending Online Payment (Midtrans)
+                                                if (
+                                                    $order->transaction &&
+                                                    $order->transaction->status == 'pending' &&
+                                                    $order->transaction->mode != 'cod' &&
+                                                    $order->status == 'ordered'
+                                                ) {
+                                                    $badgeClass = 'bg-warning'; // Yellow for pending payment
+                                                    $statusLabel = 'Menunggu Pembayaran';
+                                                    $statusNote = 'Mohon selesaikan pembayaran Anda';
+                                                } else {
+                                                    // Standard Order Status
+                                                    switch ($order->status) {
+                                                        case 'delivered':
+                                                            $badgeClass = 'bg-delivered';
+                                                            $statusLabel = 'Terkirim';
+                                                            $statusNote = 'Pesanan Anda telah Terkirim';
+                                                            break;
+                                                        case 'canceled':
+                                                            $badgeClass = 'bg-canceled';
+                                                            $statusLabel = 'Dibatalkan';
+                                                            $statusNote = 'Pesanan ini telah dibatalkan';
+                                                            break;
+                                                        case 'processing':
+                                                        case 'approved':
+                                                            $badgeClass = 'bg-processing';
+                                                            $statusLabel = 'Diproses';
+                                                            $statusNote = 'Pesanan Anda sedang Diproses';
+                                                            break;
+                                                        case 'ordered':
+                                                        case 'pending':
+                                                        default:
+                                                            $badgeClass = 'bg-processing'; // Or keep it blue/primary
+                                                            $statusLabel = 'Dikemas';
+                                                            $statusNote = 'Pesanan Anda sedang Dikemas';
+                                                            break;
+                                                    }
                                                 }
                                             @endphp
                                             <span class="badge {{ $badgeClass }}">{{ $statusLabel }}</span>
@@ -210,7 +230,21 @@
 
                                     <div class="action-btns">
                                         @if ($order->status == 'delivered' && !$order->returnRequest)
-                                            <a href="#" class="btn btn-review">Tambah Review</a>
+                                            <a href="javascript:void(0)" class="btn btn-review"
+                                                data-products="{{ json_encode(
+                                                    $order->orderItems->map(
+                                                        fn($item) => [
+                                                            'id' => $item->product->id,
+                                                            'name' => $item->product->name,
+                                                            'price' => number_format($item->price, 0, ',', '.'),
+                                                            'unit' => $item->unit_symbol ?: $item->unit->symbol ?? null ?: $item->options->unit_symbol ?? null ?: 'pcs',
+                                                            'review' => $item->product->approvedReviews->where('reviewer_email', Auth::user()->email)->first(),
+                                                        ],
+                                                    ),
+                                                ) }}"
+                                                onclick="openReviewModal(JSON.parse(this.getAttribute('data-products')))">
+                                                Tambah Review
+                                            </a>
                                         @endif
 
                                         @if ($order->status == 'delivered' && !$order->returnRequest)
@@ -221,6 +255,15 @@
                                                 </svg>
                                                 Return
                                             </a>
+                                        @elseif (
+                                            $order->transaction &&
+                                                $order->transaction->status == 'pending' &&
+                                                $order->transaction->mode != 'cod' &&
+                                                $order->status == 'ordered')
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="payNow('{{ $order->transaction->snap_token }}', '{{ $order->id }}')">
+                                                Lanjut Bayar
+                                            </button>
                                         @elseif ($order->status != 'delivered')
                                             <a href="{{ route('order.status', $order->id) }}" class="btn btn-track">Lacak
                                                 Pesanan</a>
@@ -238,7 +281,7 @@
                                             </form>
                                         @endif
 
-                                        @if ($order->status == 'canceled')
+                                        @if ($order->status == 'canceled' || $order->status == 'delivered')
                                             <form action="{{ route('user.order.delete', $order->id) }}" method="POST"
                                                 class="d-inline delete-form">
                                                 @csrf
@@ -304,10 +347,185 @@
             </div>
         </div>
     </main>
+    <!-- Review Modal -->
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">Beri Ulasan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="name" value="{{ Auth::user()->name }}">
+                        <input type="hidden" name="email" value="{{ Auth::user()->email }}">
+
+                        <div class="mb-3">
+                            <label class="form-label">Pilih Produk</label>
+                            <select name="product_id" id="modal_product_select" class="form-select" required>
+                                <option value="" disabled selected>Pilih produk yang ingin diulas...</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Rating</label>
+                            <div class="select-star-rating">
+                                <span class="star-rating">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <svg class="modal-star-icon" width="24" height="24" fill="#ccc"
+                                            viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"
+                                            data-star="{{ $i }}" style="cursor: pointer;">
+                                            <path
+                                                d="M11.1429 5.04687C11.1429 4.84598 10.9286 4.76562 10.7679 4.73884L7.40625 4.25L5.89955 1.20312C5.83929 1.07589 5.72545 0.928571 5.57143 0.928571C5.41741 0.928571 5.30357 1.07589 5.2433 1.20312L3.73661 4.25L0.375 4.73884C0.207589 4.76562 0 4.84598 0 5.04687C0 5.16741 0.0870536 5.28125 0.167411 5.3683L2.60491 7.73884L2.02902 11.0871C2.02232 11.1339 2.01563 11.1741 2.01563 11.221C2.01563 11.3951 2.10268 11.5558 2.29688 11.5558C2.39063 11.5558 2.47768 11.5223 2.56473 11.4754L5.57143 9.89509L8.57813 11.4754C8.65848 11.5223 8.75223 11.5558 8.84598 11.5558C9.04018 11.5558 9.12054 11.3951 9.12054 11.221C9.12054 11.1741 9.12054 11.1339 9.11384 11.0871L8.53795 7.73884L10.9688 5.3683C11.0558 5.28125 11.1429 5.16741 11.1429 5.04687Z" />
+                                        </svg>
+                                    @endfor
+                                </span>
+                                <input type="hidden" name="rating" id="modal_rating" value="5" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Ulasan</label>
+                            <textarea name="review" class="form-control" rows="4" placeholder="Tulis pengalaman Anda..." required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Upload Foto (Optional)</label>
+                            <div id="modal_image_preview_container" class="mb-2" style="display: none;">
+                                <p class="small text-muted mb-1">Foto saat ini:</p>
+                                <img id="modal_image_preview" src="" alt="Current Review Image"
+                                    style="max-height: 100px; border-radius: 8px; border: 1px solid #ddd;">
+                            </div>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Kirim Ulasan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
+    <!-- Midtrans Snap.js -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
     <script>
+        // Review Modal Logic
+        const reviewUploadsUrl = "{{ asset('uploads/reviews') }}";
+
+        function openReviewModal(products) {
+            const select = document.getElementById('modal_product_select');
+            select.innerHTML = '<option value="" disabled selected>Pilih produk yang ingin diulas...</option>';
+
+            products.forEach(product => {
+                const option = document.createElement('option');
+                option.value = product.id;
+                // Updated line to include price and unit
+                option.textContent = `${product.name} - Rp ${product.price} / ${product.unit}`;
+                select.appendChild(option);
+            });
+
+            // If only one product, auto-select it
+            if (products.length === 1) {
+                select.value = products[0].id;
+                // Manually trigger change to populate data if single product
+                setTimeout(() => {
+                    select.dispatchEvent(new Event('change'));
+                }, 100);
+            }
+
+            // Reset stars
+            updateModalStars(5);
+            document.getElementById('modal_rating').value = 5;
+            document.getElementById('modal_image_preview_container').style.display = 'none'; // Default hide
+
+            var myModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+            myModal.show();
+
+            // Store products for change handler
+            const productSelect = document.getElementById('modal_product_select');
+            productSelect.onchange = function() {
+                const selectedId = this.value;
+                const product = products.find(p => p.id == selectedId);
+                const imgContainer = document.getElementById('modal_image_preview_container');
+                const imgPreview = document.getElementById('modal_image_preview');
+
+                if (product && product.review) {
+                    // Populate existing review
+                    document.getElementById('modal_rating').value = product.review.rating;
+                    updateModalStars(product.review.rating);
+                    document.querySelector('textarea[name="review"]').value = product.review.review_text;
+
+                    // Show existing image if available
+                    if (product.review.image) {
+                        if (product.review.image.startsWith('http')) {
+                            imgPreview.src = product.review.image;
+                        } else {
+                            imgPreview.src = reviewUploadsUrl + '/' + product.review.image;
+                        }
+                        imgContainer.style.display = 'block';
+                    } else {
+                        imgContainer.style.display = 'none';
+                    }
+                } else {
+                    // Reset form
+                    document.getElementById('modal_rating').value = 5;
+                    updateModalStars(5);
+                    document.querySelector('textarea[name="review"]').value = '';
+                    imgContainer.style.display = 'none';
+                }
+            };
+        }
+
+        // Star click handler for Modal
+        document.querySelectorAll('.modal-star-icon').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-star');
+                document.getElementById('modal_rating').value = rating;
+                updateModalStars(rating);
+            });
+        });
+
+        function updateModalStars(rating) {
+            document.querySelectorAll('.modal-star-icon').forEach(s => {
+                const starValue = parseInt(s.getAttribute('data-star'));
+                s.setAttribute('fill', starValue <= rating ? '#ffc107' : '#ccc');
+            });
+        }
+
+        function payNow(snapToken, orderId) {
+            if (!snapToken) {
+                alert('Token pembayaran tidak ditemukan. Silakan hubungi admin.');
+                return;
+            }
+
+            snap.pay(snapToken, {
+                onSuccess: function(result) {
+                    console.log('✅ Payment SUCCESS', result);
+                    // Redirect to finish route
+                    window.location.href = '{{ route('payment.finish') }}?order_id=' + orderId;
+                },
+                onPending: function(result) {
+                    console.log('⏳ Payment PENDING', result);
+                    // Reload to update status if needed, or redirect
+                    window.location.href = '{{ route('payment.finish') }}?order_id=' +
+                        orderId; // Using finish route as it handles status display
+                },
+                onError: function(result) {
+                    console.log('❌ Payment ERROR', result);
+                    alert('Pembayaran gagal! Silakan coba lagi.');
+                },
+                onClose: function() {
+                    console.log('ℹ️ Snap popup CLOSED');
+                }
+            });
+        }
+
         function confirmCancel(button) {
             const orderId = button.closest('.order-card-item').querySelector('.order-card-header .bar-item .value')
                 .textContent;

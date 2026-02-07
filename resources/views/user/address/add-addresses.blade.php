@@ -20,9 +20,15 @@
                             <div class="col-md-10">
                                 <div class="d-flex justify-content-between align-items-end mb-3">
                                     <p class="notice mb-0">Tambah alamat pengiriman baru untuk pesanan Anda</p>
-                                    <a href="{{ route('user.addresses') }}" class="btn-back btn-sm">
-                                        <i class="fa fa-arrow-left"></i> Kembali
-                                    </a>
+                                    @if (request('origin') == 'checkout')
+                                        <a href="{{ route('cart.checkout') }}" class="btn-back btn-sm">
+                                            <i class="fa fa-arrow-left"></i> Kembali ke Checkout
+                                        </a>
+                                    @else
+                                        <a href="{{ route('user.addresses') }}" class="btn-back btn-sm">
+                                            <i class="fa fa-arrow-left"></i> Kembali
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -46,6 +52,9 @@
                                     <div class="address-form-body">
                                         <form action="{{ route('user.address.store') }}" method="POST">
                                             @csrf
+                                            @if (request('origin'))
+                                                <input type="hidden" name="origin" value="{{ request('origin') }}">
+                                            @endif
 
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -167,10 +176,17 @@
                                                         <button type="submit" class="btn btn-primary btn-update">
                                                             <i class="fa fa-save me-2"></i>Simpan Alamat
                                                         </button>
-                                                        <a href="{{ route('user.addresses') }}"
-                                                            class="btn btn-outline-secondary">
-                                                            Batal
-                                                        </a>
+                                                        @if (request('origin') == 'checkout')
+                                                            <a href="{{ route('cart.checkout') }}"
+                                                                class="btn btn-outline-secondary">
+                                                                Batal
+                                                            </a>
+                                                        @else
+                                                            <a href="{{ route('user.addresses') }}"
+                                                                class="btn btn-outline-secondary">
+                                                                Batal
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

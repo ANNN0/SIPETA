@@ -212,7 +212,8 @@
                             @if ($product->image)
                                 <div class="item" id="imgpreview">
                                     <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products') . '/' . $product->image }}"
-                                        class="effect8" alt="{{ $product->name }}">
+                                        class="effect8" alt="{{ $product->name }}"
+                                        onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22 viewBox=%220 0 400 400%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22400%22 height=%22400%22/%3E%3Cpath fill=%22%23999%22 d=%22M120,140 L120,260 L180,200 L240,260 L280,220 L280,140 Z M160,180 C160,168.95 168.95,160 180,160 C191.05,160 200,168.95 200,180 C200,191.05 191.05,200 180,200 C168.95,200 160,191.05 160,180 Z%22/%3E%3Ctext x=%22200%22 y=%22310%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2218%22 fill=%22%23999%22%3EImage not available%3C/text%3E%3C/svg%3E'">
                                 </div>
                             @endif
                             <div id="upload-file" class="item up-load">
@@ -238,7 +239,8 @@
                                 @foreach (explode(',', $product->images) as $img)
                                     <div class="item gitems">
                                         <img src="{{ Str::startsWith(trim($img), 'http') ? trim($img) : asset('uploads/products') . '/' . trim($img) }}"
-                                            alt="">
+                                            alt=""
+                                            onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22200%22 height=%22200%22/%3E%3Cpath fill=%22%23999%22 d=%22M60,70 L60,130 L90,100 L120,130 L140,110 L140,70 Z M80,90 C80,84.48 84.48,80 90,80 C95.52,80 100,84.48 100,90 C100,95.52 95.52,100 90,100 C84.48,100 80,95.52 80,90 Z%22/%3E%3C/svg%3E'">
                                     </div>
                                 @endforeach
                             @endif
@@ -387,6 +389,15 @@
         let unitRowCounter = 0;
 
         $(function() {
+            // Form submit handler - clean price inputs
+            $('.form-add-product').on('submit', function(e) {
+                // Clean price inputs (remove thousand separators)
+                $('.price-input').each(function() {
+                    const rawValue = getRawPrice($(this).val());
+                    $(this).val(rawValue);
+                });
+            });
+
             $("#myFile").on("change", function(e) {
                 const photoInp = $("#myFile");
                 const [file] = this.files;
@@ -460,7 +471,46 @@
                 const rowIndex = $(this).val();
                 updatePrimaryCheckbox(rowIndex);
             });
+
+            // ===================================
+            // Price Input Formatting (Thousand Separator)
+            // ===================================
+            $(document).on('input', '.price-input', function() {
+                formatPriceInput($(this));
+            });
+
+            // Format existing inputs on load
+            setTimeout(function() {
+                $('.price-input').each(function() {
+                    formatPriceInput($(this));
+                });
+            }, 100);
         });
+
+        // Format price input with thousand separator
+        function formatPriceInput(input) {
+            let value = input.val();
+
+            // Remove all non-digit characters except dot and comma
+            value = value.replace(/[^\d]/g, '');
+
+            // If empty, set to empty string
+            if (value === '') {
+                input.val('');
+                return;
+            }
+
+            // Convert to number and format with thousand separator (dot)
+            const number = parseInt(value);
+            const formatted = number.toLocaleString('id-ID');
+
+            input.val(formatted);
+        }
+
+        // Get raw number value from formatted input
+        function getRawPrice(formattedValue) {
+            return formattedValue.replace(/\./g, '');
+        }
 
         function addUnitPriceRow(existingData = null) {
             const rowIndex = unitRowCounter++;
@@ -481,21 +531,19 @@
                         </select>
                     </td>
                     <td>
-                        <input type="number" 
+                        <input type="text" 
+                               class="price-input"
                                name="unit_prices[${rowIndex}][regular_price]" 
                                placeholder="0" 
                                value="${existingData ? existingData.regular_price : ''}"
-                               min="0"
-                               step="0.01" 
                                required>
                     </td>
                     <td>
-                        <input type="number" 
+                        <input type="text" 
+                               class="price-input"
                                name="unit_prices[${rowIndex}][sale_price]" 
                                placeholder="0 (opsional)" 
-                               value="${existingData && existingData.sale_price ? existingData.sale_price : ''}"
-                               min="0"
-                               step="0.01">
+                               value="${existingData && existingData.sale_price ? existingData.sale_price : ''}">
                     </td>
                     <td>
                         <input type="number" 

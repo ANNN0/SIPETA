@@ -92,10 +92,15 @@
                 </clipPath>
             </defs>
         </symbol>
-        <symbol id="icon_cart" viewBox="0 0 20 20">
-            <path
-                d="M17.6562 4.6875H15.2755C14.9652 2.05164 12.7179 0 10 0C7.28215 0 5.0348 2.05164 4.72445 4.6875H2.34375C1.91227 4.6875 1.5625 5.03727 1.5625 5.46875V19.2188C1.5625 19.6502 1.91227 20 2.34375 20H17.6562C18.0877 20 18.4375 19.6502 18.4375 19.2188V5.46875C18.4375 5.03727 18.0877 4.6875 17.6562 4.6875ZM10 1.5625C11.8548 1.5625 13.3992 2.91621 13.6976 4.6875H6.30238C6.60082 2.91621 8.14516 1.5625 10 1.5625ZM16.875 18.4375H3.125V6.25H4.6875V8.59375C4.6875 9.02523 5.03727 9.375 5.46875 9.375C5.90023 9.375 6.25 9.02523 6.25 8.59375V6.25H13.75V8.59375C13.75 9.02523 14.0998 9.375 14.5312 9.375C14.9627 9.375 15.3125 9.02523 15.3125 8.59375V6.25H16.875V18.4375Z"
-                fill="currentColor" />
+        <symbol id="icon_cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h2l2 10h11l2-8H7.5"></path>
+            <circle cx="9" cy="20" r="1.5"></circle>
+            <circle cx="18" cy="20" r="1.5"></circle>
+        </symbol>
+        <symbol id="icon_store" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 6h16l-2 9H3L1 6z M1 6l1-3h14l1 3M5 15h8v-5H5v5z" />
         </symbol>
         <symbol id="icon_heart" viewBox="0 0 20 20">
             <g clip-path="url(#clip0_6_54)">
@@ -277,19 +282,82 @@
                 </a>
             </div>
 
-            <a href="#" class="header-tools__item header-tools__cart js-open-aside" data-aside="cartDrawer">
-                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <use href="#icon_cart" />
-                </svg>
-                <span
-                    class="cart-amount d-block position-absolute js-cart-items-count {{ Cart::instance('cart')->count() == 0 ? 'd-none' : '' }}">{{ Cart::instance('cart')->count() }}</span>
-            </a>
+            <div class="d-flex align-items-center gap-2">
+                {{-- Profile Icon with Dropdown (same as desktop) --}}
+                @auth
+                    {{-- Mobile Avatar Dropdown --}}
+                    <div class="header-tools__item hover-container position-relative">
+                        <a href="javascript:void(0)" class="header-tools__item js-hover__open"
+                            onclick="toggleMobileUserMenu(event)">
+                            @if (Auth::user()->image)
+                                <img src="@cloudinary(Auth::user()->image, 80, 80, 'fill')" alt="{{ Auth::user()->name }}"
+                                    class="header-avatar header-avatar--mobile">
+                            @else
+                                <div class="header-avatar__placeholder header-avatar__placeholder--mobile">
+                                    {{ substr(Auth::user()->name, 0, 1) }}
+                                </div>
+                            @endif
+                        </a>
+
+                        {{-- Mobile User Dropdown Menu --}}
+                        <div class="user-account-dropdown user-account-dropdown--mobile js-hidden-content">
+                            <ul class="user-account-dropdown__list">
+                                <li class="user-account-dropdown__item">
+                                    <a href="{{ route('user.account.details') }}" class="user-account-dropdown__link">
+                                        Akun Saya
+                                    </a>
+                                </li>
+                                <li class="user-account-dropdown__item">
+                                    <a href="{{ route('user.orders') }}" class="user-account-dropdown__link">
+                                        Pesanan Saya
+                                    </a>
+                                </li>
+                                <li class="user-account-dropdown__item">
+                                    <a href="{{ route('user.addresses') }}" class="user-account-dropdown__link">
+                                        Alamat
+                                    </a>
+                                </li>
+                                <li class="user-account-dropdown__item">
+                                    <a href="{{ route('user.wishlist') }}" class="user-account-dropdown__link">
+                                        Wishlist
+                                    </a>
+                                </li>
+                                <li class="user-account-dropdown__item">
+                                    <a href="javascript:void(0)" onclick="ModalUtils.open('logout-modal')"
+                                        class="user-account-dropdown__link user-account-dropdown__link--logout">
+                                        Keluar
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="header-tools__item">
+                        <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <use href="#icon_user" />
+                        </svg>
+                    </a>
+                @endauth
+
+                {{-- Cart Icon (same SVG as desktop) --}}
+                <a href="javascript:void(0)" class="header-tools__item header-tools__cart" data-cart-drawer>
+                    <svg class="d-block" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h2l2 10h11l2-8H7.5"></path>
+                        <circle cx="9" cy="20" r="1.5"></circle>
+                        <circle cx="18" cy="20" r="1.5"></circle>
+                    </svg>
+                    <span
+                        class="cart-amount d-block position-absolute js-cart-items-count {{ Cart::instance('cart')->count() == 0 ? 'd-none' : '' }}">{{ Cart::instance('cart')->count() }}</span>
+                </a>
+            </div>
         </div>
 
         <nav
             class="header-mobile__navigation navigation d-flex flex-column w-100 position-absolute top-100 bg-body overflow-auto">
-            <div class="container">
+            {{-- <div class="container">
                 <form action="#" method="GET" class="search-field position-relative mt-4 mb-3">
                     <div class="position-relative">
                         <input class="search-field__input w-100 border rounded-1" type="text"
@@ -307,7 +375,7 @@
                         <div class="search-result"></div>
                     </div>
                 </form>
-            </div>
+            </div> --}}
 
             <div class="container">
                 <div class="overflow-hidden">
@@ -325,10 +393,10 @@
                             <a href="{{ route('user.orders') }}" class="navigation__link">Orders</a>
                         </li> --}}
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">Tentang</a>
+                            <a href="{{ route('home.about') }}" class="navigation__link">Tentang</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Kontak</a>
+                            <a href="{{ route('home.contact') }}" class="navigation__link">Kontak</a>
                         </li>
                     </ul>
                 </div>
@@ -631,7 +699,7 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-2 col-md-4 col-6 footer-column footer-menu mb-4 mb-lg-0">
+                <div class="col-lg-2 col-md-4 col-12 footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title">Jelajahi</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="{{ route('shop.index') }}" class="menu-link">Semua
@@ -642,7 +710,7 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-2 col-md-4 col-6 footer-column footer-menu mb-4 mb-lg-0">
+                <div class="col-lg-2 col-md-4 col-12 footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title">Layanan</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="{{ route('user.account.details') }}"
@@ -688,7 +756,7 @@
 
     <footer class="footer-mobile container w-100 px-5 d-md-none bg-body">
         <div class="row text-center">
-            <div class="col-4">
+            <div class="col-3">
                 <a href="{{ route('home.index') }}"
                     class="footer-mobile__link d-flex flex-column align-items-center">
                     <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -699,18 +767,35 @@
                 </a>
             </div>
 
-            <div class="col-4">
-                <a href="{{ route('home.index') }}"
+            <div class="col-3">
+                <a href="{{ route('shop.index') }}"
                     class="footer-mobile__link d-flex flex-column align-items-center">
                     <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_hanger" />
+                        <use href="#icon_store" />
                     </svg>
                     <span>Toko</span>
                 </a>
             </div>
 
-            <div class="col-4">
+            <div class="col-3">
+                <a href="{{ route('cart.index') }}"
+                    class="footer-mobile__link d-flex flex-column align-items-center">
+                    <div class="position-relative">
+                        <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <use href="#icon_cart" />
+                        </svg>
+                        @if (Cart::instance('cart')->content()->count() > 0)
+                            <span
+                                class="wishlist-amount d-block position-absolute js-cart-count">{{ Cart::instance('cart')->content()->count() }}</span>
+                        @endif
+                    </div>
+                    <span>Cart</span>
+                </a>
+            </div>
+
+            <div class="col-3">
                 <a href="{{ route('user.wishlist') }}"
                     class="footer-mobile__link d-flex flex-column align-items-center">
                     <div class="position-relative">
@@ -718,7 +803,10 @@
                             xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_heart" />
                         </svg>
-                        <span class="wishlist-amount d-block position-absolute js-wishlist-count">3</span>
+                        @if (Cart::instance('wishlist')->content()->count() > 0)
+                            <span
+                                class="wishlist-amount d-block position-absolute js-wishlist-count">{{ Cart::instance('wishlist')->content()->count() }}</span>
+                        @endif
                     </div>
                     <span>Wishlist</span>
                 </a>
@@ -847,6 +935,91 @@
 
     {{-- Floating WhatsApp Support Button --}}
     @include('components.whatsapp-float')
+
+    {{-- Mobile User Dropdown Toggle Script --}}
+    <script>
+        function toggleMobileUserMenu(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const dropdown = event.currentTarget.parentElement.querySelector('.user-account-dropdown--mobile');
+
+            // Toggle dropdown
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            } else {
+                // Close any other open dropdowns
+                document.querySelectorAll('.user-account-dropdown--mobile.show').forEach(d => {
+                    d.classList.remove('show');
+                });
+                dropdown.classList.add('show');
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.hover-container')) {
+                document.querySelectorAll('.user-account-dropdown--mobile.show').forEach(d => {
+                    d.classList.remove('show');
+                });
+            }
+        });
+    </script>
+
+    {{-- Mobile Dropdown Styles --}}
+    <style>
+        /* Mobile-specific dropdown styles */
+        @media (max-width: 992px) {
+            .header-mobile .hover-container {
+                position: static;
+            }
+
+            .user-account-dropdown--mobile {
+                display: none;
+                position: fixed;
+                top: 90px;
+                right: 25px;
+                min-width: 200px;
+                background: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 1000;
+                padding: 8px 0;
+            }
+
+            .user-account-dropdown--mobile.show {
+                display: block;
+            }
+
+            .user-account-dropdown--mobile .user-account-dropdown__list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .user-account-dropdown--mobile .user-account-dropdown__link {
+                display: block;
+                padding: 12px 20px;
+                color: #333;
+                text-decoration: none;
+                font-size: 14px;
+                transition: background 0.2s;
+                white-space: nowrap;
+            }
+
+            .user-account-dropdown--mobile .user-account-dropdown__link:hover {
+                background: #f5f5f5;
+            }
+
+            .user-account-dropdown--mobile .user-account-dropdown__link--logout {
+                color: #dc3545;
+                border-top: 1px solid #e0e0e0;
+                margin-top: 8px;
+                padding-top: 16px;
+            }
+        }
+    </style>
 </body>
 
 </html>

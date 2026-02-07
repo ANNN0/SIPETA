@@ -89,7 +89,7 @@
                                 <select class="" name="region_id">
                                     <option value="">Pilih Region</option>
                                     @foreach ($regions as $region)
-                                        <option value="{{ $region->id }}">{{ $region->name }} -
+                                        <option value="{{ $region->id }}">{{ $region->name }}
                                             {{ $region->province }}
                                         </option>
                                     @endforeach
@@ -210,7 +210,8 @@
                         <div class="upload-image flex-grow">
                             <div class="item" id="imgpreview" style="display:none">
                                 <img src="../../../localhost_8000/images/upload/upload-1.png" class="effect8"
-                                    alt="">
+                                    alt=""
+                                    onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22 viewBox=%220 0 400 400%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22400%22 height=%22400%22/%3E%3Cpath fill=%22%23999%22 d=%22M120,140 L120,260 L180,200 L240,260 L280,220 L280,140 Z M160,180 C160,168.95 168.95,160 180,160 C191.05,160 200,168.95 200,180 C200,191.05 191.05,200 180,200 C168.95,200 160,191.05 160,180 Z%22/%3E%3Ctext x=%22200%22 y=%22310%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2218%22 fill=%22%23999%22%3EImage preview%3C/text%3E%3C/svg%3E'">
                             </div>
                             <div id="upload-file" class="item up-load">
                                 <label class="uploadfile" for="myFile">
@@ -232,8 +233,8 @@
                         <div class="body-title mb-10">Upload Gallery Images</div>
                         <div class="upload-image mb-16">
                             <!-- <div class="item">
-                                                                                                                                                                                                                                                                                                                                            <img src="images/upload/upload-1.png" alt="">
-                                                                                                                                                                                                                                                                                                                                        </div>-->
+                                                                                                                                                                                                                                                                                                                                                                                <img src="images/upload/upload-1.png" alt="">
+                                                                                                                                                                                                                                                                                                                                                                            </div>-->
                             <div id="galUpload" class="item up-load">
                                 <label class="uploadfile" for="gFile">
                                     <span class="icon">
@@ -366,6 +367,68 @@
         </div>
         <!-- /main-content-wrap -->
     </div>
+
+    <!-- Loading Overlay -->
+    <div id="uploadLoadingOverlay" class="upload-loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <h3 style="margin-top: 20px; color: #fff;">Menyimpan Produk...</h3>
+            <p id="uploadStatusText" style="color: rgba(255,255,255,0.8); margin-top: 10px;">
+                Mengupload gambar ke cloud storage...
+            </p>
+        </div>
+    </div>
+
+    <style>
+        .upload-loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-content {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .spinner-border {
+            width: 4rem;
+            height: 4rem;
+            border: 0.4em solid rgba(255, 255, 255, 0.3);
+            border-right-color: #fff;
+            border-radius: 50%;
+            animation: spinner-border .75s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spinner-border {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-content h3 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .loading-content p {
+            font-size: 14px;
+            margin: 0;
+        }
+    </style>
 @endsection
 
 @push('scripts')
@@ -375,6 +438,32 @@
         let unitRowCounter = 0;
 
         $(function() {
+            // Form submit handler - show loading overlay and clean price inputs
+            $('.form-add-product').on('submit', function(e) {
+                // Clean price inputs (remove thousand separators)
+                $('.price-input').each(function() {
+                    const rawValue = getRawPrice($(this).val());
+                    $(this).val(rawValue);
+                });
+
+                // Show loading overlay
+                $('#uploadLoadingOverlay').fadeIn(300);
+
+                // Disable submit button to prevent double submission
+                $(this).find('button[type="submit"]').prop('disabled', true).text('Memproses...');
+
+                // Update status text
+                setTimeout(function() {
+                    $('#uploadStatusText').text('Menyimpan data produk...');
+                }, 500);
+
+                setTimeout(function() {
+                    $('#uploadStatusText').text('Memproses gambar untuk upload...');
+                }, 1500);
+
+                // Form will continue to submit normally
+            });
+
             // Existing image upload handlers
             $("#myFile").on("change", function(e) {
                 const photoInp = $("#myFile");
@@ -447,7 +536,44 @@
                 const rowIndex = $(this).val();
                 updatePrimaryCheckbox(rowIndex);
             });
+
+            // ===================================
+            // Price Input Formatting (Thousand Separator)
+            // ===================================
+            $(document).on('input', '.price-input', function() {
+                formatPriceInput($(this));
+            });
+
+            // Format existing inputs on load
+            $('.price-input').each(function() {
+                formatPriceInput($(this));
+            });
         });
+
+        // Format price input with thousand separator
+        function formatPriceInput(input) {
+            let value = input.val();
+
+            // Remove all non-digit characters except dot and comma
+            value = value.replace(/[^\d]/g, '');
+
+            // If empty, set to empty string
+            if (value === '') {
+                input.val('');
+                return;
+            }
+
+            // Convert to number and format with thousand separator (dot)
+            const number = parseInt(value);
+            const formatted = number.toLocaleString('id-ID');
+
+            input.val(formatted);
+        }
+
+        // Get raw number value from formatted input
+        function getRawPrice(formattedValue) {
+            return formattedValue.replace(/\./g, '');
+        }
 
         function addUnitPriceRow() {
             const rowIndex = unitRowCounter++;
@@ -466,19 +592,17 @@
                         </select>
                     </td>
                     <td>
-                        <input type="number" 
+                        <input type="text" 
+                               class="price-input"
                                name="unit_prices[${rowIndex}][regular_price]" 
                                placeholder="0" 
-                               min="0"
-                               step="0.01" 
                                required>
                     </td>
                     <td>
-                        <input type="number" 
+                        <input type="text" 
+                               class="price-input"
                                name="unit_prices[${rowIndex}][sale_price]" 
-                               placeholder="0 (opsional)" 
-                               min="0"
-                               step="0.01">
+                               placeholder="0 (opsional)">
                     </td>
                     <td>
                         <input type="number" 

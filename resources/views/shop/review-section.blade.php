@@ -29,6 +29,17 @@
                                         <div class="review-date">{{ $review->created_at->format('F d, Y') }}</div>
                                         <div class="review-text">
                                             <p>{{ $review->review_text }}</p>
+                                            @if ($review->image)
+                                                <div class="review-image mt-2">
+                                                    @php
+                                                        $imageSrc = Str::startsWith($review->image, 'http')
+                                                            ? $review->image
+                                                            : asset('uploads/reviews/' . $review->image);
+                                                    @endphp
+                                                    <img src="{{ $imageSrc }}" alt="Review Image" class="img-fluid"
+                                                        style="max-height: 150px; width: auto; border-radius: 12px;">
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -38,7 +49,7 @@
                         </div>
 
                         <div class="product-single__review-form">
-                            <form action="{{ route('review.store') }}" method="POST">
+                            <form action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
 
@@ -68,6 +79,15 @@
                                     <textarea name="review" id="form-input-review" class="form-control form-control_gray" placeholder="Ulasan Anda *"
                                         cols="30" rows="8" required>{{ old('review') }}</textarea>
                                     @error('review')
+                                        <span class="text-danger small">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="form-input-image" class="form-label">Upload Foto (Optional)</label>
+                                    <input type="file" name="image" id="form-input-image"
+                                        class="form-control form-control_gray" accept="image/*">
+                                    @error('image')
                                         <span class="text-danger small">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -113,4 +133,3 @@
                                 });
                             });
                         </script>
-

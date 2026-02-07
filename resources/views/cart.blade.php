@@ -134,8 +134,9 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="cart-table-footer">
 
+                        {{-- Desktop Coupon & Clear (hidden on mobile) --}}
+                        <div class="cart-table-footer cart-table-footer--desktop">
                             @if (!Session::has('coupon'))
                                 <form action="{{ route('cart.coupon.apply') }}" method="POST"
                                     class="position-relative bg-body">
@@ -164,6 +165,7 @@
                                 </button>
                             </form>
                         </div>
+
                         <div>
                             @if (Session::has('success'))
                                 <p class="text-success">{{ Session::get('success') }}</p>
@@ -172,7 +174,108 @@
                             @endif
                         </div>
                     </div>
+
+                    {{-- Mobile Card View (hidden on desktop, shown on mobile via CSS) --}}
+                    <div class="cart-mobile-view" style="display: none;">
+                        @foreach ($items as $item)
+                            <div class="cart-item-mobile">
+                                <div class="item-row">
+                                    <div class="item-image">
+                                        <img loading="lazy"
+                                            src="{{ Str::startsWith($item->options->image, 'http') ? $item->options->image : asset('uploads/products/thumbnails') . '/' . $item->options->image }}"
+                                            alt="{{ $item->name }}">
+                                    </div>
+                                    <div class="item-details">
+                                        <h4>{{ $item->name }}</h4>
+                                        @if (isset($item->options->unit_name))
+                                            <p class="unit-info">
+                                                Unit: {{ $item->options->unit_name }} ({{ $item->options->unit_symbol }})
+                                            </p>
+                                        @endif
+                                        <p class="price">
+                                            Rp {{ number_format($item->price, 0, ',', '.') }}
+                                            @if (isset($item->options->unit_symbol))
+                                                <span class="text-muted small">/ {{ $item->options->unit_symbol }}</span>
+                                            @endif
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="item-meta">
+                                    @php
+                                        $organicStatus = trim($item->model?->organic_status ?? '');
+                                    @endphp
+                                    @if (strtolower($organicStatus) == 'organik')
+                                        <span class="badge bg-success">Organik</span>
+                                    @elseif(strtolower($organicStatus) == 'non-organik')
+                                        <span class="badge bg-danger">Non-Organik</span>
+                                    @endif
+                                </div>
+
+                                <div class="item-actions">
+                                    <div class="qty-control">
+                                        <form method="POST"
+                                            action="{{ route('cart.qty.decrease', ['rowId' => $item->rowId]) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="qty-control__reduce">-</button>
+                                        </form>
+
+                                        <input type="number" name="quantity" value="{{ $item->qty }}"
+                                            min="1" class="qty-control__number" readonly>
+
+                                        <form method="POST"
+                                            action="{{ route('cart.qty.increase', ['rowId' => $item->rowId]) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="qty-control__increase">+</button>
+                                        </form>
+                                    </div>
+
+                                    <a href="javascript:void(0)"
+                                        class="remove-cart btn btn-sm btn-outline-danger delete-item"
+                                        data-name="{{ $item->name }}" data-type="Cart Item"
+                                        data-rowid="{{ $item->rowId }}">
+                                        Hapus
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- Mobile Coupon & Clear (shown after cards on mobile, hidden on desktop) --}}
+                    <div class="cart-table-footer cart-table-footer--mobile">
+                        @if (!Session::has('coupon'))
+                            <form action="{{ route('cart.coupon.apply') }}" method="POST"
+                                class="position-relative bg-body">
+                                @csrf
+                                <input class="form-control" type="text" name="coupon_code" placeholder="Kode Kupon"
+                                    value="">
+                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
+                                    value="Gunakan Kupon">
+                            </form>
+                        @else
+                            <form action="{{ route('cart.coupon.remove') }}" method="POST"
+                                class="position-relative bg-body">
+                                @csrf
+                                @method('DELETE')
+                                <input class="form-control" type="text" name="coupon_code" placeholder="Kode Kupon"
+                                    value="@if (Session::has('coupon')) {{ Session::get('coupon')['code'] }} Applied! @endif">
+                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
+                                    value="Hapus Kupon">
+                            </form>
+                        @endif
+                        <form action="{{ route('cart.empty') }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn-clear" type="submit">
+                                <i class="fa fa-trash me-2"></i>HAPUS KERANJANG
+                            </button>
+                        </form>
+                    </div>
+
                     <div class="shopping-cart__totals-wrapper">
+
                         <div class="sticky-content">
                             {{-- Modern Order Summary Card (same as checkout) --}}
                             <div class="order-summary-card">

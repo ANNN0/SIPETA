@@ -758,6 +758,7 @@ function pureFadeOut(e) {
 
     Header.prototype = Object.assign({}, Header.prototype, {
       _init: function () {
+        UomoHelpers.isMobile = UomoHelpers.updateDeviceSize();
         const headerClass = UomoHelpers.isMobile ? this.selectors.mobileHeader : this.selectors.header;
 
         this.lastScrollTop = 0;
@@ -783,18 +784,21 @@ function pureFadeOut(e) {
         let transformLeft = 0;
 
         if ($mobileDropdown) {
-          $mobileMenuActivator && $mobileMenuActivator.addEventListener('click', function(event) {
-            event.preventDefault();
-            if (document.body.classList.contains(_this.selectors.mobileMenuActiveClass)) {
-              document.body.classList.remove(_this.selectors.mobileMenuActiveClass);
-              _this.$header.style.paddingRight = '';
-              $mobileDropdown.style.paddingRight = '';
-            } else {
-              document.body.classList.add(_this.selectors.mobileMenuActiveClass);
-              _this.$header.style.paddingRight = UomoSelectors.scrollWidth;
-              $mobileDropdown.style.paddingRight = UomoSelectors.scrollWidth;
-            }
-          });
+          if ($mobileMenuActivator && !$mobileMenuActivator.classList.contains('js-click-initialized')) {
+            $mobileMenuActivator.classList.add('js-click-initialized');
+            $mobileMenuActivator.addEventListener('click', function(event) {
+              event.preventDefault();
+              if (document.body.classList.contains(_this.selectors.mobileMenuActiveClass)) {
+                document.body.classList.remove(_this.selectors.mobileMenuActiveClass);
+                _this.$header.style.paddingRight = '';
+                $mobileDropdown.style.paddingRight = '';
+              } else {
+                document.body.classList.add(_this.selectors.mobileMenuActiveClass);
+                _this.$header.style.paddingRight = UomoSelectors.scrollWidth;
+                $mobileDropdown.style.paddingRight = UomoSelectors.scrollWidth;
+              }
+            });
+          }
 
           const $mobileMenu = $mobileDropdown.querySelector('.navigation__list');
           let menuMaxHeight = $mobileMenu.offsetHeight;

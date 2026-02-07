@@ -15,6 +15,7 @@ class ProductReview extends Model
         'reviewer_email',
         'rating',
         'review_text',
+        'image',
         'is_approved',
     ];
 

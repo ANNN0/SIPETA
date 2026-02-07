@@ -22,6 +22,13 @@
                 </a>
             @endif
 
+            {{-- Page Number Info --}}
+            <div class="pagination-page-info">
+                <span class="current-page">Page {{ $paginator->currentPage() }}</span>
+                <span class="page-separator">of</span>
+                <span class="total-pages">{{ $paginator->lastPage() }}</span>
+            </div>
+
             @if ($paginator->hasMorePages())
                 <a href="{{ $paginator->nextPageUrl() }}" class="pagination-nav next">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">

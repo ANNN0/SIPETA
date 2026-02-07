@@ -13,6 +13,7 @@ use App\Models\OrderItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
@@ -22,6 +23,9 @@ use App\Models\ProductReview;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Jobs\UploadProductImagesJob;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -533,33 +537,10 @@ class AdminController extends Controller
 
         $current_timestamp = Carbon::now()->timestamp;
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = $current_timestamp . '.' . $image->extension();
-            $url = $this->GenerateProductThumbnailImage($image, $imageName);
-            $product->image = $url;
-        }
-
-        $gallery_arr = array();
-        $gallery_images = "";
-        $counter = 1;
-
-        if ($request->hasFile('images')) {
-            $allowedfileExtion = ['jpg', 'png', 'jpeg'];
-            $files = $request->file('images');
-            foreach ($files as $file) {
-                $gextension = $file->getClientOriginalExtension();
-                $gcheck = in_array($gextension, $allowedfileExtion);
-                if ($gcheck) {
-                    $gfileName = $current_timestamp . "_" . $counter . "." . $gextension;
-                    $url = $this->GenerateProductThumbnailImage($file, $gfileName);
-                    array_push($gallery_arr, $url);
-                    $counter = $counter + 1;
-                }
-            }
-            $gallery_images = implode(',', $gallery_arr);
-        }
-        $product->images = $gallery_images;
+        // Placeholder image URL while uploading in background
+        $placeholderImage = 'https://res.cloudinary.com/demo/image/upload/placeholder.jpg';
+        $product->image = $placeholderImage;
+        $product->images = '';
         $product->save();
 
         // Sync product types (many-to-many)
@@ -595,7 +576,38 @@ class AdminController extends Controller
             $product->unitPrices()->first()->update(['is_primary' => true]);
         }
 
-        return redirect()->route('admin.products')->with('status', 'Product has been added successfully!');
+        // Save uploaded images to temporary storage
+        $mainImagePath = null;
+        $galleryImagePaths = [];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'temp_products/' . $current_timestamp . '_main.' . $image->extension();
+            $mainImagePath = $image->storeAs('', $imageName, 'local');
+        }
+
+        if ($request->hasFile('images')) {
+            $allowedfileExtion = ['jpg', 'png', 'jpeg'];
+            $files = $request->file('images');
+            $counter = 1;
+            foreach ($files as $file) {
+                $gextension = $file->getClientOriginalExtension();
+                $gcheck = in_array($gextension, $allowedfileExtion);
+                if ($gcheck) {
+                    $gfileName = 'temp_products/' . $current_timestamp . '_gallery_' . $counter . '.' . $gextension;
+                    $galleryImagePaths[] = $file->storeAs('', $gfileName, 'local');
+                    $counter++;
+                }
+            }
+        }
+
+        // Dispatch job to upload images in background
+        UploadProductImagesJob::dispatch($product->id, $mainImagePath, $galleryImagePaths);
+
+        return redirect()->route('admin.products')->with(
+            'status',
+            'Product sedang diproses! Gambar akan muncul dalam beberapa saat.'
+        );
     }
 
     public function GenerateProductThumbnailImage($image, $imageName)
@@ -1393,5 +1405,72 @@ class AdminController extends Controller
         $testimonial = Contact::findOrFail($id);
         $testimonial->delete();
         return redirect()->route('admin.testimonials')->with('status', 'Testimonial has been deleted successfully!');
+    }
+
+    public function markNotificationAsRead($id)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $notification = $user->notifications()->find($id);
+        if ($notification) {
+            $notification->markAsRead();
+        }
+        return back();
+    }
+
+    public function deleteNotification($id)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $notification = $user->notifications()->find($id);
+        if ($notification) {
+            $notification->delete();
+            return back()->with('status', 'Notification deleted successfully');
+        }
+        return back()->with('error', 'Notification not found');
+    }
+
+    public function profile()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        return view('admin.profile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'password' => 'nullable|min:8|confirmed',
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $file_extension = $image->extension();
+            $file_name = Carbon::now()->timestamp . '.' . $file_extension;
+
+            $publicId = pathinfo($file_name, PATHINFO_FILENAME);
+            $url = Cloudinary::uploadApi()->upload($image->getRealPath(), [
+                'folder' => 'avatars',
+                'public_id' => $publicId
+            ])['secure_url'];
+
+            $user->image = $url;
+        }
+
+        $user->save();
+
+        return back()->with('status', 'Profile updated successfully!');
     }
 }

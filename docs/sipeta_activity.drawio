@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" multi-page="1" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.3.2" pages="6">
+<mxfile host="app.diagrams.net" multi-page="1" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.6" pages="9">
   <diagram id="activity-login" name="1. Login">
     <mxGraphModel dx="1389" dy="749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="700" math="0" shadow="0">
       <root>
@@ -429,75 +429,621 @@
     </mxGraphModel>
   </diagram>
   <diagram id="activity-return" name="6. Return Request">
-    <mxGraphModel dx="1000" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="850">
+    <mxGraphModel dx="1042" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="t6" value="ACTIVITY DIAGRAM - RETURN REQUEST" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="350" y="20" width="300" height="25" as="geometry" />
+        <mxCell id="t6" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1;" value="ACTIVITY DIAGRAM - RETURN REQUEST" vertex="1">
+          <mxGeometry height="25" width="300" x="350" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="start6" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="480" y="60" width="40" height="40" as="geometry" />
+        <mxCell id="start6" parent="1" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="480" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="a6_1" value="Buka Menu Pesanan Saya" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="425" y="130" width="150" height="40" as="geometry" />
+        <mxCell id="a6_1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Buka Menu Pesanan Saya" vertex="1">
+          <mxGeometry height="40" width="150" x="425" y="130" as="geometry" />
         </mxCell>
-        <mxCell id="a6_2" value="Pilih Pesanan yang Ingin di-Return" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="410" y="200" width="180" height="40" as="geometry" />
+        <mxCell id="a6_2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Pilih Pesanan yang Ingin di-Return" vertex="1">
+          <mxGeometry height="40" width="180" x="410" y="200" as="geometry" />
         </mxCell>
-        <mxCell id="a6_3" value="Klik Tombol Ajukan Return" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="420" y="270" width="160" height="40" as="geometry" />
+        <mxCell id="a6_3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Klik Tombol Ajukan Return" vertex="1">
+          <mxGeometry height="40" width="160" x="420" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="a6_4" value="Pilih Alasan Return" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="430" y="340" width="140" height="40" as="geometry" />
+        <mxCell id="a6_4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Pilih Alasan Return" vertex="1">
+          <mxGeometry height="40" width="140" x="430" y="340" as="geometry" />
         </mxCell>
-        <mxCell id="a6_5" value="Isi Deskripsi Masalah" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="430" y="410" width="140" height="40" as="geometry" />
+        <mxCell id="a6_5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Isi Deskripsi Masalah" vertex="1">
+          <mxGeometry height="40" width="140" x="430" y="410" as="geometry" />
         </mxCell>
-        <mxCell id="a6_6" value="Upload Foto/Video Bukti" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="425" y="480" width="150" height="40" as="geometry" />
+        <mxCell id="a6_6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Upload Foto/Video Bukti" vertex="1">
+          <mxGeometry height="40" width="150" x="425" y="480" as="geometry" />
         </mxCell>
-        <mxCell id="a6_7" value="Pilih Solusi (Refund/Tukar)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="420" y="550" width="160" height="40" as="geometry" />
+        <mxCell id="a6_7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Pilih Solusi (Refund/Tukar)" vertex="1">
+          <mxGeometry height="40" width="160" x="420" y="550" as="geometry" />
         </mxCell>
-        <mxCell id="a6_8" value="Submit Return Request" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="430" y="620" width="140" height="40" as="geometry" />
+        <mxCell id="a6_8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Submit Return Request" vertex="1">
+          <mxGeometry height="40" width="140" x="430" y="620" as="geometry" />
         </mxCell>
-        <mxCell id="a6_9" value="Menunggu Persetujuan Admin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="415" y="690" width="170" height="40" as="geometry" />
+        <mxCell id="a6_9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" value="Menunggu Persetujuan Admin" vertex="1">
+          <mxGeometry height="40" width="170" x="415" y="690" as="geometry" />
         </mxCell>
-        <mxCell id="end6" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="480" y="770" width="40" height="40" as="geometry" />
+        <mxCell id="end6" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="480" y="770" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_1" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="start6" target="a6_1">
+        <mxCell id="arr6_1" edge="1" parent="1" source="start6" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_2" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_1" target="a6_2">
+        <mxCell id="arr6_2" edge="1" parent="1" source="a6_1" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_3" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_2" target="a6_3">
+        <mxCell id="arr6_3" edge="1" parent="1" source="a6_2" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_4" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_3" target="a6_4">
+        <mxCell id="arr6_4" edge="1" parent="1" source="a6_3" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_5" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_4" target="a6_5">
+        <mxCell id="arr6_5" edge="1" parent="1" source="a6_4" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_6" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_5" target="a6_6">
+        <mxCell id="arr6_6" edge="1" parent="1" source="a6_5" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_7" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_6" target="a6_7">
+        <mxCell id="arr6_7" edge="1" parent="1" source="a6_6" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_8" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_7" target="a6_8">
+        <mxCell id="arr6_8" edge="1" parent="1" source="a6_7" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_8">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_9" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_8" target="a6_9">
+        <mxCell id="arr6_9" edge="1" parent="1" source="a6_8" style="endArrow=classic;html=1;strokeColor=#000000;" target="a6_9">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="arr6_10" style="endArrow=classic;html=1;strokeColor=#000000;" edge="1" parent="1" source="a6_9" target="end6">
+        <mxCell id="arr6_10" edge="1" parent="1" source="a6_9" style="endArrow=classic;html=1;strokeColor=#000000;" target="end6">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="activity-admin-reviews" name="7. Admin - Review Moderation">
+    <mxGraphModel dx="1042" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t7" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1;labelBackgroundColor=none;" value="ACTIVITY DIAGRAM - ADMIN REVIEW MODERATION" vertex="1">
+          <mxGeometry height="25" width="400" x="350" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="start7" parent="1" style="ellipse;html=1;shape=startState;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="530" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Login sebagai Admin" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Buka Menu Reviews" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Lihat Daftar Review Pending" vertex="1">
+          <mxGeometry height="40" width="170" x="465" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="d7_1" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="520" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="d7_1t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Ada Review Baru?" vertex="1">
+          <mxGeometry height="15" width="95" x="585" y="353" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Tidak Ada Review" vertex="1">
+          <mxGeometry height="40" width="140" x="280" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Pilih Review untuk di-Moderasi" vertex="1">
+          <mxGeometry height="40" width="170" x="465" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Lihat Detail Review (Rating, Teks, Foto)" vertex="1">
+          <mxGeometry height="40" width="210" x="445" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="d7_2" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="520" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="d7_2t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Keputusan Admin?" vertex="1">
+          <mxGeometry height="15" width="100" x="585" y="593" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Update Review Status = &#39;approved&#39;" vertex="1">
+          <mxGeometry height="40" width="170" x="465" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Update Review Status = &#39;rejected&#39;" vertex="1">
+          <mxGeometry height="40" width="170" x="720" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Delete Review dari Database" vertex="1">
+          <mxGeometry height="40" width="170" x="260" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Publish Review ke Public" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="a7_11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Send Notification ke User" vertex="1">
+          <mxGeometry height="40" width="150" x="475" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="end7" parent="1" style="ellipse;html=1;shape=endState;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="530" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_1" edge="1" parent="1" source="start7" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_2" edge="1" parent="1" source="a7_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_3" edge="1" parent="1" source="a7_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_4" edge="1" parent="1" source="a7_3" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d7_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_5" edge="1" parent="1" source="d7_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_5l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Tidak" vertex="1">
+          <mxGeometry height="12" width="35" x="430" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_6" edge="1" parent="1" source="d7_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_6l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Ya" vertex="1">
+          <mxGeometry height="12" width="20" x="555" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_7" edge="1" parent="1" source="a7_5" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_8" edge="1" parent="1" source="a7_6" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d7_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_9" edge="1" parent="1" source="d7_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_9l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Approve" vertex="1">
+          <mxGeometry height="12" width="45" x="548" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_10" edge="1" parent="1" source="d7_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_10l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Reject" vertex="1">
+          <mxGeometry height="12" width="35" x="640" y="595" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_11" edge="1" parent="1" source="d7_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_11l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Delete" vertex="1">
+          <mxGeometry height="12" width="35" x="445" y="595" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_12" edge="1" parent="1" source="a7_7" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_13" edge="1" parent="1" source="a7_10" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_14" edge="1" parent="1" source="a7_8" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="805" y="540" />
+              <mxPoint x="805" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr7_15" edge="1" parent="1" source="a7_9" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a7_3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="610" />
+              <mxPoint x="200" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr7_16" edge="1" parent="1" source="a7_11" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="end7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7_17" edge="1" parent="1" source="a7_4" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="end7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="370" />
+              <mxPoint x="150" y="910" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="activity-admin-coupons" name="8. Admin - Coupon Management">
+    <mxGraphModel dx="1042" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t8" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1;labelBackgroundColor=none;" value="ACTIVITY DIAGRAM - ADMIN COUPON MANAGEMENT" vertex="1">
+          <mxGeometry height="25" width="400" x="350" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="start8" parent="1" style="ellipse;html=1;shape=startState;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="530" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Login sebagai Admin" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Buka Menu Coupons" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="d8_1" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="520" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="d8_1t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Pilih Aksi?" vertex="1">
+          <mxGeometry height="15" width="65" x="585" y="283" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Klik Add Coupon" vertex="1">
+          <mxGeometry height="40" width="140" x="250" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Isi Form Coupon (Code, Type, Value, Min Cart, Expiry)" vertex="1">
+          <mxGeometry height="40" width="240" x="200" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="d8_2" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="290" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="d8_2t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Valid?" vertex="1">
+          <mxGeometry height="15" width="38" x="355" y="503" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Tampilkan Error" vertex="1">
+          <mxGeometry height="40" width="120" x="100" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Save Coupon ke Database" vertex="1">
+          <mxGeometry height="40" width="140" x="250" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="View/Edit Coupon" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Load Coupon Data" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Modify Coupon Details" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Update Database" vertex="1">
+          <mxGeometry height="40" width="120" x="490" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Delete Coupon" vertex="1">
+          <mxGeometry height="40" width="140" x="710" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="d8_3" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="750" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="d8_3t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Konfirmasi?" vertex="1">
+          <mxGeometry height="15" width="70" x="815" y="433" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Delete dari Database" vertex="1">
+          <mxGeometry height="40" width="120" x="720" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Cancel Delete" vertex="1">
+          <mxGeometry height="40" width="100" x="890" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Lihat Daftar Coupons" vertex="1">
+          <mxGeometry height="40" width="160" x="470" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="a8_15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Filter Coupon (Active/Expired/All)" vertex="1">
+          <mxGeometry height="40" width="190" x="455" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="end8" parent="1" style="ellipse;html=1;shape=endState;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="530" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_1" edge="1" parent="1" source="start8" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_2" edge="1" parent="1" source="a8_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_3" edge="1" parent="1" source="a8_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d8_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_4" edge="1" parent="1" source="d8_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_4l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Add" vertex="1">
+          <mxGeometry height="12" width="25" x="410" y="283" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_5" edge="1" parent="1" source="a8_3" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_6" edge="1" parent="1" source="a8_4" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d8_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_7" edge="1" parent="1" source="d8_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_7l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Tidak" vertex="1">
+          <mxGeometry height="12" width="35" x="235" y="505" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_8" edge="1" parent="1" source="d8_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_8l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Ya" vertex="1">
+          <mxGeometry height="12" width="20" x="325" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_9" edge="1" parent="1" source="a8_5" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="80" y="520" />
+              <mxPoint x="80" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr8_10" edge="1" parent="1" source="d8_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_10l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Edit" vertex="1">
+          <mxGeometry height="12" width="25" x="548" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_11" edge="1" parent="1" source="a8_7" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_12" edge="1" parent="1" source="a8_8" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_13" edge="1" parent="1" source="a8_9" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_14" edge="1" parent="1" source="d8_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_14l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Delete" vertex="1">
+          <mxGeometry height="12" width="35" x="645" y="283" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_15" edge="1" parent="1" source="a8_11" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d8_3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_16" edge="1" parent="1" source="d8_3" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_16l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Ya" vertex="1">
+          <mxGeometry height="12" width="20" x="785" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_17" edge="1" parent="1" source="d8_3" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_17l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Tidak" vertex="1">
+          <mxGeometry height="12" width="35" x="825" y="433" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_18" edge="1" parent="1" source="a8_6" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr8_19" edge="1" parent="1" source="a8_10" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_20" edge="1" parent="1" source="a8_12" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr8_21" edge="1" parent="1" source="a8_13" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr8_22" edge="1" parent="1" source="a8_14" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a8_15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8_23" edge="1" parent="1" source="a8_15" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="end8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="activity-admin-users" name="9. Admin - User &amp; Return Management">
+    <mxGraphModel dx="672" dy="363" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t9" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1;labelBackgroundColor=none;" value="ACTIVITY DIAGRAM - ADMIN USER &amp; RETURN MANAGEMENT" vertex="1">
+          <mxGeometry height="25" width="500" x="300" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="start9" parent="1" style="ellipse;html=1;shape=startState;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="530" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Login sebagai Admin" vertex="1">
+          <mxGeometry height="40" width="140" x="480" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="d9_1" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="520" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="d9_1t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Pilih Menu?" vertex="1">
+          <mxGeometry height="15" width="75" x="585" y="213" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1;labelBackgroundColor=none;" value="Manage Users" vertex="1">
+          <mxGeometry height="40" width="140" x="250" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="View User List" vertex="1">
+          <mxGeometry height="40" width="140" x="250" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Select User" vertex="1">
+          <mxGeometry height="40" width="140" x="250" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="View User Details (Orders, Reviews, Addresses)" vertex="1">
+          <mxGeometry height="40" width="210" x="215" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="d9_2" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="290" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="d9_2t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Aksi User?" vertex="1">
+          <mxGeometry height="15" width="68" x="355" y="583" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Block User (is_blocked = 1)" vertex="1">
+          <mxGeometry height="40" width="160" x="240" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Unblock User (is_blocked = 0)" vertex="1">
+          <mxGeometry height="40" width="160" x="70" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Update Database" vertex="1">
+          <mxGeometry height="40" width="140" x="250" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1;labelBackgroundColor=none;" value="Manage Returns" vertex="1">
+          <mxGeometry height="40" width="140" x="710" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="View Return Requests List" vertex="1">
+          <mxGeometry height="40" width="160" x="700" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="d9_3" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="750" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="d9_3t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Ada Request?" vertex="1">
+          <mxGeometry height="15" width="85" x="815" y="443" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Tidak Ada Return" vertex="1">
+          <mxGeometry height="40" width="120" x="920" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Select Return Request" vertex="1">
+          <mxGeometry height="40" width="140" x="710" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="View Details (Reason, Description, Photos/Videos)" vertex="1">
+          <mxGeometry height="40" width="220" x="670" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="d9_4" parent="1" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="750" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="d9_4t" parent="1" style="text;fontSize=10;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Keputusan?" vertex="1">
+          <mxGeometry height="15" width="75" x="815" y="683" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Approve Return (status = &#39;approved&#39;)" vertex="1">
+          <mxGeometry height="40" width="200" x="680" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Reject Return (status = &#39;rejected&#39;)" vertex="1">
+          <mxGeometry height="40" width="180" x="920" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Add Admin Notes" vertex="1">
+          <mxGeometry height="40" width="140" x="710" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="a9_17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="Update Return Status" vertex="1">
+          <mxGeometry height="40" width="140" x="710" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="end9" parent="1" style="ellipse;html=1;shape=endState;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="530" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_1" edge="1" parent="1" source="start9" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_2" edge="1" parent="1" source="a9_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d9_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_3" edge="1" parent="1" source="d9_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_3l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Users" vertex="1">
+          <mxGeometry height="12" width="35" x="400" y="213" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_4" edge="1" parent="1" source="a9_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_5" edge="1" parent="1" source="a9_3" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_6" edge="1" parent="1" source="a9_4" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_7" edge="1" parent="1" source="a9_5" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d9_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_8" edge="1" parent="1" source="d9_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_8l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Block" vertex="1">
+          <mxGeometry height="12" width="32" x="325" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_9" edge="1" parent="1" source="d9_2" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_9l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Unblock" vertex="1">
+          <mxGeometry height="12" width="45" x="245" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_10" edge="1" parent="1" source="a9_6" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_11" edge="1" parent="1" source="a9_7" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="770" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr9_12" edge="1" parent="1" source="d9_1" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_12l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Returns" vertex="1">
+          <mxGeometry height="12" width="45" x="650" y="213" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_13" edge="1" parent="1" source="a9_9" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_14" edge="1" parent="1" source="a9_10" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d9_3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_15" edge="1" parent="1" source="d9_3" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_15l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Tidak" vertex="1">
+          <mxGeometry height="12" width="35" x="860" y="443" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_16" edge="1" parent="1" source="d9_3" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_16l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Ya" vertex="1">
+          <mxGeometry height="12" width="20" x="785" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_17" edge="1" parent="1" source="a9_12" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_18" edge="1" parent="1" source="a9_13" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="d9_4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_19" edge="1" parent="1" source="d9_4" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_19l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Approve" vertex="1">
+          <mxGeometry height="12" width="48" x="783" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_20" edge="1" parent="1" source="d9_4" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_20l" parent="1" style="text;fontSize=9;fillColor=none;strokeColor=none;labelBackgroundColor=none;" value="Reject" vertex="1">
+          <mxGeometry height="12" width="35" x="860" y="683" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_21" edge="1" parent="1" source="a9_14" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_22" edge="1" parent="1" source="a9_15" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010" y="860" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr9_23" edge="1" parent="1" source="a9_16" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="a9_17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9_24" edge="1" parent="1" source="a9_17" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="end9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="980" />
+              <mxPoint x="550" y="980" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr9_25" edge="1" parent="1" source="a9_8" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="end9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="940" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr9_26" edge="1" parent="1" source="a9_11" style="endArrow=classic;html=1;labelBackgroundColor=none;fontColor=default;" target="end9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="980" />
+              <mxPoint x="550" y="980" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

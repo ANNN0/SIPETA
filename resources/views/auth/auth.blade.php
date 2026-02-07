@@ -2,7 +2,12 @@
 
 @section('content')
     <div class="auth-wrapper">
-        <div class="auth-container" id="auth-container">
+        <div class="auth-container" id="auth-container"
+            style="
+            --bg-login: url('{{ asset('assets/images/login/farmland-min.jpg') }}');
+            --bg-register: url('{{ asset('assets/images/login/farmland_2-min.jpg') }}');
+            --bg-forgot: url('{{ asset('assets/images/login/farmland_3-min.jpg') }}');
+        ">
             {{-- ============================================ --}}
             {{-- LEFT PANEL - IMAGE (Login) / FORM (Register) --}}
             {{-- ============================================ --}}

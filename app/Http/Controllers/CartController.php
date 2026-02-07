@@ -12,6 +12,9 @@ use App\Models\OrderItem;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Session;
 use Surfsidemedia\Shoppingcart\Facades\Cart;
+use App\Notifications\NewOrderNotification;
+use Illuminate\Support\Facades\Notification;
+use App\Models\User;
 
 class CartController extends Controller
 {
@@ -313,6 +316,12 @@ class CartController extends Controller
         $order->zip = $address->zip;
 
         $order->save();
+
+        // Send Notification to Admins
+        $admins = User::where('utype', 'ADM')->get();
+        if ($admins->count() > 0) {
+            Notification::send($admins, new NewOrderNotification($order));
+        }
 
         foreach (Cart::instance('cart')->content() as $item) {
             $orderItem = new OrderItem();

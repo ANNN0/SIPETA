@@ -314,6 +314,31 @@
             .action-btns {
                 width: 100%;
                 justify-content: flex-end;
+                flex-wrap: wrap; // Allow wrapping on small screens
+            }
+        }
+    }
+}
+
+// Ultra Small Devices
+@media (max-width: 480px) {
+    .order-card-item {
+        .order-card-header {
+            .bar-item {
+                .label { font-size: 11px; }
+                .value { font-size: 13px; }
+            }
+        }
+        
+        .order-card-footer {
+            .action-btns {
+                justify-content: flex-start; // Align layout left on very small screens
+                gap: 8px;
+                
+                .btn {
+                    padding: 6px 14px;
+                    font-size: 13px;
+                }
             }
         }
     }

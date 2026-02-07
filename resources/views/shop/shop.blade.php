@@ -265,7 +265,8 @@
                         <div class="shop-asc__seprator mx-3 bg-light d-none d-md-block order-md-0"></div>
 
                         {{-- Search Bar (Moved from Sidebar) --}}
-                        <div class="shop-search d-flex align-items-center order-1 flex-grow-1" style="max-width: 400px;">
+                        <div class="shop-search d-none d-lg-flex align-items-center order-1 flex-grow-1"
+                            style="max-width: 400px;">
                             <div class="position-relative w-100">
                                 <input type="text" id="search-input-top" class="form-control form-control-sm"
                                     placeholder="Cari produk, kategori, petani, daerah, type..."
@@ -289,7 +290,7 @@
                             </div>
                         </div>
 
-                        <div class="shop-filter d-flex align-items-center order-0 order-md-3 d-lg-none">
+                        <div class="shop-filter d-none align-items-center order-0 order-md-3">
                             <button class="btn-link btn-link_f d-flex align-items-center ps-0 js-open-aside"
                                 data-aside="shopFilter">
                                 <svg class="d-inline-block align-middle me-2" width="14" height="10"
@@ -317,6 +318,58 @@
                         </a>
                     </div>
                 @endif
+
+                {{-- Mobile: Search + Filter (Horizontal Layout) --}}
+                <div class="shop-mobile-toolbar d-lg-none mb-3">
+                    <div class="row g-2">
+                        {{-- Search 60% --}}
+                        <div class="col-7">
+                            <div class="shop-search d-flex align-items-center">
+                                <div class="position-relative w-100">
+                                    <input type="text" id="search-input-mobile" class="form-control form-control-sm"
+                                        placeholder="Cari produk, kategori, petani, daerah, type..."
+                                        value="{{ request('search') }}" style="padding-right: 30px; padding-left: 35px;">
+                                    <svg class="position-absolute top-50 start-0 translate-middle-y ms-2" width="16"
+                                        height="16" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM18.5 18.5L15 15" stroke="currentColor"
+                                            stroke-width="1.5" stroke-linecap="round" />
+                                    </svg>
+                                    @if (request('search'))
+                                        <button type="button" id="search-clear-mobile"
+                                            class="btn btn-sm position-absolute top-50 end-0 translate-middle-y me-1 border-0 p-0"
+                                            style="background: none; font-size: 18px; line-height: 1; width: 20px; height: 20px;">×</button>
+                                    @endif
+
+                                    {{-- Mobile Suggestions Dropdown --}}
+                                    <div class="suggestions-container" id="search-suggestions-mobile">
+                                        {{-- Populated by JavaScript --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Filter Button 40% --}}
+                        <div class="col-5">
+                            <button class="btn btn-outline-secondary btn-sm w-100" id="mobileFilterToggle">
+                                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_filter" />
+                                </svg>
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+
+                    {{-- Collapsible Filter Panel --}}
+                    <div id="mobileFilterPanel" class="mobile-filter-panel mt-2" style="display:none;">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-3" id="mobileFilterContent">
+                                {{-- Filter content cloned here via JavaScript --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="products-grid row row-cols-2 row-cols-md-3" id="products-grid">
                     @include('shop.partials.products')
@@ -536,6 +589,122 @@
                     performAjaxSearchFn: typeof performAjaxSearch !== 'undefined' ? performAjaxSearch : null
                 });
             }
+
+
+            // ===================================
+            // MOBILE FILTER PANEL FUNCTIONALITY
+            // ===================================
+
+            // Toggle mobile filter panel with jQuery click handler
+            $('#mobileFilterToggle').on('click', function() {
+                const panel = $('#mobileFilterPanel');
+                if (panel.css('display') === 'none') {
+                    panel.show();
+                    // Clone filter content on first open
+                    cloneMobileFilterContent();
+                } else {
+                    panel.hide();
+                }
+            });
+
+            // Clone desktop filter content to mobile panel
+            function cloneMobileFilterContent() {
+                const mobileContent = document.getElementById('mobileFilterContent');
+                const desktopFilter = document.getElementById('shopFilter');
+
+                // Only clone if mobile content is empty
+                if (mobileContent && desktopFilter && mobileContent.children.length === 0) {
+                    console.log('Cloning filter content to mobile...');
+                    // Clone all accordions from desktop
+                    const accordions = desktopFilter.querySelectorAll('.accordion');
+                    console.log('Found accordions:', accordions.length);
+                    accordions.forEach(accordion => {
+                        const clone = accordion.cloneNode(true);
+
+                        // Collapse all accordions by default on mobile
+                        clone.querySelectorAll('.accordion-collapse.show').forEach(el => {
+                            el.classList.remove('show');
+                        });
+
+                        // Update IDs to prevent conflict with desktop (Fixes Dropdown/Accordion toggle)
+                        clone.querySelectorAll('[id]').forEach(el => {
+                            const oldId = el.id;
+                            const newId = oldId + '_mobile';
+                            el.id = newId;
+
+                            // Update references in the clone
+                            clone.querySelectorAll(`[data-bs-target="#${oldId}"]`).forEach(b => b
+                                .setAttribute('data-bs-target', '#' + newId));
+                            clone.querySelectorAll(`[aria-controls="${oldId}"]`).forEach(b => b
+                                .setAttribute('aria-controls', newId));
+                            clone.querySelectorAll(`[aria-labelledby="${oldId}"]`).forEach(b => b
+                                .setAttribute('aria-labelledby', newId));
+                        });
+
+                        // Update aria-expanded to false
+                        clone.querySelectorAll('[aria-expanded="true"]').forEach(el => {
+                            el.setAttribute('aria-expanded', 'false');
+                        });
+
+                        mobileContent.appendChild(clone);
+                    });
+
+                    // Re-initialize event handlers for cloned content
+                    console.log('Re-initializing event handlers...');
+
+                    // Bootstrap accordion will work automatically via data-bs-toggle
+                    // Just need to re-attach our custom checkbox handlers
+
+                    // Generic sync handler for ALL inputs in mobile filter
+                    // This ensures that when you check/uncheck in mobile, the desktop input (which is the source of truth) updates and submits
+                    $(mobileContent).on('change', 'input', function() {
+                        var name = $(this).attr('name');
+                        var val = $(this).val();
+                        var type = $(this).attr('type');
+                        var checked = $(this).prop('checked');
+
+                        // Find desktop counterpart in #shopFilter
+                        // Use attribute selector carefully handling quotes
+                        var desktopInput = $('#shopFilter input[name="' + name + '"][value="' + val + '"]');
+
+                        if (desktopInput.length) {
+                            // Sync state
+                            if (type === 'checkbox' || type === 'radio') {
+                                desktopInput.prop('checked', checked);
+                            } else {
+                                desktopInput.val(val);
+                            }
+
+                            // Trigger change on desktop input to execute its attached listeners
+                            desktopInput.trigger('change');
+                        }
+                    });
+
+
+                    // Specific handlers removed - handled by generic sync above
+                }
+            }
+
+            // ===================================
+            // MOBILE SEARCH - Use Same Autocomplete
+            // ===================================
+            if (typeof initShopAutocomplete === 'function') {
+                initShopAutocomplete({
+                    searchInputId: '#search-input-mobile',
+                    suggestionsContainerId: '#search-suggestions-mobile',
+                    shopRoute: "{{ route('shop.index') }}",
+                    detailsRoute: "{{ route('shop.product.details', ['product_slug' => '__SLUG__']) }}",
+                    assetPath: "{{ asset('uploads/products/thumbnails') }}",
+                    performAjaxSearchFn: typeof performAjaxSearch !== 'undefined' ? performAjaxSearch : null
+                });
+            }
+
+            // Mobile search clear button
+            $('#search-clear-mobile').on('click', function() {
+                $('#search-input-mobile').val('');
+                $('#hdnSearch').val('');
+                $("#frmfilter").submit();
+            });
 
         }); // End of $(function())
     </script>

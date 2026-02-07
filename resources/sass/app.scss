@@ -42,7 +42,7 @@
 @import "user/sidebar";
 @import "user/cart";
 @import "user/checkout";
-@import "user/payment";  // Midtrans payment styles
+@import "user/payment"; 
 @import "user/addresses";
 @import "user/wishlist";
 @import "user/whistlist";
@@ -56,10 +56,12 @@
 
 // Admin Styles
 @import "admin/datatables";
-@import "admin/dropdown-fix";
 @import "admin/modern-tables";
 @import "admin/order-details";
 @import "admin/reviews";
 @import "admin/analytics";
 @import "admin/product-form";
 @import "admin/user";
+
+// Dropdown fix MUST be last to override all other styles
+@import "admin/dropdown-fix";

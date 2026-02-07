@@ -1,22 +1,138 @@
 // ====================================
-// Dropdown Overflow Fix
+// Dropdown Overflow Fix - Final Solution
 // ====================================
 
-// Fix for dropdown overflow - prevent clipping at ALL levels
-.wg-box,
+// Remove ALL overflow restrictions from every possible container
+// This ensures dropdowns can appear outside their containers
+
+.main-content,
+.main-content-inner,
+.main-content-wrap {
+    overflow: visible !important;
+}
+
+.wg-box {
+    overflow: visible !important;
+}
+
 .wg-table,
-.table-responsive,
 .table-all-user {
     overflow: visible !important;
 }
 
-// Force table body to allow overflow
-table tbody,
-table {
+.table-responsive {
     overflow: visible !important;
 }
 
-// Ensure dropdowns appear above everything
-.dropdown-menu {
-    z-index: 1050 !important;
+// Force table and all its descendants to allow overflow
+table,
+table tbody,
+table tr,
+table td {
+    overflow: visible !important;
+}
+
+// ====================================
+// Dropdown Menu - Normal Position (Down)
+// With proper background styling
+// ====================================
+
+.dropdown {
+    position: relative !important;
+}
+
+// Reset dropdown positioning - let it appear normally (downward)
+// and ensure full background visibility
+.wg-table .dropdown-menu,
+.table-all-user .dropdown-menu,
+.table-responsive .dropdown-menu,
+table .dropdown-menu {
+    // Position - normal dropdown behavior
+    position: absolute !important;
+    z-index: 9999 !important;
+    
+    // CRITICAL: Full background styling with explicit values
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    
+    // Border and shadow for visibility
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+    
+    // Size
+    min-width: 130px !important;
+    padding: 8px 0 !important;
+    
+    // Remove any clipping
+    clip: auto !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+}
+
+// Dropdown items styling
+.wg-table .dropdown-item,
+.table-all-user .dropdown-item,
+.table-responsive .dropdown-item,
+table .dropdown-item {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    color: #374151 !important;
+    background-color: transparent !important;
+    
+    &:hover {
+        background-color: #f3f4f6 !important;
+        color: #111827 !important;
+    }
+}
+
+// Danger item (Delete)
+.wg-table .dropdown-item.text-danger,
+.table-all-user .dropdown-item.text-danger,
+.table-responsive .dropdown-item.text-danger,
+table .dropdown-item.text-danger {
+    color: #dc2626 !important;
+    
+    &:hover {
+        background-color: #fef2f2 !important;
+        color: #b91c1c !important;
+    }
+}
+
+// Dropdown divider
+.wg-table .dropdown-divider,
+.table-all-user .dropdown-divider,
+.table-responsive .dropdown-divider,
+table .dropdown-divider {
+    margin: 6px 0 !important;
+    border-top: 1px solid #e5e7eb !important;
+}
+
+// ====================================
+// Action Button (Three Dots)
+// ====================================
+
+.btn-action-dots {
+    background: transparent !important;
+    border: none !important;
+    padding: 8px !important;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .dot {
+        width: 4px;
+        height: 4px;
+        background-color: #64748b;
+        border-radius: 50%;
+    }
 }

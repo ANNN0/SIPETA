@@ -14,6 +14,23 @@
         }
     }
 
+    #search-input-mobile {
+        border-radius: 12px;
+        border: 1.5px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        font-size: 13px;
+        height: 36px;
+        // Keep side padding for icons (Left: Icon, Right: Clear btn)
+        // Vertical padding reduced to 7px as requested
+        padding: 7px 30px 7px 35px !important;
+
+        &:focus {
+            border-color: #1a7a3e;
+            box-shadow: 0 0 0 3px rgba(26, 122, 62, 0.1);
+            outline: none;
+        }
+    }
+
     .suggestions-container {
         position: absolute;
         top: calc(100% + 8px);

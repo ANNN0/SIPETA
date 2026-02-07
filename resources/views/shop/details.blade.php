@@ -1,122 +1,246 @@
 @extends('layouts.app')
 
 @section('content')
+    @push('styles')
+        <style>
+            .product-gallery .main-image {
+                background: #fff;
+                border-radius: 16px;
+                overflow: hidden;
+                margin-bottom: 1rem;
+                aspect-ratio: 1/1;
+                width: 100%;
+                position: relative;
+                border: 1px solid #f0f0f0;
+            }
+
+            .product-gallery .main-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                cursor: grab;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .product-gallery .main-image img.loading {
+                opacity: 0.5;
+                transform: scale(0.98);
+            }
+
+            .product-gallery .main-image:active img {
+                cursor: grabbing;
+            }
+
+            .product-gallery .thumbnails {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+            }
+
+            .product-gallery .thumbnail {
+                background: #fff;
+                border-radius: 8px;
+                overflow: hidden;
+                aspect-ratio: 1/1;
+                cursor: pointer;
+                border: 2px solid transparent;
+                transition: border-color 0.2s;
+            }
+
+            .product-gallery .thumbnail img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .product-gallery .thumbnail:hover,
+            .product-gallery .thumbnail.active {
+                border-color: #EFA927;
+            }
+
+            /* Mobile Responsive */
+            @media (max-width: 768px) {
+                .product-gallery {
+                    display: block;
+                }
+
+                .product-gallery .thumbnails {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    width: 100%;
+                    margin-top: 1rem;
+                    flex-direction: row;
+                    height: auto;
+                    max-height: none;
+                }
+
+                /* Side-by-side Unit & Qty on Mobile */
+                .product-addtocart-wrapper {
+                    display: flex !important;
+                    flex-direction: row !important;
+                    gap: 12px;
+                    /* Standardize gap */
+                    align-items: flex-end;
+                    flex-wrap: nowrap !important;
+                }
+
+                /* Harmonize Widths: ~55% for Unit, ~45% for Qty */
+                .unit-selector-wrapper {
+                    flex: 0 0 55%;
+                    min-width: 0;
+                }
+
+                .qty-wrapper {
+                    flex: 0 0 45%;
+                    min-width: 0;
+                }
+
+                .unit-selector-wrapper select {
+                    width: 100%;
+                    text-overflow: ellipsis;
+                }
+
+                /* Standardize Control styling */
+                .qty-control-modern {
+                    margin-top: 0;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    /* Distribute buttons/input */
+                }
+
+                .qty-control-modern button {
+                    padding: 0 10px;
+                    /* Standard padding */
+                }
+
+                /* Allow input to fill space between buttons */
+                .qty-control-modern input {
+                    flex: 1;
+                    width: auto !important;
+                    /* Remove fixed width */
+                    min-width: 0;
+                    padding: 0;
+                    text-align: center;
+                }
+
+                /* Unified Height */
+                #unit-selector,
+                .qty-control-modern,
+                .qty-control-modern input,
+                .qty-control-modern button {
+                    height: 48px;
+                    /* Slightly larger, touch friendly */
+                }
+            }
+        </style>
+    @endpush
     <main class="pt-90">
         <div class="mb-md-1 pb-md-3"></div>
         <section class="product-single container">
+            <div class="d-flex justify-content-between mb-4 pb-md-2">
+                <div class="breadcrumb mb-0 flex-grow-1">
+                    <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
+                    <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
+                    <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Shop</a>
+                </div><!-- /.breadcrumb -->
+
+                <div
+                    class="product-single__prev-next d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
+                    @if ($prevProduct)
+                        <a href="{{ route('shop.product.details', $prevProduct->slug) }}?sort={{ $sort ?? 'latest' }}"
+                            class="text-uppercase fw-medium"
+                            style="cursor: pointer !important; position: relative; z-index: 10; pointer-events: auto !important;">
+                            <svg width="10" height="10" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
+                                <use href="#icon_prev_md" />
+                            </svg>
+                            <span class="menu-link menu-link_us-s">Prev</span>
+                        </a>
+                    @else
+                        <span class="text-uppercase fw-medium"
+                            style="opacity: 0.3; cursor: not-allowed; pointer-events: none;">
+                            <svg width="10" height="10" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
+                                <use href="#icon_prev_md" />
+                            </svg>
+                            <span class="menu-link menu-link_us-s">Prev</span>
+                        </span>
+                    @endif
+
+                    @if ($nextProduct)
+                        <a href="{{ route('shop.product.details', $nextProduct->slug) }}?sort={{ $sort ?? 'latest' }}"
+                            class="text-uppercase fw-medium"
+                            style="cursor: pointer !important; position: relative; z-index: 10; pointer-events: auto !important;">
+                            <span class="menu-link menu-link_us-s">Next</span>
+                            <svg width="10" height="10" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
+                                <use href="#icon_next_md" />
+                            </svg>
+                        </a>
+                    @else
+                        <span class="text-uppercase fw-medium"
+                            style="opacity: 0.3; cursor: not-allowed; pointer-events: none;">
+                            <span class="menu-link menu-link_us-s">Next</span>
+                            <svg width="10" height="10" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
+                                <use href="#icon_next_md" />
+                            </svg>
+                        </span>
+                    @endif
+                </div><!-- /.shop-acs -->
+            </div>
             <div class="row">
-                <div class="col-lg-7">
-                    <div class="product-single__media" data-media-type="horizontal-thumbnail">
-                        <div class="product-single__image">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-
-                                    <div class="swiper-slide product-image-slide">
-                                        <img loading="lazy" class="h-auto" src="@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products') . '/' . $product->image, 4020)" width="674"
-                                            height="674" alt="{{ $product->name }}" />
-                                        <a data-fancybox="gallery" href="@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products') . '/' . $product->image)" data-bs-toggle="tooltip"
-                                            data-bs-placement="left" title="Zoom">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_zoom" />
-                                            </svg>
-                                        </a>
-                                    </div>
-
-                                    @foreach (explode(',', $product->images) as $gimg)
-                                        <div class="swiper-slide product-image-slide">
-                                            <img loading="lazy" class="h-auto" src="@cloudinary(Str::startsWith($gimg, 'http') ? $gimg : asset('uploads/products') . '/' . $gimg, 1920)" width="674"
-                                                height="674" alt="{{ $product->name }}" />
-                                            <a data-fancybox="gallery" href="@cloudinary(Str::startsWith($gimg, 'http') ? $gimg : asset('uploads/products') . '/' . $gimg)" data-bs-toggle="tooltip"
-                                                data-bs-placement="left" title="Zoom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_zoom" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="swiper-button-prev"><svg width="7" height="11" viewBox="0 0 7 11"
+                <div class="col-lg-6">
+                    {{-- NEW GRID GALLERY IMPLEMENTATION --}}
+                    <div class="product-gallery">
+                        <div class="main-image">
+                            @if ($product->image)
+                                <img id="mainImage" src="@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products') . '/' . $product->image, 4020)" alt="{{ $product->name }}">
+                                <a id="mainImageZoom" data-fancybox="gallery" href="@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products') . '/' . $product->image)"
+                                    style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer;"
+                                    data-bs-toggle="tooltip" title="Zoom">
+                                    <svg width="18" height="18" viewBox="0 0 16 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></div>
-                                <div class="swiper-button-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></div>
-                            </div>
-                        </div>
-                        <div class="product-single__thumbnail">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide product-single__image-item"><img loading="lazy" class="h-auto"
-                                            src="@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products/thumbnails') . '/' . $product->image, 104, 104, 'fill')" width="104" height="104" alt="" />
-                                    </div>
-                                    @foreach (explode(',', $product->images) as $gimg)
-                                        <div class="swiper-slide product-single__image-item"><img loading="lazy"
-                                                class="h-auto" src="@cloudinary(Str::startsWith($gimg, 'http') ? $gimg : asset('uploads/products/thumbnails') . '/' . $gimg, 104, 104, 'fill')" width="104" height="104"
-                                                alt="" />
-                                        </div>
-                                    @endforeach
+                                        <use href="#icon_zoom" />
+                                    </svg>
+                                </a>
+                            @else
+                                <div
+                                    style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4a4a4a; background: #f8f9fa;">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none"
+                                        class="feather feather-image">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"></circle>
+                                        <polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"></polyline>
+                                    </svg>
                                 </div>
-                            </div>
+                            @endif
                         </div>
+
+                        @php
+                            $images = explode(',', $product->images);
+                        @endphp
+                        @if (count($images) > 0 && $images[0] != '')
+                            <div class="thumbnails">
+                                {{-- Main Image as first thumbnail --}}
+                                <div class="thumbnail active"
+                                    onclick="changeImage(this, '@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products') . '/' . $product->image, 4020)', '@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products') . '/' . $product->image)')">
+                                    <img src="@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products/thumbnails') . '/' . $product->image, 104, 104, 'fill')" alt="Main Image">
+                                </div>
+
+                                @foreach ($images as $gimg)
+                                    <div class="thumbnail"
+                                        onclick="changeImage(this, '@cloudinary(Str::startsWith($gimg, 'http') ? $gimg : asset('uploads/products') . '/' . $gimg, 4020)', '@cloudinary(Str::startsWith($gimg, 'http') ? $gimg : asset('uploads/products') . '/' . $gimg)')">
+                                        <img src="@cloudinary(Str::startsWith($gimg, 'http') ? $gimg : asset('uploads/products/thumbnails') . '/' . $gimg, 104, 104, 'fill')" alt="Thumbnail">
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="d-flex justify-content-between mb-4 pb-md-2">
-                        <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
-                            <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
-                            <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
-                            <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Shop</a>
-                        </div><!-- /.breadcrumb -->
-
-                        <div
-                            class="product-single__prev-next d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
-                            @if ($prevProduct)
-                                <a href="{{ route('shop.product.details', $prevProduct->slug) }}?sort={{ $sort ?? 'latest' }}"
-                                    class="text-uppercase fw-medium"
-                                    style="cursor: pointer !important; position: relative; z-index: 10; pointer-events: auto !important;">
-                                    <svg width="10" height="10" viewBox="0 0 25 25"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_md" />
-                                    </svg>
-                                    <span class="menu-link menu-link_us-s">Prev</span>
-                                </a>
-                            @else
-                                <span class="text-uppercase fw-medium"
-                                    style="opacity: 0.3; cursor: not-allowed; pointer-events: none;">
-                                    <svg width="10" height="10" viewBox="0 0 25 25"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_md" />
-                                    </svg>
-                                    <span class="menu-link menu-link_us-s">Prev</span>
-                                </span>
-                            @endif
-
-                            @if ($nextProduct)
-                                <a href="{{ route('shop.product.details', $nextProduct->slug) }}?sort={{ $sort ?? 'latest' }}"
-                                    class="text-uppercase fw-medium"
-                                    style="cursor: pointer !important; position: relative; z-index: 10; pointer-events: auto !important;">
-                                    <span class="menu-link menu-link_us-s">Next</span>
-                                    <svg width="10" height="10" viewBox="0 0 25 25"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_md" />
-                                    </svg>
-                                </a>
-                            @else
-                                <span class="text-uppercase fw-medium"
-                                    style="opacity: 0.3; cursor: not-allowed; pointer-events: none;">
-                                    <span class="menu-link menu-link_us-s">Next</span>
-                                    <svg width="10" height="10" viewBox="0 0 25 25"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_md" />
-                                    </svg>
-                                </span>
-                            @endif
-                        </div><!-- /.shop-acs -->
-                    </div>
+                <div class="col-lg-6">
                     <h1 class="product-single__name">{{ $product->name }}</h1>
                     <div class="product-single__rating d-flex align-items-center mb-1">
                         <div class="reviews-group d-flex align-items-center">
@@ -763,13 +887,159 @@
 
             </section><!-- /.recently-viewed-section -->
         @endif
+        {{-- Sticky Add to Cart for Mobile (Inserted via Agent) --}}
+        <div class="sticky-add-to-cart">
+            <div class="sticky-add-to-cart__img">
+                <img src="@cloudinary(Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products/thumbnails') . '/' . $product->image, 100)" alt="{{ $product->name }}">
+            </div>
+            <div class="sticky-add-to-cart__info">
+                <h5>{{ $product->name }}</h5>
+                <div class="price">
+                    @if ($product->primaryUnitPrice)
+                        @php
+                            $dispPrice =
+                                $product->primaryUnitPrice->sale_price ?: $product->primaryUnitPrice->regular_price;
+                        @endphp
+                        Rp {{ number_format($dispPrice, 0, ',', '.') }}
+                    @endif
+                </div>
+            </div>
+            <div class="sticky-add-to-cart__btn">
+                {{-- Triggers the main add to cart button click --}}
+                <button type="button" class="btn btn-primary"
+                    onclick="window.scrollTo({top: 100, behavior: 'smooth'}); document.querySelector('.btn-addtocart').focus();">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </main>
 @endsection
 
 @push('scripts')
     <script>
+        // Gallery Image Switcher
+        function changeImage(element, src, largeSrc) {
+            const img = document.getElementById('mainImage');
+            img.classList.add('loading');
+
+            setTimeout(() => {
+                img.src = src;
+                const zoomLink = document.getElementById('mainImageZoom');
+                if (zoomLink) {
+                    zoomLink.href = largeSrc;
+                }
+
+                img.onload = () => {
+                    img.classList.remove('loading');
+                };
+                // Fallback
+                setTimeout(() => img.classList.remove('loading'), 100);
+
+            }, 200);
+
+            // Handle active state
+            document.querySelectorAll('.product-gallery .thumbnail').forEach(el => el.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            }
+        }
+
         $(document).ready(function() {
+            // Swipe Functionality for Main Image
+            const mainImageContainer = document.querySelector('.product-gallery .main-image');
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            if (mainImageContainer) {
+                // Touch Events (Mobile)
+                mainImageContainer.addEventListener('touchstart', e => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+
+                mainImageContainer.addEventListener('touchend', e => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                });
+
+                // Mouse Events (Desktop optional, but requested "digerakkan" so good to have)
+                let isDragging = false;
+                mainImageContainer.addEventListener('mousedown', e => {
+                    isDragging = true;
+                    touchStartX = e.screenX;
+                    e.preventDefault(); // Prevent default drag behavior
+                });
+
+                mainImageContainer.addEventListener('mouseup', e => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    touchEndX = e.screenX;
+                    handleSwipe();
+                });
+
+                mainImageContainer.addEventListener('mouseleave', () => {
+                    isDragging = false;
+                });
+            }
+
+            function handleSwipe() {
+                const threshold = 50; // min distance for swipe
+                if (touchEndX < touchStartX - threshold) {
+                    navigateGallery('next'); // Swiped Left -> Next Image
+                }
+                if (touchEndX > touchStartX + threshold) {
+                    navigateGallery('prev'); // Swiped Right -> Prev Image
+                }
+            }
+
+            function navigateGallery(direction) {
+                const thumbnails = document.querySelectorAll('.product-gallery .thumbnail');
+                let activeIndex = -1;
+
+                thumbnails.forEach((thumb, index) => {
+                    if (thumb.classList.contains('active')) {
+                        activeIndex = index;
+                    }
+                });
+
+                if (activeIndex !== -1) {
+                    let nextIndex;
+                    if (direction === 'next') {
+                        nextIndex = activeIndex + 1;
+                        if (nextIndex >= thumbnails.length) nextIndex = 0; // Loop back to start
+                    } else {
+                        nextIndex = activeIndex - 1;
+                        if (nextIndex < 0) nextIndex = thumbnails.length - 1; // Loop to end
+                    }
+
+                    // Trigger click on the next/prev thumbnail
+                    thumbnails[nextIndex].click();
+                }
+            }
             console.log('=== Product Detail Scripts Loaded ===');
+
+            // Sticky Bar Logic
+            const $stickyBar = $('.sticky-add-to-cart');
+            const $mainBtn = $('.btn-addtocart');
+
+            if ($stickyBar.length && $mainBtn.length) {
+                $(window).on('scroll', function() {
+                    const btnTop = $mainBtn.offset().top;
+                    const btnBottom = btnTop + $mainBtn.outerHeight();
+                    const windowTop = $(window).scrollTop();
+
+                    // Show if scrolled past the main button
+                    if (windowTop > btnBottom) {
+                        $stickyBar.addClass('visible');
+                    } else {
+                        $stickyBar.removeClass('visible');
+                    }
+                });
+            }
 
             // Unit selector change event - dynamic price AND unit symbol update
             $('#unit-selector').on('change', function() {

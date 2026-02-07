@@ -24,6 +24,12 @@
             <div class="auth-right-panel">
                 <div class="auth-form-container">
                     <div class="auth-header">
+                        {{-- Mobile Logo (shown only on mobile when left panel is hidden) --}}
+                        <div class="auth-mobile-logo">
+                            <img src="{{ asset('images/logo/sipeta-logo.svg') }}" alt="SIPETA Logo">
+                            <span>SIPETA</span>
+                        </div>
+
                         <h1>Selamat Datang di SIPETA!</h1>
                         <p>Masuk ke akun Anda</p>
                     </div>

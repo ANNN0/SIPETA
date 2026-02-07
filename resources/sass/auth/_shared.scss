@@ -116,8 +116,7 @@ $auth-spacing-2xl: 48px;
     }
     
     @media (max-width: 768px) {
-        min-height: 300px;
-        padding: 24px;
+        display: none; // Hide brand panel on mobile to prevent form cutoff
     }
 }
 
@@ -132,6 +131,16 @@ $auth-spacing-2xl: 48px;
         width: 60px;
         height: 60px;
         filter: brightness(0) invert(1); // Make logo white
+        
+        @media (max-width: 768px) {
+            width: 48px;
+            height: 48px;
+        }
+        
+        @media (max-width: 375px) {
+            width: 40px;
+            height: 40px;
+        }
     }
     
     span {
@@ -139,6 +148,14 @@ $auth-spacing-2xl: 48px;
         font-weight: 700;
         color: #ffffff;
         letter-spacing: 0.5px;
+        
+        @media (max-width: 768px) {
+            font-size: 20px;
+        }
+        
+        @media (max-width: 375px) {
+            font-size: 18px;
+        }
     }
 }
 
@@ -159,6 +176,16 @@ $auth-spacing-2xl: 48px;
         
         @media (max-width: 768px) {
             font-size: 32px;
+            margin: 0 0 16px 0;
+        }
+        
+        @media (max-width: 425px) {
+            font-size: 28px;
+            margin: 0 0 12px 0;
+        }
+        
+        @media (max-width: 375px) {
+            font-size: 24px;
         }
     }
     
@@ -173,10 +200,79 @@ $auth-spacing-2xl: 48px;
         
         @media (max-width: 768px) {
             font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 425px) {
+            font-size: 14px;
+        }
+        
+        @media (max-width: 375px) {
+            font-size: 13px;
         }
     }
 }
 
+
+
+// ============================================
+// LEFT PANEL VARIANT (for register page)
+// ============================================
+
+// Register page uses .auth-left-panel instead of .auth-panel-left
+.auth-left-panel {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a7a3e 0%, #22c55e 100%);
+    
+    @media (max-width: 768px) {
+        display: none !important; // Force hide on mobile - HIGH PRIORITY
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+}
+
+.auth-logo-container {
+    text-align: center;
+    z-index: 2;
+    
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.auth-logo-image {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.auth-brand-text {
+    color: #ffffff;
+    
+    h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin: 0 0 8px 0;
+        letter-spacing: 1px;
+    }
+    
+    p {
+        font-size: 16px;
+        margin: 0;
+        opacity: 0.95;
+    }
+}
 
 
 // ============================================
@@ -198,7 +294,47 @@ $auth-spacing-2xl: 48px;
     background-position: center;
     
     @media (max-width: 768px) {
-        padding: 16px;
+        width: 100%; // Full width on mobile
+        padding: 12px;
+        min-height: 100vh; // Full viewport height
+        align-items: center; // Center form vertically
+    }
+    
+    @media (max-width: 425px) {
+        padding: 8px;
+    }
+}
+
+// Register/Password pages use .auth-right-panel (different naming)
+.auth-right-panel {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    min-height: 100vh;
+    z-index: 10; // Ensure form is above background
+    
+    // Background image  
+    background-image: url('/assets/images/login/farmland-min.jpg');
+    background-size: cover;
+    background-position: center;
+    
+    @media (max-width: 768px) {
+        width: 100% !important; // Full width on mobile - force override
+        padding: 12px;
+        min-height: 100vh !important; // Full viewport height
+        align-items: center; // Center form vertically
+        order: -1 !important; // Move form ABOVE left panel in mobile
+        display: flex !important; // Force display
+        visibility: visible !important; // Force visible
+        opacity: 1 !important; // Force visible
+        z-index: 100 !important; // Ensure it's ON TOP
+    }
+    
+    @media (max-width: 425px) {
+        padding: 8px;
     }
 }
 
@@ -225,8 +361,18 @@ $auth-spacing-2xl: 48px;
     border: 1px solid rgba(255, 255, 255, 0.6);
     
     @media (max-width: 768px) {
-        padding: 32px 24px;
-        border-radius: 24px;
+        padding: 28px 20px;
+        border-radius: 20px;
+    }
+    
+    @media (max-width: 425px) {
+        padding: 24px 16px;
+        border-radius: 16px;
+        backdrop-filter: blur(8px); // Reduce for performance
+    }
+    
+    @media (max-width: 375px) {
+        padding: 20px 14px;
     }
 }
 
@@ -248,6 +394,50 @@ $auth-spacing-2xl: 48px;
     text-align: center;
     margin-top: $auth-spacing-xl;
     
+    @media (max-width: 768px) {
+        margin-top: 16px;
+    }
+    
+    @media (max-width: 425px) {
+        margin-top: 12px;
+    }
+    
+    // Logo for mobile (hidden on desktop)
+    .auth-mobile-logo {
+        display: none;
+        margin-bottom: 20px;
+        
+        @media (max-width: 768px) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            
+            img {
+                width: 48px;
+                height: 48px;
+            }
+            
+            span {
+                font-size: 24px;
+                font-weight: 700;
+                color: $auth-primary;
+                letter-spacing: 0.5px;
+            }
+        }
+        
+        @media (max-width: 425px) {
+            img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            span {
+                font-size: 20px;
+            }
+        }
+    }
+    
     h1 {
         font-size: $auth-font-size-title;
         font-weight: 700;
@@ -258,6 +448,14 @@ $auth-spacing-2xl: 48px;
         @media (max-width: 768px) {
             font-size: 28px;
         }
+        
+        @media (max-width: 425px) {
+            font-size: 24px;
+        }
+        
+        @media (max-width: 375px) {
+            font-size: 22px;
+        }
     }
     
     p {
@@ -265,6 +463,10 @@ $auth-spacing-2xl: 48px;
         color: $auth-text-primary;
         font-weight: 500;
         letter-spacing: 0.5px;
+        
+        @media (max-width: 425px) {
+            font-size: 14px;
+        }
     }
 }
 
@@ -276,12 +478,24 @@ $auth-spacing-2xl: 48px;
     .auth-input-group {
         margin-bottom: $auth-spacing-lg;
         
+        @media (max-width: 768px) {
+            margin-bottom: 16px;
+        }
+        
+        @media (max-width: 425px) {
+            margin-bottom: 14px;
+        }
+        
         label {
             display: block;
             font-size: $auth-font-size-small;
             font-weight: 500;
             color: $auth-text-primary;
             margin-bottom: $auth-spacing-xs;
+            
+            @media (max-width: 425px) {
+                font-size: 13px;
+            }
             
             .required {
                 color: #ef4444;
@@ -303,6 +517,11 @@ $auth-spacing-2xl: 48px;
                 font-size: 18px;
                 pointer-events: none;
                 
+                @media (max-width: 425px) {
+                    font-size: 16px;
+                    right: 12px;
+                }
+                
                 svg path {
                     stroke: $auth-text-muted; // Ensure SVG stroke is gray
                 }
@@ -319,6 +538,17 @@ $auth-spacing-2xl: 48px;
                 color: $auth-text-primary;
                 transition: all 0.3s ease;
                 font-family: $auth-font-family;
+                
+                @media (max-width: 768px) {
+                    min-height: 48px; // Touch target
+                    padding: 12px 44px 12px 14px;
+                    font-size: 16px; // Prevent zoom on iOS
+                }
+                
+                @media (max-width: 425px) {
+                    min-height: 50px; // Slightly larger
+                    border-radius: 10px;
+                }
                 
                 &::placeholder {
                     color: $auth-text-muted;
@@ -359,6 +589,15 @@ $auth-spacing-2xl: 48px;
                     height: 20px;
                 }
                 
+                @media (max-width: 425px) {
+                    right: 10px;
+                    
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+                
                 &:hover {
                     opacity: 0.7;
                 }
@@ -380,10 +619,22 @@ $auth-spacing-2xl: 48px;
             .input-icon {
                 left: 14px;
                 right: auto;
+                
+                @media (max-width: 425px) {
+                    left: 12px;
+                }
             }
             
             input {
                 padding: 14px 48px 14px 48px; // Padding both sides for icon + toggle
+                
+                @media (max-width: 768px) {
+                    padding: 12px 44px 12px 44px;
+                }
+                
+                @media (max-width: 425px) {
+                    padding: 12px 40px 12px 40px;
+                }
             }
         }
         
@@ -392,6 +643,10 @@ $auth-spacing-2xl: 48px;
             font-size: $auth-font-size-small;
             color: #ef4444;
             margin-top: $auth-spacing-xs;
+            
+            @media (max-width: 425px) {
+                font-size: 12px;
+            }
         }
     }
 }
@@ -406,6 +661,13 @@ $auth-spacing-2xl: 48px;
     align-items: center;
     margin-bottom: $auth-spacing-lg;
     
+    // @media (max-width: 425px) {
+    //     flex-direction: column;
+    //     align-items: flex-start;
+    //     gap: 12px;
+    //     margin-bottom: 18px;
+    // }
+    
     .auth-checkbox {
         display: flex;
         align-items: center;
@@ -416,6 +678,11 @@ $auth-spacing-2xl: 48px;
             margin-right: $auth-spacing-xs;
             cursor: pointer;
             accent-color: $auth-primary;
+            
+            @media (max-width: 425px) {
+                width: 20px;
+                height: 20px;
+            }
         }
         
         label {
@@ -424,6 +691,10 @@ $auth-spacing-2xl: 48px;
             margin: 0;
             cursor: pointer;
             user-select: none;
+            
+            @media (max-width: 425px) {
+                font-size: 14px;
+            }
         }
     }
     
@@ -433,6 +704,10 @@ $auth-spacing-2xl: 48px;
         text-decoration: none;
         font-weight: 500;
         transition: color 0.2s ease;
+        
+        @media (max-width: 425px) {
+            font-size: 14px;
+        }
         
         &:hover {
             color: $auth-link-hover;
@@ -459,6 +734,22 @@ $auth-spacing-2xl: 48px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-family: $auth-font-family;
+    
+    @media (max-width: 768px) {
+        min-height: 50px;
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    @media (max-width: 425px) {
+        min-height: 52px;
+        padding: 15px 20px;
+        border-radius: 10px;
+    }
+    
+    @media (max-width: 375px) {
+        min-height: 54px; // Extra large for small screens
+    }
     
     &:hover {
         background-color: $auth-button-hover;
@@ -536,6 +827,23 @@ $auth-spacing-2xl: 48px;
         flex-shrink: 0;
     }
     
+    @media (max-width: 768px) {
+        min-height: 50px;
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    @media (max-width: 425px) {
+        min-height: 52px;
+        gap: 10px;
+        border-radius: 10px;
+        
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+    
     &:hover {
         background-color: #f8fafc;
         border-color: $auth-text-muted;
@@ -555,6 +863,11 @@ $auth-spacing-2xl: 48px;
     text-align: center;
     font-size: $auth-font-size-small;
     color: $auth-text-secondary;
+    
+    @media (max-width: 425px) {
+        font-size: 13px;
+        margin-top: 8px;
+    }
     
     .auth-link {
         color: $auth-link-color;
@@ -611,6 +924,38 @@ $auth-spacing-2xl: 48px;
     }
 }
 
+// Hide left panels (brand) on mobile - applies to both .auth-panel-left and .auth-left-panel
+// Hide left panels (brand) on mobile - ONLY for legacy .auth-left-panel
+// .auth-panel.auth-panel-left MUST remain visible because it contains Register form!
+.auth-left-panel {
+    @media (max-width: 768px) {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+}
+
+// Ensure right panels (form) are visible on mobile
+.auth-panel.auth-panel-right,
+.auth-right-panel {
+    @media (max-width: 768px) {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        z-index: 100 !important;
+        position: relative !important;
+    }
+}
+
+
 // Panel overlay (image background)
 .auth-panel-overlay {
     position: absolute;
@@ -628,6 +973,15 @@ $auth-spacing-2xl: 48px;
     transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
                 opacity 0.5s ease;
     z-index: 5;
+    
+    // CRITICAL: Hide ALL overlays on mobile - show forms only
+    @media (max-width: 768px) {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
+    }
     
     // Dark overlay
     &::before {
@@ -669,6 +1023,23 @@ $auth-spacing-2xl: 48px;
     transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
                 opacity 0.5s ease;
     z-index: 10;
+    
+    // CRITICAL: Force show forms on mobile (overlays are hidden)
+    @media (max-width: 768px) {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important; // Change from absolute to relative
+        z-index: 100 !important; // Ensure above everything
+        width: 100% !important;
+        min-height: 100vh !important;
+        padding: 12px;
+        align-items: center; // Center form vertically
+    }
+    
+    @media (max-width: 425px) {
+        padding: 8px;
+    }
 }
 
 // ============================================
@@ -893,6 +1264,137 @@ $auth-spacing-2xl: 48px;
         svg {
             width: 14px;
             height: 14px;
+        }
+    }
+}
+
+// ============================================
+// MOBILE OVERRIDE - SIMPLIFIED FORM SWITCHING
+// ============================================
+
+// ============================================
+// MOBILE OVERRIDE - SIMPLIFIED FORM SWITCHING
+// ============================================
+
+// ============================================
+// MOBILE OVERRIDE - SIMPLIFIED FORM SWITCHING
+// ============================================
+
+@media (max-width: 768px) {
+    // 1. GLOBAL RESETS
+    // Hide default sliding overlays
+    .auth-panel-overlay, #left-overlay, #right-overlay, #forgot-overlay {
+        display: none !important;
+    }
+    
+    // Allow panels to hide/show
+    .auth-panel {
+        min-height: 0 !important;
+        flex: auto !important;
+        // background-color: #fff; // REMOVED plain white
+    }
+
+    // Mixin for Mobile Panel Background
+    // Mixin for Mobile Panel Background
+    @mixin mobile-panel-bg($bg-var) {
+        // Fallback color logic
+        background-color: #f0f0f0 !important; 
+        
+        // Use CSS Variable passed from Blade (already contains url(...))
+        background-image: $bg-var !important;
+        background-size: cover !important;
+        background-position: center !important;
+        position: relative !important;
+        z-index: 1 !important;
+        
+        // Restore Overlay (Clean White)
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            // 85% opacity white for good readability
+            background: rgba(255,255,255,0.85) !important; 
+            z-index: 0;
+            pointer-events: none;
+            display: block !important;
+        }
+        
+        // Ensure content is above overlay
+        .auth-form-wrapper {
+            position: relative !important;
+            z-index: 2 !important;
+            background: transparent !important; // Remove wrapper white bg
+        }
+        
+        // Transparent form container (let the panel overlay handle bg)
+        .auth-form-container {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+    }
+
+    // 2. LOGIN MODE (Default)
+    .auth-container:not(.register-mode):not(.forgot-mode):not(.reset-mode) {
+        .auth-panel-right {
+            display: flex !important;
+            min-height: 100vh !important;
+            width: 100% !important;
+            @include mobile-panel-bg(var(--bg-login)); 
+            
+            #login-form-wrapper { 
+                display: flex !important; 
+                opacity: 1 !important; 
+                transform: none !important; 
+            }
+        }
+        
+        .auth-panel-left { display: none !important; }
+    }
+
+    // 3. REGISTER MODE
+    .auth-container.register-mode {
+        .auth-panel-right { display: none !important; }
+        
+        .auth-panel-left {
+            display: flex !important;
+            min-height: 100vh !important;
+            width: 100% !important;
+            @include mobile-panel-bg(var(--bg-register));
+            
+            #register-form-wrapper { 
+                display: flex !important; 
+                opacity: 1 !important; 
+                transform: none !important;
+                visibility: visible !important;
+            }
+            #forgot-form-wrapper, #reset-password-wrapper { display: none !important; }
+        }
+    }
+    
+    // 4. FORGOT/RESET MODE
+    .auth-container.forgot-mode,
+    .auth-container.reset-mode {
+        .auth-panel-right { display: none !important; }
+        
+        .auth-panel-left {
+            display: flex !important;
+            min-height: 100vh !important;
+            width: 100% !important;
+            @include mobile-panel-bg(var(--bg-forgot));
+            
+            #forgot-form-wrapper,
+            #reset-password-wrapper { 
+                display: flex !important; 
+                opacity: 1 !important; 
+                transform: none !important;
+                visibility: visible !important;
+            }
+            #register-form-wrapper { display: none !important; }
         }
     }
 }

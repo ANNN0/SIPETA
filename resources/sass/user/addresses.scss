@@ -61,41 +61,41 @@ $transition-smooth: all 0.3s ease;
 // ====================================
 // Edit Address Form Card
 // ====================================
+    // Modern Clean Form Card
     .address-form-card {
-        background: $bg-card;
-        border-radius: $radius-lg;
-        border: 1px solid $border-color;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        background: #ffffff;
+        border-radius: 16px; // Modern larger radius
+        border: 1px solid #f1f3f5; // Very subtle border
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03); // Soft premium float
         overflow: hidden;
         transition: $transition-smooth;
-
-        &:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
     }
 
     .address-form-header {
-        background: $primary-soft; // Brand Green
-        padding: $spacing-lg $spacing-xl;
-        border-bottom: 3px solid $primary-dark;
-
+        background: #ffffff; // Clean white
+        padding: 24px 32px;
+        border-bottom: 1px solid #f1f3f5;
+        
         h5 {
-            color: white;
+            color: #2D3436;
             margin: 0;
-            font-size: 1.125rem;
-            font-weight: 600;
+            font-size: 1.25rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
+            letter-spacing: -0.02em;
 
             i {
-                opacity: 0.95;
+                color: #FBC531; // Yellow accent icon
+                margin-right: 12px;
+                font-size: 1.1em;
             }
         }
     }
 
     .address-form-body {
-        padding: $spacing-lg;
-        background: $bg-body;
+        padding: 32px;
+        background: #ffffff;
     }
 
     // Form Controls
@@ -103,18 +103,19 @@ $transition-smooth: all 0.3s ease;
         position: relative;
 
         .form-control {
-            border: 1px solid $border-color;
-            border-radius: $radius-md;
-            padding: 1rem 0.75rem;
-            font-size: 0.9375rem;
-            transition: $transition-smooth;
-            background: $bg-card;
-            color: $text-primary;
+            border: 1px solid #e9ecef; // Lighter border
+            border-radius: 10px;
+            padding: 1.1rem 1rem; // More breathing room
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            background: #fafbfc; // Slight off-white bg input
+            color: #2D3436;
+            font-weight: 500;
 
             &:focus {
-                border-color: $primary-soft;
-                box-shadow: 0 0 0 3px rgba($primary-soft, 0.08);
-                background: $bg-card;
+                background: #ffffff;
+                border-color: #FBC531; // Yellow focus ring
+                box-shadow: 0 0 0 4px rgba(251, 197, 49, 0.1); // Soft yellow glow
                 outline: none;
             }
 
@@ -225,19 +226,22 @@ $transition-smooth: all 0.3s ease;
         margin-top: $spacing-md;
 
         .btn-update {
-            background: $primary;
-            border: 2px solid $primary;
-            color: white;
-            padding: 0.65rem 2rem;
-            font-weight: 600;
-            border-radius: $radius-md;
-            box-shadow: 0 4px 12px rgba($primary, 0.15);
-            transition: $transition-smooth;
+            background: #FBC531; // Sipeta Yellow
+            border: 2px solid #FBC531;
+            color: #2D3436; // Dark text
+            padding: 0.75rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px; // Pill shape
+            box-shadow: 0 4px 15px rgba(251, 197, 49, 0.25);
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
 
             &:hover {
-                background: transparent;
-                color: $primary;
-                box-shadow: 0 4px 15px rgba($primary, 0.2);
+                background: #e1b12c;
+                border-color: #e1b12c;
+                color: #2D3436;
+                box-shadow: 0 6px 20px rgba(251, 197, 49, 0.35);
                 transform: translateY(-2px);
             }
 
@@ -247,17 +251,18 @@ $transition-smooth: all 0.3s ease;
         }
 
         .btn-outline-secondary {
-            border: 1px solid $border-color;
-            color: $text-secondary;
-            background: $bg-card;
-            padding: 0.75rem 1.5rem;
-            border-radius: $radius-md;
-            transition: $transition-smooth;
+            border: 1px solid #dfe6e9;
+            color: #636E72;
+            background: transparent;
+            padding: 0.75rem 2rem;
+            border-radius: 50px; // Pill shape
+            font-weight: 600;
+            transition: all 0.3s ease;
 
             &:hover {
-                background: $primary-light;
-                border-color: $primary-soft;
-                color: $primary-soft;
+                background: #f1f3f5;
+                color: #2D3436;
+                border-color: #ced6e0;
             }
         }
     }
@@ -390,59 +395,60 @@ $transition-smooth: all 0.3s ease;
 }
 
 // Section Title
-.section-title-wrapper {
-    margin-bottom: $spacing-xl;
+    .section-title-wrapper {
+        margin-bottom: $spacing-xl;
 
-    .section-title {
+        .section-title {
         color: $text-primary;
-        font-size: 1.375rem;
-        font-weight: 700;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        letter-spacing: -0.02em;
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.02em;
 
-        i {
-            color: $primary-soft;
-            font-size: 1.25rem;
+            i {
+                color: #FBC531; // Sipeta Yellow Icon
+                font-size: 1.25rem;
+            }
+        }
+
+        .title-underline {
+            width: 60px;
+            height: 4px;
+            background: #FBC531; // Sipeta Yellow Line
+            border-radius: 2px;
+            margin-top: $spacing-sm;
         }
     }
 
-    .title-underline {
-        width: 60px;
-        height: 4px;
-        background: linear-gradient(90deg, $primary-soft 0%, lighten($primary-soft, 30%) 100%);
-        border-radius: 2px;
-        margin-top: $spacing-sm;
-    }
-}
-
 // Add New Button
-.btn-add-new {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.625rem 2rem;
+    .btn-add-new {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.625rem 2rem;
     background: $primary;
     color: white;
     border: 2px solid $primary;
-    border-radius: $radius-xl;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    text-decoration: none;
+        border-radius: $radius-xl;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
     box-shadow: 0 4px 12px rgba($primary, 0.15);
-    transition: $transition-smooth;
+        transition: $transition-smooth;
 
-    i {
-        font-size: 0.875rem;
-    }
+        i {
+            font-size: 0.875rem;
+        }
 
-    &:hover {
+        &:hover {
         background: transparent;
         color: $primary;
         box-shadow: 0 6px 18px rgba($primary, 0.2);
-        transform: translateY(-3px);
-    }
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(251, 197, 49, 0.3);
+        }
 
     &:active {
         transform: translateY(0);
@@ -460,8 +466,8 @@ $transition-smooth: all 0.3s ease;
 // Individual Address Card
 .address-card {
     background: $bg-card;
-    border: 1px solid $border-color;
-    border-radius: $radius-lg;
+    border: 1px solid #eef2f6; // Match Order Card border
+    border-radius: 12px; // Match Order Card radius
     overflow: hidden;
     transition: $transition-smooth;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
@@ -475,8 +481,8 @@ $transition-smooth: all 0.3s ease;
 
 // Card Header
 .address-card-header {
-    background: $primary-light; // Soft Green Tint
-    border-bottom: 2px solid $border-color;
+    background: #FBC531; // Sipeta Yellow (Match Order)
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     padding: $spacing-lg;
     display: flex;
     justify-content: space-between;
@@ -490,9 +496,9 @@ $transition-smooth: all 0.3s ease;
 
         h5 {
             margin: 0;
-            color: $text-primary;
+            color: #2D3436; // Dark text for yellow BG
             font-size: 1.125rem;
-            font-weight: 600;
+            font-weight: 700;
         }
     }
 
@@ -500,7 +506,7 @@ $transition-smooth: all 0.3s ease;
         display: inline-flex;
         align-items: center;
         padding: 0.375rem 0.75rem;
-        background: $success-soft;
+        background: #2D3436; // Dark badge on Yellow
         color: white;
         border-radius: $radius-xl;
         font-size: 0.75rem;
@@ -519,8 +525,8 @@ $transition-smooth: all 0.3s ease;
     align-items: center;
     padding: 0.45rem 1.25rem;
     background: white;
-    color: $primary;
-    border: 2px solid $primary;
+    color: #2D3436;
+    border: 1px solid #dfe6e9;
     border-radius: $radius-xl;
     font-size: 0.875rem;
     font-weight: 600;
@@ -532,17 +538,17 @@ $transition-smooth: all 0.3s ease;
     }
 
     &:hover {
-        background: $primary;
-        color: white;
-        box-shadow: 0 4px 10px rgba($primary, 0.2);
-        transform: scale(1.05);
+        background: #f8f9fa;
+        color: #2D3436;
+        border-color: #b2bec3;
+        transform: translateY(-1px);
     }
 }
 
 // Card Body
 .address-card-body {
     padding: $spacing-lg;
-    background: $bg-body;
+    background: #ffffff; // Pure White body
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $spacing-md $spacing-lg;
@@ -561,7 +567,7 @@ $transition-smooth: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: $primary; // Brand Green icon
+        color: #FBC531; // Sipeta Yellow Icon
         font-size: 0.9rem;
         flex-shrink: 0;
         margin-top: 2px;

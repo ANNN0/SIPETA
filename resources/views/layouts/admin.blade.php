@@ -321,11 +321,11 @@
                                                 <div class="text">Pesanan</div>
                                             </a>
                                         </li>
-                                        <li class="sub-menu-item">
+                                        {{-- <li class="sub-menu-item">
                                             <a href="order-tracking.html" class="">
                                                 <div class="text">Order tracking</div>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </li>
                                 <li class="menu-item has-children {{ isMenuActive('admin.slide') ? 'active' : '' }}">
@@ -446,7 +446,8 @@
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-item">
-                                                <span class="text-tiny">1</span>
+                                                <span
+                                                    class="text-tiny">{{ Auth::user()->unreadNotifications->count() }}</span>
                                                 <i class="icon-bell"></i>
                                             </span>
                                         </button>
@@ -455,56 +456,56 @@
                                             <li>
                                                 <h6>Notifications</h6>
                                             </li>
-                                            <li>
-                                                <div class="message-item item-1">
-                                                    <div class="image">
-                                                        <i class="icon-noti-1"></i>
-                                                    </div>
-                                                    <div>
-                                                        <div class="body-title-2">Discount available</div>
-                                                        <div class="text-tiny">Morbi sapien massa, ultricies at rhoncus
-                                                            at, ullamcorper nec diam</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="message-item item-2">
-                                                    <div class="image">
-                                                        <i class="icon-noti-2"></i>
-                                                    </div>
-                                                    <div>
-                                                        <div class="body-title-2">Account has been verified</div>
-                                                        <div class="text-tiny">Mauris libero ex, iaculis vitae rhoncus
-                                                            et</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="message-item item-3">
-                                                    <div class="image">
-                                                        <i class="icon-noti-3"></i>
-                                                    </div>
-                                                    <div>
-                                                        <div class="body-title-2">Order shipped successfully</div>
-                                                        <div class="text-tiny">Integer aliquam eros nec sollicitudin
-                                                            sollicitudin</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="message-item item-4">
-                                                    <div class="image">
-                                                        <i class="icon-noti-4"></i>
-                                                    </div>
-                                                    <div>
-                                                        <div class="body-title-2">Order pending: <span>ID 305830</span>
+                                            @forelse(Auth::user()->unreadNotifications as $notification)
+                                                <li>
+                                                    <div
+                                                        class="message-item item-1 d-flex justify-content-between align-items-start">
+                                                        <div class="d-flex align-items-start gap-2">
+                                                            <div class="image">
+                                                                <i class="icon-bell"></i>
+                                                            </div>
+                                                            <div>
+                                                                <div class="body-title-2">
+                                                                    {{ $notification->data['message'] ?? 'No Message' }}
+                                                                </div>
+                                                                <div class="text-tiny">
+                                                                    {{ $notification->created_at->diffForHumans() }}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="text-tiny">Ultricies at rhoncus at ullamcorper
+                                                        <div class="d-flex gap-1">
+                                                            <form
+                                                                action="{{ route('admin.notification.read', $notification->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-link p-0 text-success"
+                                                                    title="Mark as Read">
+                                                                    <i class="icon-check"></i>
+                                                                </button>
+                                                            </form>
+                                                            <form
+                                                                action="{{ route('admin.notification.delete', $notification->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-link p-0 text-danger"
+                                                                    title="Delete">
+                                                                    <i class="icon-trash-2"></i>
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li><a href="#" class="tf-button w-full">View all</a></li>
+                                                </li>
+                                            @empty
+                                                <li>
+                                                    <div class="message-item">
+                                                        <div class="text-tiny p-3">No new notifications</div>
+                                                    </div>
+                                                </li>
+                                            @endforelse
                                         </ul>
                                     </div>
                                 </div>
@@ -518,49 +519,35 @@
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
                                                 <span class="image">
-                                                    <img class="admin-logo"
-                                                        src="{{ asset('images/logo/logo-sipeta-2.png') }}"
-                                                        alt="">
+                                                    @if (Auth::user()->image)
+                                                        <img src="{{ Auth::user()->image }}"
+                                                            alt="{{ Auth::user()->name }}"
+                                                            style="width: 40px; height: 40px; max-width: 40px; max-height: 40px; border-radius: 50%; object-fit: cover;">
+                                                    @elseif(Auth::user()->avatar)
+                                                        <img src="{{ Auth::user()->avatar }}"
+                                                            alt="{{ Auth::user()->name }}"
+                                                            style="width: 40px; height: 40px; max-width: 40px; max-height: 40px; border-radius: 50%; object-fit: cover;">
+                                                    @else
+                                                        <div class="d-flex align-items-center justify-content-center bg-primary text-white"
+                                                            style="width: 40px; height: 40px; border-radius: 50%; font-weight: bold; font-size: 16px;">
+                                                            {{ substr(Auth::user()->name, 0, 1) }}
+                                                        </div>
+                                                    @endif
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Admin</span>
-
+                                                    <span class="body-title mb-2">{{ Auth::user()->name }}</span>
+                                                    <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end has-content"
                                             aria-labelledby="dropdownMenuButton3">
                                             <li>
-                                                <a href="#" class="user-item">
+                                                <a href="{{ route('admin.profile') }}" class="user-item">
                                                     <div class="icon">
                                                         <i class="icon-user"></i>
                                                     </div>
-                                                    <div class="body-title-2">Account</div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="user-item">
-                                                    <div class="icon">
-                                                        <i class="icon-mail"></i>
-                                                    </div>
-                                                    <div class="body-title-2">Inbox</div>
-                                                    <div class="number">27</div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="user-item">
-                                                    <div class="icon">
-                                                        <i class="icon-file-text"></i>
-                                                    </div>
-                                                    <div class="body-title-2">Taskboard</div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="user-item">
-                                                    <div class="icon">
-                                                        <i class="icon-headphones"></i>
-                                                    </div>
-                                                    <div class="body-title-2">Support</div>
+                                                    <div class="body-title-2">Profile</div>
                                                 </a>
                                             </li>
                                             <li>

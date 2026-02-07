@@ -22,7 +22,7 @@
                         <div class="slideshow-bg position-relative h-100">
                             {{-- Full Background Image --}}
                             <div class="slideshow-bg__image position-absolute w-100 h-100"
-                                style="background-image: url('@cloudinary(Str::startsWith($slide->image, 'http') ? $slide->image : asset('uploads/slides') . '/' . $slide->image, 1600)'); 
+                                style="background-image: url('@cloudinary(Str::startsWith($slide->image, 'http') ? $slide->image : asset('uploads/slides') . '/' . $slide->image, 3000)'); 
                                        background-size: cover; 
                                        background-position: center center;
                                        background-repeat: no-repeat;">
@@ -424,10 +424,10 @@
                     ])
                 </div>
 
-                <div class="text-center mt-2">
+                {{-- <div class="text-center mt-2">
                     <a class="btn-link btn-link_lg default-underline text-uppercase fw-medium" href="#">Load
                         More</a>
-                </div>
+                </div> --}}
             </section>
         </div>
 

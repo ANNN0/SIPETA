@@ -115,6 +115,14 @@ Route::middleware(['auth', AuthAdmin::class, 'check.blocked'])->group(function (
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.admin');
     Route::get('/admin/dashboard/export', [AdminController::class, 'exportDashboardPdf'])->name('admin.dashboard.export');
 
+    // Notifications
+    Route::put('/admin/notification/{id}/read', [AdminController::class, 'markNotificationAsRead'])->name('admin.notification.read');
+    Route::delete('/admin/notification/{id}/delete', [AdminController::class, 'deleteNotification'])->name('admin.notification.delete');
+
+    // Admin Profile
+    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::put('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+
     //Region Routes
     Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');
     Route::get('/admin/region/add', [AdminController::class, 'region_add'])->name('admin.region.add');

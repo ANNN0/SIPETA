@@ -47,12 +47,20 @@
                                 <tr>
                                     <th>Order Status</th>
                                     <td colspan="5">
-                                        @if ($order->status == 'delivered')
-                                            <span class="badge bg-success">Delivered</span>
+                                        @if (
+                                            $order->transaction &&
+                                                $order->transaction->status == 'pending' &&
+                                                $order->transaction->mode != 'cod' &&
+                                                $order->status == 'ordered')
+                                            <span class="badge bg-warning">Menunggu Pembayaran</span>
+                                        @elseif ($order->status == 'delivered')
+                                            <span class="badge bg-success">Terkirim</span>
                                         @elseif($order->status == 'canceled')
-                                            <span class="badge bg-danger">Canceled</span>
+                                            <span class="badge bg-danger">Dibatalkan</span>
+                                        @elseif($order->status == 'processing' || $order->status == 'approved')
+                                            <span class="badge bg-info">Diproses</span>
                                         @else
-                                            <span class="badge bg-warning">Ordered</span>
+                                            <span class="badge bg-primary">Dikemas</span>
                                         @endif
                                     </td>
                                 </tr>
@@ -216,13 +224,41 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ($order->status == 'ordered')
+                    @if (
+                        $order->transaction &&
+                            $order->transaction->status == 'pending' &&
+                            $order->transaction->mode != 'cod' &&
+                            $order->status == 'ordered')
+                        <div class="wg-box text-right">
+                            <button type="button" class="btn btn-primary"
+                                onclick="payNow('{{ $order->transaction->snap_token }}', '{{ $order->id }}')">
+                                Lanjut Bayar
+                            </button>
+                            <form action="{{ route('user.order.cancel', $order->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="order_id" value="{{ $order->id }}" />
+                                <button type="button" class="btn btn-danger cancel-order"
+                                    style="margin-left: 10px;">Batalkan Pesanan</button>
+                            </form>
+                        </div>
+                    @elseif ($order->status != 'delivered' && $order->status != 'canceled')
                         <div class="wg-box text-right">
                             <form action="{{ route('user.order.cancel', $order->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="order_id" value="{{ $order->id }}" />
                                 <button type="button" class="btn btn-danger cancel-order">Batalkan Pesanan</button>
+                            </form>
+                        </div>
+                    @else
+                        <div class="wg-box text-right">
+                            <form action="{{ route('user.order.delete', $order->id) }}" method="POST"
+                                class="d-inline delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn btn-delete" onclick="confirmDeleteOrder(this)">Hapus
+                                    dari Riwayat</button>
                             </form>
                         </div>
                     @endif
@@ -233,22 +269,72 @@
 @endsection
 
 @push('scripts')
+    <!-- Midtrans Snap.js -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
     <script>
+        function payNow(snapToken, orderId) {
+            if (!snapToken) {
+                alert('Token pembayaran tidak ditemukan. Silakan hubungi admin.');
+                return;
+            }
+
+            snap.pay(snapToken, {
+                onSuccess: function(result) {
+                    console.log('✅ Payment SUCCESS', result);
+                    // Redirect to finish route
+                    window.location.href = '{{ route('payment.finish') }}?order_id=' + orderId;
+                },
+                onPending: function(result) {
+                    console.log('⏳ Payment PENDING', result);
+                    // Reload to update status if needed, or redirect
+                    window.location.href = '{{ route('payment.finish') }}?order_id=' +
+                    orderId; // Using finish route as it handles status display
+                },
+                onError: function(result) {
+                    console.log('❌ Payment ERROR', result);
+                    alert('Pembayaran gagal! Silakan coba lagi.');
+                },
+                onClose: function() {
+                    console.log('ℹ️ Snap popup CLOSED');
+                }
+            });
+        }
+
+        function confirmDeleteOrder(button) {
+            const orderId = '{{ $order->id }}';
+            if (typeof ModalUtils !== 'undefined') {
+                ModalUtils.showDelete(
+                    orderId,
+                    'Pesanan dari Riwayat',
+                    function() {
+                        button.closest('form').submit();
+                    }
+                );
+            } else {
+                if (confirm('Apakah Anda yakin ingin menghapus pesanan ' + orderId + ' dari riwayat?')) {
+                    button.closest('form').submit();
+                }
+            }
+        }
+
         $(function() {
             $('.cancel-order').on('click', function(e) {
                 e.preventDefault();
                 var form = $(this).closest('form');
-                swal({
-                    title: "Are you sure?",
-                    text: "You want to cancel this order?",
-                    type: "warning",
-                    buttons: ["No", "Yes"],
-                    confirmButtonColor: "#dc3545",
-                }).then(function(result) {
-                    if (result) {
+                if (typeof ModalUtils !== 'undefined') {
+                    ModalUtils.showDelete(
+                        '{{ $order->id }}',
+                        'Pesanan',
+                        function() {
+                            form.submit();
+                        }
+                    );
+                } else {
+                    if (confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')) {
                         form.submit();
                     }
-                });
+                }
             });
         })
     </script>

@@ -21,6 +21,12 @@
                 <div class="auth-form-container">
                     {{-- Header --}}
                     <div class="auth-header">
+                        {{-- Mobile Logo (shown only on mobile when left panel is hidden) --}}
+                        <div class="auth-mobile-logo">
+                            <img src="{{ asset('images/logo/sipeta-logo.svg') }}" alt="SIPETA Logo">
+                            <span>SIPETA</span>
+                        </div>
+
                         <h1>LUPA PASSWORD</h1>
                         <p>Masukkan email Anda untuk Reset Password</p>
                     </div>

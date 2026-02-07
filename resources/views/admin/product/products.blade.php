@@ -64,6 +64,7 @@
                                         <div class="d-flex align-items-center justify-content-center">
                                             <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('uploads/products/thumbnails') . '/' . $product->image }}"
                                                 alt="{{ $product->name }}"
+                                                onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22100%22 height=%22100%22/%3E%3Cpath fill=%22%23999%22 d=%22M30,35 L30,65 L45,50 L60,65 L70,55 L70,35 Z M40,45 C40,42.24 42.24,40 45,40 C47.76,40 50,42.24 50,45 C50,47.76 47.76,50 45,50 C42.24,50 40,47.76 40,45 Z%22/%3E%3C/svg%3E'"
                                                 style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; margin-right: 12px;">
                                             <div>
                                                 <div class="fw-medium">{{ $product->name }}</div>

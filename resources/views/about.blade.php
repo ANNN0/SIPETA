@@ -74,7 +74,7 @@
                     {{-- Right: Accordion Content --}}
                     <div class="about-page__story-content">
                         <h2 class="about-page__section-title">
-                            Cerita Dibalik<br>Platform SIPETA
+                            Cerita Dibalik <span class="d-md-inline d-block">Platform SIPETA</span>
                         </h2>
 
                         <div class="about-page__accordion">
